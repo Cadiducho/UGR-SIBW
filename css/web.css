@@ -1,106 +1,86 @@
 .container {
-  width: 800px;
-  margin: auto;
+	margin: auto;
   
 }
 
 .container .footer {
-  padding: 10px;
-  font-size: 12px;
-  border-style: dotted; /* lo mismo del border */
-}
-
-.container .content {
-  min-height: 120px;
-}
-
-.container .content .main {
-  margin-left: 5%;
+	padding: 10px;
+	font-size: 12px;
 }
 
 .container .content .sidebar {
-  width: 150px;
-  height: 170px; /* esto no debería ser forzado a 120, si no comprobar a cuánto está el footer */
-  float: left;
-  background-color: #f1f1f1;
+	float: left;
+	background-color: #f1f1f1;
+
 }
 
+.content {
+	background-image: url("../Imagenes/mario_background_2.jpg");
+	background-size: cover;
+}
+
+
 .container .header {
-  height: 100px;
-  text-indent: 1%;
-  background-color: Slateblue;
-  
+	text-indent: 1%;
+	background-color: #ff3636;
 }
 
 .main {
-  text-align: justify;
+	text-align: justify;
 }
 
-h1 {
+.lotype{
+	float: left
+}
+
+aside.logotype {
+	margin: auto
+}
+
+.title{
+	font-family: Impact, Charcoal, sans-serif;
+	font-variant: small-caps;
+	color:white;
+	font-size: 20px;
 	text-align: center;
-	color: white;
+	
 }
 
-h2 {
+h2.links{
+
 	font-family:Lucida Sans Unicode;
 	font-size: 15px;
 	text-align: center;
 	color: black;
+
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
+ul.navbar{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
 }
 
-li {
+li.navbar {
   float: left;
 }
 
-li a, .despl {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-family:Lucida Sans Unicode;
-  
+.navbar li a:hover{
+  background-color: #4169E1;
 }
 
-li a:hover, .contacto:hover .despl {
-  background-color: red;
+.navbar li a{
+	display: inline-block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-family:Lucida Sans Unicode;
 }
 
-li.contacto {
-  display: inline-block;
-}
-
-.contacto-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.contacto-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.contacto-content a:hover {background-color: #f1f1f1}
-
-.contacto:hover .contacto-content {
-  display: block;
-}
-ol {
+ul.sidebar {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -108,16 +88,17 @@ ol {
   background-color: #f1f1f1;
 }
 
-li b {
-  display: block;
-  color: #000;
-  padding: 8px 16px;
-  text-decoration: none;
-  font-family:Lucida Sans Unicode;
-  font-size:12px;
+.sidebar li a {
+	display:  inline-block;
+	color: #000;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-family:Lucida Sans Unicode;
 }
 
-li b:hover {
+
+.sidebar li a:hover {
   background-color: #555;
   color: white;
 }
