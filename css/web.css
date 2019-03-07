@@ -10,9 +10,13 @@
 
 .container .content .sidebar {
 	float: left;
-	background-color: #f1f1f1;
+	background-color: #e6fff7;
 
 }
+
+.sidebar {
+  width: 200px;
+  }
 
 .content {
 	background-image: url("../Imagenes/mario_background_2.jpg");
@@ -52,7 +56,6 @@ h2.links{
 	font-size: 15px;
 	text-align: center;
 	color: black;
-
 }
 
 ul.navbar{
@@ -88,19 +91,17 @@ ul.sidebar {
   background-color: #f1f1f1;
 }
 
-.sidebar li a {
-	display:  inline-block;
+.sidebar a {
+	display: block;
 	color: #000;
 	text-align: center;
-	padding: 14px 16px;
+	padding: 12 px;
 	text-decoration: none;
 	font-family:Lucida Sans Unicode;
 }
 
 
-.sidebar li a:hover {
+.sidebar a:hover {
   background-color: #555;
   color: white;
 }
-
-
