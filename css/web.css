@@ -1,26 +1,53 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  font-size: 100%;
+}
+
 .container {
 	margin: auto;
-  
+	background-image: url("../Imagenes/mario_background_2.jpg");
+	background-size: cover;
 }
 
 .container .footer {
 	padding: 10px;
 	font-size: 12px;
+	text-align: center;
+	background-color: #333;
+	color: white;
 }
 
 .container .content .sidebar {
 	float: left;
 	background-color: #e6fff7;
-
+	width: 15%;
+	margin-left: 2%;
+	border-radius: 10px;
 }
 
-.sidebar {
-  width: 200px;
-  }
+.container .content .sidebar .list {
+	list-style-type: none;
+}
+
+.container .content .main {
+	text-align: justify;
+	width: 84%;
+	margin-left: 20%;
+	margin-right: 2%;
+	border-style: solid;
+	border-radius: 10px;
+	background: F0F0F0;
+}
 
 .content {
-	background-image: url("../Imagenes/mario_background_2.jpg");
-	background-size: cover;
+	width: 90%;
+	margin-top: 2%;
 }
 
 
@@ -29,19 +56,12 @@
 	background-color: #ff3636;
 }
 
-.main {
-	text-align: justify;
+.title .logotype {
+	vertical-align: top !important;
+	margin: auto;
 }
 
-.lotype{
-	float: left
-}
-
-aside.logotype {
-	margin: auto
-}
-
-.title{
+.title {
 	font-family: Impact, Charcoal, sans-serif;
 	font-variant: small-caps;
 	color:white;
