@@ -40,9 +40,9 @@ body {
 	width: 84%;
 	margin-left: 20%;
 	margin-right: 2%;
-	border-style: solid;
 	border-radius: 10px;
 	background: F0F0F0;
+	
 }
 
 .content {
@@ -59,6 +59,13 @@ body {
 .title .logotype {
 	vertical-align: top !important;
 	margin: auto;
+}
+
+.gallery {
+	vertical-align: top !important;
+	margin: auto;
+	border-radius: 10px;
+	
 }
 
 .title {
@@ -109,6 +116,7 @@ ul.sidebar {
   padding: 0;
   width: 200px;
   background-color: #f1f1f1;
+
 }
 
 .sidebar a {
@@ -118,11 +126,20 @@ ul.sidebar {
 	padding: 12 px;
 	text-decoration: none;
 	font-family:Lucida Sans Unicode;
+	
 }
 
 
 .sidebar a:hover {
-  background-color: #ff3636;
-  color: white;
+	background-color: #ff3636;
+	color: white;
+}
+
+.box{
+	float: left;
+	text-align: center;
+	width: 33.33%; 
+	border-radius: 10px;
+	font-family:Lucida Sans Unicode;
 }
 
