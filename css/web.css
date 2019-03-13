@@ -1,145 +1,147 @@
-html,
+* {
+  box-sizing: border-box;
+}
+
+/* Margenes a 0 en el body */
 body {
-  height: 100%;
-  width: 100%;
+  font-family: Arial;
   margin: 0;
-  padding: 0;
-  left: 0;
-  top: 0;
-  font-size: 100%;
 }
 
-.container {
-	margin: auto;
-	background-image: url("../Imagenes/mario_background_2.jpg");
-	background-size: cover;
+/* Header y logo */
+.header {
+  padding: 30px;
+  text-align: center;
+  background-color: #ff3636;
+  text-indent: 1%;
+  color: white;
 }
 
-.container .footer {
-	padding: 10px;
-	font-size: 12px;
-	text-align: center;
-	background-color: #333;
-	color: white;
+.header .title img {
+  height: 75px;
+  width: 75px;
+  height: auto;
 }
 
-.container .content .sidebar {
-	float: left;
-	background-color: #e6fff7;
-	width: 15%;
-	margin-left: 2%;
-	border-radius: 10px;
-}
-
-.container .content .sidebar .list {
-	list-style-type: none;
-}
-
-.container .content .main {
-	text-align: justify;
-	width: 84%;
-	margin-left: 20%;
-	margin-right: 2%;
-	border-radius: 10px;
-	background: F0F0F0;
-	
-}
-
-.content {
-	width: 90%;
-	margin-top: 2%;
-}
-
-
-.container .header {
-	text-indent: 1%;
-	background-color: #ff3636;
-}
-
-.title .logotype {
-	vertical-align: top !important;
-	margin: auto;
-}
-
-.gallery {
-	vertical-align: top !important;
-	margin: auto;
-	border-radius: 10px;
-	
-}
-
-.title {
+.header .title h1 {
 	font-family: Impact, Charcoal, sans-serif;
 	font-variant: small-caps;
 	color:white;
 	font-size: 20px;
 	text-align: center;
-	
+  color: white;
+  font-size: 40px;
+  margin-left: 4%;
+  position: relative;
+  display: inline;
 }
 
-h2.links{
+/* Barra justo inferior al header que hace de navbar con enlaces */
+.navbar {
+  display: flex;
+  background-color: #333;
+}
 
-	font-family:Lucida Sans Unicode;
-	font-size: 15px;
+.navbar a {
+  color: white;
+  padding: 14px 20px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.navbar a:hover {
+  background-color: #4169E1;
+}
+
+/* Content establece el grid en columnas */
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+
+  justify-content: space-between;
+}
+
+/* Columna para el sidebar izquierdo */
+.sidebar {
+  flex: 18%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+.sidebar-links-title {
+	font-family: Lucida Sans Unicode;
+	font-size: 19px;
 	text-align: center;
 	color: black;
 }
 
-ul.navbar{
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #333;
+.sidebar-link {
+  width: 100%;
+  padding: 15px;
+  height: 50px;
+  text-align: center;
 }
 
-li.navbar {
-  float: left;
+.sidebar-link a {
+  text-decoration: none;
+  color: black;
 }
 
-.navbar li a:hover{
-  background-color: #4169E1;
+.sidebar-link:hover {
+  background-color: #d6d6d6;
+  width: 100%;
 }
 
-.navbar li a{
-	display: inline-block;
-	color: white;
+/* Columna principal, el otro 82% */
+.main {
+  flex: 82%;
+  background-color: white;
+  padding: 20px;
+}
+
+.main-title {
+	font-family: Lucida Sans Unicode;
+	font-size: 35px;
 	text-align: center;
-	padding: 14px 16px;
+	color: black;
+}
+
+/* Minicolumnas caja de 30% (no al 33 por los bordes) cada una, para agrupar los eventos */
+.box {
+  display: flex;
+  margin: 0 0 15px 15px;
+  flex: 30%;
+  padding: 10px;
+}
+
+/* Uso a y a:hover para la decoración cuando se pasa el ratón por encima */
+.box a {
+	color: black;
 	text-decoration: none;
-	font-family:Lucida Sans Unicode;
 }
 
-ul.sidebar {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #f1f1f1;
-
+.box a:hover {
+	box-shadow: 3px 3px 8px hsl(0, 0%, 80%);
 }
 
-.sidebar a {
+.box-content {
+	padding: 1.4em;
+}
+
+/* Imagenes dentro de las cajas */
+.box img {
 	display: block;
-	color: #000;
-	text-align: center;
-	padding: 12 px;
-	text-decoration: none;
-	font-family:Lucida Sans Unicode;
-	
+	border: 0;
+	width: 100%;
+	height: auto;
 }
 
-
-.sidebar a:hover {
-	background-color: #ff3636;
+/* Footer */
+.footer {
+  padding: 10px;
+	font-size: 15px;
+	text-align: center;
+	background-color: #333;
 	color: white;
 }
-
-.box{
-	float: left;
-	text-align: center;
-	width: 33.33%; 
-	border-radius: 10px;
-	font-family:Lucida Sans Unicode;
-}
-
