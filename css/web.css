@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -12,7 +13,7 @@ body {
 .header {
   padding: 30px;
   text-align: center;
-  background-color: #ff3636;
+  background-image: url("../Imagenes/mario_background_2.jpg");
   text-indent: 1%;
   color: white;
 }
@@ -24,12 +25,12 @@ body {
 }
 
 .header .title h1 {
-	font-family: Impact, Charcoal, sans-serif;
-	font-variant: small-caps;
-	color:white;
-	font-size: 20px;
-	text-align: center;
-  color: white;
+  font-family: Impact, Charcoal, sans-serif;
+  font-variant: small-caps;
+  color:white;
+  font-size: 20px;
+  text-align: center;
+  color: #e60000;
   font-size: 40px;
   margin-left: 4%;
   position: relative;
