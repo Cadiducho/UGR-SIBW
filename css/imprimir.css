@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Margenes a 0 en el body */
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+/* Header y logo */
+.header {
+  padding: 20px;
+  text-align: center;
+  background-color: beige;
+  text-indent: 1%;
+  color: white;
+  border-bottom: dashed black 1px;
+}
+
+.header .title img {
+  height: 75px;
+  width: 75px;
+}
+
+.header .title h1 {
+  font-family: Impact, Charcoal, sans-serif;
+  font-variant: small-caps;
+  color:white;
+  font-size: 20px;
+  text-align: center;
+  color: #e60000;
+  font-size: 40px;
+  position: relative;
+  display: inline;
+}
+
+/* Content establece el grid en columnas */
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+
+  justify-content: space-between;
+}
+
+/* Columna principal, el otro 82% */
+.main {
+  flex: 90%;
+  background-color: white;
+  padding: 20px;
+}
+
+.main-title {
+	font-family: Lucida Sans Unicode;
+	font-size: 23px;
+	text-align: center;
+	color: black;
+}
+
+/* Pagina evento*/
+/* Contenido del evento*/
+.content-event {
+  margin: 0 0 15px 15px;
+  width: 100%;
+  padding: 10px;
+  flex-direction: column;
+}
+
+/*Caracteristicas de la organizacion del evento*/
+.organizer-event {
+	font-family: Lucida Sans Unicode;
+	font-size: 16px;
+	color: black;
+}
+
+/*Caracteristicas de la fecha del evento*/
+.date-event {
+	font-family: Lucida Sans Unicode;
+	font-size: 12px;
+	color: black;
+}
+
+/*Caracteristicas del texto del evento*/
+.text-event {
+	text-align : justify;
+	font-family: Lucida Sans Unicode;
+	width: 70%;
+}
+
+/*img del evento*/
+.img-event {
+	float: right;
+	width: 20%;
+}
+
+.img-event img {
+  width: 60%;
+  height: auto;
+}
+
+/* Footer */
+.footer {
+  padding: 10px;
+	font-size: 15px;
+	text-align: center;
+  border-top: dashed black 1px;
+	background-color: beige;
+	color: black;
+}
