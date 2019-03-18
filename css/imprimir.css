@@ -12,7 +12,7 @@ body {
 .header {
   padding: 20px;
   text-align: center;
-  background-color: beige;
+  background-color: white;
   text-indent: 1%;
   color: white;
   border-bottom: dashed black 1px;
@@ -29,7 +29,7 @@ body {
   color:white;
   font-size: 20px;
   text-align: center;
-  color: #e60000;
+  color: black;
   font-size: 40px;
   position: relative;
   display: inline;
@@ -105,6 +105,6 @@ body {
 	font-size: 15px;
 	text-align: center;
   border-top: dashed black 1px;
-	background-color: beige;
+	background-color: white;
 	color: black;
 }
