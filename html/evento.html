@@ -7,6 +7,8 @@
 	<meta charset="UTF-8">
 	<title> Mario Tennis Club </title>
 	<link rel="stylesheet" type="text/css" href="../css/web.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="../css/comentarios.css" media="screen"/>
+	<script src="../js/comentarios.js"></script>
 </head>
 <!-- Fin Head -->
 
@@ -42,7 +44,7 @@
 		<div class="sidebar-link"><a href="https://www.tennisfame.com/">International Tennis Hall of Fame</a></div>
   </div>
   <!-- Fin enlaces de interes -->
-  
+
   <!-- Evento Indian Wells Masters -->
   <div class="main">
     <h2 class="main-title">Indian Wells Masters</h2>
@@ -55,7 +57,7 @@
 				<p class="img-footer"> Djokovic ganando el Indian Well Masters </p>
 		</div>
 		<!-- Fin de imagenes del evento -->
-		
+
 		<!-- Texto del evento -->
 		<h3 class="organizer-event">WTA y Asociación de Tenistas Profesionales</h3>
 		<h3 class="date-event">4 a 17 de marzo</h3>
@@ -83,6 +85,41 @@
 		Roger Federer y Novak Djokovic son los jugadores que más veces se han llevado el trofeo del Indian Wells Master, con cinco títulos.
 		</p>
 		<!-- Fin texto del evento -->
+
+		<button id="mostrarComentarios" onclick="mostrarComentarios()" class="boton botonMostrar">Mostrar comentarios</button>
+		<button id="ocultarComentarios" onclick="mostrarComentarios()" class="boton botonOcultar">Ocultar comentarios</button>
+		<div id="cajaComentarios" class="cajaComentarios" hidden>
+			<section id="listaComentarios">
+				<article class="comentario">
+					<div class="comentario-autor">
+						Ana
+					</div>
+					<div class="comentario-mensaje">
+						<p>Cuerpo del comentario 1</p>
+					</div>
+				</article>
+				<article class="comentario">
+					<div class="comentario-autor">
+						Dani
+					</div>
+					<div class="comentario-mensaje">
+						<p>Cuerpo del comentario 2</p>
+					</div>
+				</article>
+			</section>
+
+			<form class="form-comentarios" id="formEnviarComentario" onsubmit="enviarComentario()">
+				<div class="infoComentarios">Añade un comentario</div>
+
+				<label for="nombre">Nombre</label>
+				<input name="nombre" placeholder="Tu nombre" required></input>
+
+				<label for="mensaje">Mensaje</label>
+				<textarea placeholder="Introduce tu comentario..." name="mensaje" required></textarea>
+
+				<button type="submit" class="boton botonEnviar">Enviar</button>
+			</form>
+		</div>
 	</section>
   </div>
   <!-- Fin evento Indian Wells Masters -->

@@ -1,0 +1,87 @@
+
+.cajaComentarios {
+  display: none;
+  border: 3px solid #f1f1f1;
+  width: 52%;
+}
+
+.comentario {
+  margin: 15px 5px;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0.25rem;
+}
+
+.comentario-autor {
+  background-color: #00afaf;
+  color: white;
+  padding: 10px;
+  display: block;
+
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.comentario-mensaje {
+  padding: 10px;
+}
+
+.form-comentarios {
+  padding: 10px;
+}
+
+.form-comentarios .infoComentarios {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.form-comentarios label {
+  width: 100%;
+  margin-top: 20px;
+  display:inline-block;
+  border: none;
+}
+
+.form-comentarios input {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 5px 0;
+  background: #f2f2f2;
+  resize: none;
+  border: none;
+}
+
+.form-comentarios textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  background: #f2f2f2;
+  resize: none;
+  border: none;
+}
+
+.boton {
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.botonEnviar {
+  background-color: #4CAF50;
+  color: white;
+  width: 100%;
+}
+
+.botonMostrar {
+  background-color: #f4c842;
+  color: black;
+  width: 52%;
+}
+
+.botonOcultar {
+  display: none;
+  background-color: #e87925;
+  color: black;
+  width: 52%;
+}
