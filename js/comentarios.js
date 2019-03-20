@@ -16,16 +16,20 @@ function mostrarComentarios() {
   }
 }
 
-function enviarComentario() {
+function enviarComentario(event) {
   event.preventDefault();
   let form = document.getElementById("formEnviarComentario");
   let autor = form.nombre.value;
   let mensaje = form.mensaje.value;
-  form.reset();
+  form.reset(); // Limpiar los campos del formulario una vez se ha insertado un nuevo comentario
 
-  //Filtros de comentarios insert
+  // Validar que los campos del comentario son correctos
+
+  //----
 
   addComentario(autor, mensaje);
+
+  return false; // No recargar página tras procesar formulario
 }
 
 function addComentario(autor, mensaje) {
