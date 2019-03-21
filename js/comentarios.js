@@ -21,6 +21,27 @@ function enviarComentario(event) {
   let form = document.getElementById("formEnviarComentario");
   let autor = form.nombre.value;
   let mensaje = form.mensaje.value;
+  let palabrasProhibidas = ["futbol", "baloncesto", "sonic", "bolos", "natacion", "surf", "patinaje", "snowboard", "tiro", "skate"];
+  
+  //Se eliminan las palbras que hemos determinado como prohibidas
+  var numeroPalabrasProhibidas = palabrasProhibidas.length;
+  
+  //Comprobamos si aparece cada una de las palabras prohibidas
+  while(numeroPalabrasProhibidas--)
+  {
+	  //En el caso de que la palbra se encuentre en el mensaje
+	  if(mensaje.indexOf(palabrasProhibidas[numeroPalabrasProhibidas])!=-1)
+	  {
+		 var mensajeModificado = "";
+		 
+		 for(var i=0; i<palabrasProhibidas[numeroPalabrasProhibidas].length; i++)
+			 mensajeModificado+="*";
+		 
+		//Se sustituyen sus caracteres por "*"
+         mensaje = mensaje.replace(new RegExp(palabrasProhibidas[numeroPalabrasProhibidas], "g"), mensajeModificado); 
+      }
+  }
+  
   form.reset(); // Limpiar los campos del formulario una vez se ha insertado un nuevo comentario
 
   // Validar que los campos del comentario son correctos
