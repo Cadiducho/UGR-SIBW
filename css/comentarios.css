@@ -21,6 +21,21 @@
   font-weight: bold;
 }
 
+.comentario-datos {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comentario-email {
+  font-size: 0.7em;
+  font-weight: lighter;
+}
+
+.comentario-fecha {
+  font-size: 0.9em;
+  font-weight: normal;
+}
+
 .comentario-mensaje {
   padding: 10px;
 }

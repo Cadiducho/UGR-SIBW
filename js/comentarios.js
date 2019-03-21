@@ -20,12 +20,16 @@ function enviarComentario(event) {
   event.preventDefault();
   let form = document.getElementById("formEnviarComentario");
   let autor = form.nombre.value;
+  let email = form.email.value;
+  let fecha = new Date();
   let mensaje = form.mensaje.value;
-  let palabrasProhibidas = ["futbol", "baloncesto", "sonic", "bolos", "natacion", "surf", "patinaje", "snowboard", "tiro", "skate"];
-  
+
+  form.reset(); // Limpiar los campos del formulario una vez se ha insertado un nuevo comentario
+
   //Se eliminan las palbras que hemos determinado como prohibidas
+  let palabrasProhibidas = ["futbol", "baloncesto", "sonic", "bolos", "natacion", "surf", "patinaje", "snowboard", "tiro", "skate"];
   var numeroPalabrasProhibidas = palabrasProhibidas.length;
-  
+
   //Comprobamos si aparece cada una de las palabras prohibidas
   while(numeroPalabrasProhibidas--)
   {
@@ -33,32 +37,34 @@ function enviarComentario(event) {
 	  if(mensaje.indexOf(palabrasProhibidas[numeroPalabrasProhibidas])!=-1)
 	  {
 		 var mensajeModificado = "";
-		 
+
 		 for(var i=0; i<palabrasProhibidas[numeroPalabrasProhibidas].length; i++)
 			 mensajeModificado+="*";
-		 
-		//Se sustituyen sus caracteres por "*"
-         mensaje = mensaje.replace(new RegExp(palabrasProhibidas[numeroPalabrasProhibidas], "g"), mensajeModificado); 
+
+		     //Se sustituyen sus caracteres por "*"
+         mensaje = mensaje.replace(new RegExp(palabrasProhibidas[numeroPalabrasProhibidas], "g"), mensajeModificado);
       }
   }
-  
-  form.reset(); // Limpiar los campos del formulario una vez se ha insertado un nuevo comentario
 
   // Validar que los campos del comentario son correctos
 
   //----
 
-  addComentario(autor, mensaje);
+  addComentario(autor, email, mensaje, fecha);
 
   return false; // No recargar página tras procesar formulario
 }
 
-function addComentario(autor, mensaje) {
+function addComentario(autor, email, mensaje, fecha) {
   let lista = document.getElementById("listaComentarios");
   let nuevoComentario = '' +
   '<article class="comentario">' +
     '<div class="comentario-autor">' +
       autor +
+      '<div class="comentario-datos">' +
+        '<span class="comentario-email">' + email + '</span>' +
+        '<span class="comentario-fecha">' + fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear() + ' ' + fecha.getHours() + ':' + fecha.getMinutes() + '</span>' +
+      '</div>'+
     '</div>' +
     '<div class="comentario-mensaje">' +
     '<p>' + mensaje + '</p>' +
