@@ -12,8 +12,8 @@
 }
 
 .comentario-autor {
-  background-color: #00afaf;
-  color: white;
+  background-image: url("../img/background.jpg");
+  color: black;
   padding: 10px;
   display: block;
 
@@ -83,20 +83,47 @@
 }
 
 .botonEnviar {
-  background-color: #4CAF50;
+  background-image: url("../img/ground.jpg");
+  font-family: Impact, Charcoal, sans-serif;
+  font-variant: small-caps;
+  border-radius: 8px;
+  font-size: 20px;
   color: white;
   width: 100%;
 }
 
+.botonEnviar:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
 .botonMostrar {
-  background-color: #f4c842;
-  color: black;
+  background-image: url("../img/bricks1.jpg");
+  font-family: Impact, Charcoal, sans-serif;
+  font-variant: small-caps;
+  border-radius: 8px;
+  font-size: 20px;
+  color: white;
   width: 52%;
+}
+
+.botonMostrar:hover {  
+  background-image: url("../img/bricks.jpg");
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
 }
 
 .botonOcultar {
   display: none;
-  background-color: #e87925;
-  color: black;
+  background-image: url("../img/bricks.jpg");
+  font-family: Impact, Charcoal, sans-serif;
+  font-variant: small-caps;
+  border-radius: 8px;
+  font-size: 20px;
+  color: white;
   width: 52%;
+}
+
+.botonOcultar:hover {  
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
 }

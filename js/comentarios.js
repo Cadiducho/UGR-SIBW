@@ -16,17 +16,13 @@ function mostrarComentarios() {
   }
 }
 
-function enviarComentario(event) {
-  event.preventDefault();
-  let form = document.getElementById("formEnviarComentario");
-  let autor = form.nombre.value;
-  let email = form.email.value;
-  let fecha = new Date();
-  let mensaje = form.mensaje.value;
-
-  form.reset(); // Limpiar los campos del formulario una vez se ha insertado un nuevo comentario
-
-  //Se eliminan las palbras que hemos determinado como prohibidas
+function filtrarContenido(event)
+{
+  //event.preventDefault();
+  let textarea = document.getElementById("areaMensaje");
+  let mensaje = textarea.value;
+  
+  //Se eliminan las palabras que hemos determinado como prohibidas
   let palabrasProhibidas = ["futbol", "baloncesto", "sonic", "bolos", "natacion", "surf", "patinaje", "snowboard", "tiro", "skate"];
   var numeroPalabrasProhibidas = palabrasProhibidas.length;
 
@@ -41,10 +37,21 @@ function enviarComentario(event) {
 		 for(var i=0; i<palabrasProhibidas[numeroPalabrasProhibidas].length; i++)
 			 mensajeModificado+="*";
 
-		     //Se sustituyen sus caracteres por "*"
-         mensaje = mensaje.replace(new RegExp(palabrasProhibidas[numeroPalabrasProhibidas], "g"), mensajeModificado);
+		 //Se sustituyen sus caracteres
+         textarea.value = textarea.value.replace(new RegExp(palabrasProhibidas[numeroPalabrasProhibidas], "gi"), mensajeModificado);
       }
-  }
+  }  
+}
+
+function enviarComentario(event) {
+  event.preventDefault();
+  let form = document.getElementById("formEnviarComentario");
+  let autor = form.nombre.value;
+  let email = form.email.value;
+  let fecha = new Date();
+  let mensaje = form.mensaje.value;
+
+  form.reset(); // Limpiar los campos del formulario una vez se ha insertado un nuevo comentario
 
   // Validar que los campos del comentario son correctos
 

@@ -99,7 +99,7 @@
 						</div>
 					</div>
 					<div class="comentario-mensaje">
-						<p>Cuerpo del comentario 1</p>
+						<p>Buah... que pena que perdiera Federer...</p>
 					</div>
 				</article>
 				<article class="comentario">
@@ -111,7 +111,7 @@
 						</div>
 					</div>
 					<div class="comentario-mensaje">
-						<p>Cuerpo del comentario 2</p>
+						<p>Si, pero como se le nota que hace lo que le gusta, si jugara a ****** no sería tan bueno =)</p>
 					</div>
 				</article>
 			</section>
@@ -126,7 +126,7 @@
 				<input name="email" placeholder="Email" required></input>
 
 				<label for="mensaje">Mensaje</label>
-				<textarea placeholder="Introduce tu comentario..." name="mensaje" required></textarea>
+				<textarea onkeyup="filtrarContenido(event)" id="areaMensaje" placeholder="Introduce tu comentario..." name="mensaje" required></textarea>
 
 				<button type="submit" class="boton botonEnviar">Enviar</button>
 			</form>
