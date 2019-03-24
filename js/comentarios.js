@@ -21,7 +21,7 @@ function filtrarContenido(event)
   //event.preventDefault();
   let textarea = document.getElementById("areaMensaje");
   let mensaje = textarea.value;
-  
+
   //Se eliminan las palabras que hemos determinado como prohibidas
   let palabrasProhibidas = ["futbol", "baloncesto", "sonic", "bolos", "natacion", "surf", "patinaje", "snowboard", "tiro", "skate"];
   var numeroPalabrasProhibidas = palabrasProhibidas.length;
@@ -40,7 +40,49 @@ function filtrarContenido(event)
 		 //Se sustituyen sus caracteres
          textarea.value = textarea.value.replace(new RegExp(palabrasProhibidas[numeroPalabrasProhibidas], "gi"), mensajeModificado);
       }
-  }  
+  }
+}
+
+function validar(email, autor, mensaje) {
+  let regex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|io|es|uk|co|fr|it)");
+  let emailValid = regex.test(email);
+
+  let emailInput = document.getElementById("emailInput");
+  let emailLabel = document.getElementById("emailLabel");
+
+  let autorInput = document.getElementById("autorInput");
+  let autorLabel = document.getElementById("autorLabel");
+
+  let areaMensaje = document.getElementById("areaMensaje");
+  let mensajeLabel = document.getElementById("mensajeLabel");
+
+  if (!emailValid) {
+    emailInput.classList.add("invalid-input");
+    emailLabel.classList.add("invalid-label");
+  } else {
+    emailInput.classList.remove("invalid-input");
+    emailLabel.classList.remove("invalid-label");
+  }
+
+  let autorValid = (autor.length >= 3);
+  if (!autorValid) {
+    autorInput.classList.add("invalid-input");
+    autorLabel.classList.add("invalid-label");
+  } else {
+    autorInput.classList.remove("invalid-input");
+    autorLabel.classList.remove("invalid-label");
+  }
+
+  let mensajeValid = (mensaje.length >= 3);
+  if (!mensajeValid) {
+    areaMensaje.classList.add("invalid-input");
+    mensajeLabel.classList.add("invalid-label");
+  } else {
+    areaMensaje.classList.remove("invalid-input");
+    mensajeLabel.classList.remove("invalid-label");
+  }
+
+  return (emailValid && mensajeValid && autorValid);
 }
 
 function enviarComentario(event) {
@@ -51,11 +93,15 @@ function enviarComentario(event) {
   let fecha = new Date();
   let mensaje = form.mensaje.value;
 
-  form.reset(); // Limpiar los campos del formulario una vez se ha insertado un nuevo comentario
-
   // Validar que los campos del comentario son correctos
+  if (!validar(email, autor, mensaje)) {
+    return false; // Cortar aquí la función para no agregar comentarios ni borrar el formulario (para que sea corregido)
+  }
 
-  //----
+  form.reset(); // Limpiar los campos del formulario una vez se ha insertado un nuevo comentario
+  let mensajeLabel = document.getElementById("mensajeLabel");
+  let emailLabel = document.getElementById("emailLabel");
+
 
   addComentario(autor, email, mensaje, fecha);
 

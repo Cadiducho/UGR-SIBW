@@ -119,13 +119,13 @@
 			<form class="form-comentarios" id="formEnviarComentario" onsubmit="return enviarComentario(event)">
 				<div class="infoComentarios">Añade un comentario</div>
 
-				<label for="nombre">Nombre</label>
-				<input name="nombre" placeholder="Tu nombre" required></input>
+				<label for="nombre" id="autorLabel">Nombre</label>
+				<input name="nombre" id="autorInput" placeholder="Tu nombre" required></input>
 
-				<label for="email">Correo electrónico</label>
-				<input name="email" placeholder="Email" required></input>
+				<label for="email" id="emailLabel">Correo electrónico</label>
+				<input name="email" id="emailInput" placeholder="Email" required></input>
 
-				<label for="mensaje">Mensaje</label>
+				<label for="mensaje" id="mensajeLabel">Mensaje</label>
 				<textarea onkeyup="filtrarContenido(event)" id="areaMensaje" placeholder="Introduce tu comentario..." name="mensaje" required></textarea>
 
 				<button type="submit" class="boton">Enviar</button>
