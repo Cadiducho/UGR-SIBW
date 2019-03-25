@@ -2,6 +2,8 @@
 function mostrarComentarios() {
   let botonComentario = document.getElementById("mostrarComentarios");
   let botonOcultar = document.getElementById("ocultarComentarios");
+  
+  //Se establece lo que ocurre al pulsar ocultar/mostrar comentarios
   botonOcultar.style.display = "block";
 
   let cajaComentarios = document.getElementById("cajaComentarios");
@@ -44,6 +46,7 @@ function filtrarContenido(event)
 }
 
 function validar(email, autor, mensaje) {
+  //Se crea el regex para validar el email
   let regex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|io|es|uk|co|fr|it)");
   let emailValid = regex.test(email);
 
@@ -56,6 +59,7 @@ function validar(email, autor, mensaje) {
   let areaMensaje = document.getElementById("areaMensaje");
   let mensajeLabel = document.getElementById("mensajeLabel");
 
+  //Se valida el email
   if (!emailValid) {
     emailInput.classList.add("invalid-input");
     emailLabel.classList.add("invalid-label");
@@ -64,6 +68,7 @@ function validar(email, autor, mensaje) {
     emailLabel.classList.remove("invalid-label");
   }
 
+  //Se valida el autor
   let autorValid = (autor.length >= 3);
   if (!autorValid) {
     autorInput.classList.add("invalid-input");
@@ -73,6 +78,7 @@ function validar(email, autor, mensaje) {
     autorLabel.classList.remove("invalid-label");
   }
 
+	//Se valida el comentario
   let mensajeValid = (mensaje.length >= 3);
   if (!mensajeValid) {
     areaMensaje.classList.add("invalid-input");
@@ -110,6 +116,8 @@ function enviarComentario(event) {
 
 function addComentario(autor, email, mensaje, fecha) {
   let lista = document.getElementById("listaComentarios");
+  
+  //Nuevo comentario con el formato de los ya creados 
   let nuevoComentario = '' +
   '<article class="comentario">' +
     '<div class="comentario-autor">' +
@@ -123,5 +131,7 @@ function addComentario(autor, email, mensaje, fecha) {
     '<p>' + mensaje + '</p>' +
     '</div>' +
   '</article>';
+  
+  //Se incorpora el nuevo comentario
   lista.insertAdjacentHTML('beforeend', nuevoComentario);
 }

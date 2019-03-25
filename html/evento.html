@@ -86,9 +86,11 @@
 		</p>
 		<!-- Fin texto del evento -->
 
+		<!-- Panel de comentarios -->
 		<button id="mostrarComentarios" onclick="mostrarComentarios()" class="boton botonMostrar">Mostrar comentarios</button>
 		<button id="ocultarComentarios" onclick="mostrarComentarios()" class="boton botonOcultar">Ocultar comentarios</button>
 		<div id="cajaComentarios" class="cajaComentarios" hidden>
+			<!-- Lista de comentarios -->
 			<section id="listaComentarios">
 				<article class="comentario">
 					<div class="comentario-autor">
@@ -115,7 +117,9 @@
 					</div>
 				</article>
 			</section>
-
+			<!-- Fin lista de comentarios -->
+			
+			<!-- Formulario -->
 			<form class="form-comentarios" id="formEnviarComentario" onsubmit="return enviarComentario(event)">
 				<div class="infoComentarios">Añade un comentario</div>
 
@@ -130,7 +134,9 @@
 
 				<button type="submit" class="boton">Enviar</button>
 			</form>
+			<!-- Fin formulario -->
 		</div>
+		<!-- Fin panel de comentarios -->
 	</section>
   </div>
   <!-- Fin evento Indian Wells Masters -->
