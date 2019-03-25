@@ -20,7 +20,7 @@ function mostrarComentarios() {
 
 function filtrarContenido(event)
 {
-  //event.preventDefault();
+  event.preventDefault();
   let textarea = document.getElementById("areaMensaje");
   let mensaje = textarea.value;
 
