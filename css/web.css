@@ -153,7 +153,7 @@ body {
 }
 
 /*Caracteristicas de la fecha del evento*/
-.date-event {
+.date-event{
 	font-family: Lucida Sans Unicode;
 	font-size: 15px;
 	color: black;
@@ -184,10 +184,19 @@ body {
 
 /*Iconos sociales*/
 .social {
-	float: right;
+	position: center;
 	margin: 1%;
+	margin-bottom: 50px;
 }
 
+.social a {
+	text-decoration:none;
+}
+
+.social-event{
+	margin-bottom: 25px;
+	margin-top: 50px;
+}
 /* Footer */
 .footer {
   padding: 10px;
