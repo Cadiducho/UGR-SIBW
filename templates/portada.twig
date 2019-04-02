@@ -4,100 +4,20 @@
 
 {% block mainContent %}
 	<!-- Eventos -->
-	<div class="main">
 		<h2 class="main-title">Eventos destacados</h2>
 		<section class="content">
-			<article class="box">
-				<a href="evento.html">
-					<picture class="thumbnail">
-						<img src="img/indianwells.jpg" alt="Indian Wells Masters">
-					</picture>
-					<div class="box-content">
-						<p>Indian Wells Masters.</p>
-					</div>
-				</a>
-			</article>
-			<article class="box">
-				<a href="#">
-					<picture class="thumbnail">
-						<img src="img/miami.jpg" alt="Miami Open">
-					</picture>
-					<div class="box-content">
-						<p>Miami Open.</p>
-					</div>
-				</a>
-			</article>
-			<article class="box">
-				<a href="#">
-					<picture class="thumbnail">
-						<img src="img/montecarlo.jpg" alt="Montecarlo Masters">
-					</picture>
-					<div class="box-content">
-						<p>Montecarlo Masters.</p>
-					</div>
-				</a>
-			</article>
-			<article class="box">
-				<a href="#">
-					<picture class="thumbnail">
-						<img src="img/madrid.jpg" alt="Madrid Open">
-					</picture>
-					<div class="box-content">
-						<p>Madrid Open.</p>
-					</div>
-				</a>
-			</article>
-			<article class="box">
-				<a href="#">
-					<picture class="thumbnail">
-						<img src="img/italia.jpg" alt="Italian Open">
-					</picture>
-					<div class="box-content">
-						<p>Italian Open.</p>
-					</div>
-				</a>
-			</article>
-			<article class="box">
-				<a href="#">
-					<picture class="thumbnail">
-						<img src="img/canadian.jpg" alt="Canadian Open">
-					</picture>
-					<div class="box-content">
-						<p>Canadian Open.</p>
-					</div>
-				</a>
-			</article>
-			<article class="box">
-				<a href="#">
-					<picture class="thumbnail">
-						<img src="img/cincinnati.jpg" alt="Cincinnati Open">
-					</picture>
-					<div class="box-content">
-						<p>Cincinnati Open.</p>
-					</div>
-				</a>
-			</article>
-			<article class="box">
-				<a href="#">
-					<picture class="thumbnail">
-						<img src="img/shanghai.jpg" alt="Shanghai Open">
-					</picture>
-					<div class="box-content">
-						<p>Shanghai Open.</p>
-					</div>
-				</a>
-			</article>
-			<article class="box">
-				<a href="#">
-					<picture class="thumbnail">
-						<img src="img/paris.jpg" alt="Paris Open">
-					</picture>
-					<div class="box-content">
-						<p>Paris Open.</p>
-					</div>
-				</a>
-			</article>
+			{% for evento in eventos %}
+				<article class="box">
+					<a href="evento.php?id={{ evento.id }}">
+						<picture class="thumbnail">
+							<img src="img/{{ evento.imagen }}" alt=" {{ evento.nombre }}">
+						</picture>
+						<div class="box-content">
+							<p>{{ evento.nombre }}</p>
+						</div>
+					</a>
+				</article>
+			{% endfor %}
 		</section>
-	</div>
 	<!-- Fin eventos -->
 {% endblock %}
