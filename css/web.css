@@ -166,6 +166,13 @@ body {
 	width: 50%;
 }
 
+.text-created-updated-event {
+  font-weight: lighter;
+  font-style: italic;
+  font-size: 10px;
+	font-family: Lucida Sans Unicode;
+}
+
 /*img del evento*/
 .img-event {
 	float: right;

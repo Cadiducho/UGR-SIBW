@@ -31,6 +31,7 @@
     <p class="text-event">
       {{ evento.descripcion|nl2br }} {# nl2br insertará saltos de línea #}
     </p>
+    <span class="text-created-updated-event">Creado el {{ evento.creado_en|date("d/m/Y H:i") }}. Actualizado el {{ evento.actualizado_en|date("d/m/Y H:i") }}</span>
     <!-- Fin texto del evento -->
 
     <!-- Enlaces sociales -->

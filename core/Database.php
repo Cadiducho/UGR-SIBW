@@ -47,7 +47,8 @@ class Database {
             $row["id"], $row["nombre"], $row["imagen"],
             $row["organizador"], $row["fecha"], $row["descripcion"],
             $row["imagen_lateral_1"], $row["imagen_lateral_1_descripcion"],
-            $row["imagen_lateral_2"], $row["imagen_lateral_2_descripcion"]
+            $row["imagen_lateral_2"], $row["imagen_lateral_2_descripcion"],
+            $row["creado_en"], $row["actualizado_en"]
         );
     }
     return $evento;
