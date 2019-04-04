@@ -12,6 +12,7 @@ class Database {
     $password = "sibw";
     $databaseName = "sibw";
     $this->mysqli = new mysqli($hostname, $username, $password, $databaseName);
+    $this->mysqli->set_charset("utf8");
 
     if (mysqli_connect_errno()) {
         printf("Conexión errónea: %s\n", mysqli_connect_error());
@@ -30,6 +31,25 @@ class Database {
     }
 
     return $eventos;
+  }
+
+  public function getEvento($id) {
+    $queryEventos = "SELECT * FROM eventos WHERE id=?";
+    $stmt = $this->mysqli->prepare($queryEventos);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $resultEvento = $stmt->get_result();
+
+    $evento = null;
+    if ($row = $resultEvento->fetch_assoc()) {
+        $evento = new Evento(
+            $row["id"], $row["nombre"], $row["imagen"],
+            $row["organizador"], $row["fecha"], $row["descripcion"],
+            $row["imagen_lateral_1"], $row["imagen_lateral_1_descripcion"],
+            $row["imagen_lateral_2"], $row["imagen_lateral_2_descripcion"]
+        );
+    }
+    return $evento;
   }
 }
 

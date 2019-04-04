@@ -1,0 +1,101 @@
+{% extends "layout.twig" %}
+
+{% block titulo %}Portada{% endblock %}
+
+{# Cargar el head normal y añadir el css y js de los comentarios #}
+{% block head %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="css/comentarios.css" media="screen"/>
+    <script src="js/comentarios.js"></script>
+{% endblock %}
+
+
+{% block mainContent %}
+<h2 class="main-title">{{ evento.nombre }}</h2>
+<section class="content-event">
+    <!-- Imagenes del evento -->
+    {#  Revisar: Si nos pide una galería, esto sería un foreach?
+        Y en lugar de 2 columnas para fotos, otra tabla asociada a la id del evento para poder añadir diferentes cantidades de fotos
+    #}
+    <div class="img-event">
+        <img src="{{ evento.imagen_lateral_1 }}">
+        <p class="img-footer"> {{ evento.imagen_lateral_1_descripcion }} </p>
+        <img src="{{ evento.imagen_lateral_2 }}">
+        <p class="img-footer"> {{ evento.imagen_lateral_2_descripcion }} </p>
+    </div>
+    <!-- Fin de imagenes del evento -->
+
+    <!-- Texto del evento -->
+    <h3 class="organizer-event">{{ evento.organizador }}</h3>
+    <h3 class="date-event">{{ evento.fecha }}</h3>
+    <p class="text-event">
+      {{ evento.descripcion|nl2br }} {# nl2br insertará saltos de línea #}
+    </p>
+    <!-- Fin texto del evento -->
+
+    <!-- Enlaces sociales -->
+    {# ToDo: Confirmar lo de los enlaces sociales e incluirlos bien en el template #}
+    <h3 class="social-event">Comparte este evento</h3>
+    <div class="social">
+      <a href="https://es-la.facebook.com/BNPPARIBASOPEN/"> <img src="img/facebook.png"> </a>
+      <a href="https://twitter.com/bnpparibasopen?lang=es"> <img src="img/twitter.png"> </a>
+      <a href="evento-imprimir.html"> <img src="img/printer.png"> </a>
+    </div>
+    <!-- Fin enlaces sociales -->
+
+    <!-- Panel de comentarios -->
+    {# ToDo: Crear esquema de comentarios tabla etc y pasar los comentarios como un parametro array a Twig #}
+    <button id="mostrarComentarios" onclick="mostrarComentarios()" class="boton botonMostrar">Mostrar comentarios</button>
+    <button id="ocultarComentarios" onclick="mostrarComentarios()" class="boton botonOcultar">Ocultar comentarios</button>
+    <div id="cajaComentarios" class="cajaComentarios" hidden>
+      <!-- Lista de comentarios -->
+      <section id="listaComentarios">
+        <article class="comentario">
+          <div class="comentario-autor">
+            Ana
+            <div class="comentario-datos">
+              <span class="comentario-email">ana@web.com</span>
+              <span class="comentario-fecha">21/3/2019 18:05</span>
+            </div>
+          </div>
+          <div class="comentario-mensaje">
+            <p>Buah... que pena que perdiera Federer...</p>
+          </div>
+        </article>
+        <article class="comentario">
+          <div class="comentario-autor">
+            Dani
+            <div class="comentario-datos">
+              <span class="comentario-email">dani@web.org</span>
+              <span class="comentario-fecha">21/3/2019 18:29</span>
+            </div>
+          </div>
+          <div class="comentario-mensaje">
+            <p>Si, pero como se le nota que hace lo que le gusta, si jugara a ****** no sería tan bueno =)</p>
+          </div>
+        </article>
+      </section>
+      <!-- Fin lista de comentarios -->
+
+      <!-- Formulario -->
+      {# ToDo: que el formulario envie la petición a un archivo .php mediante POST y se inserten en una tabla de mysql #}
+      <form class="form-comentarios" id="formEnviarComentario" onsubmit="return enviarComentario(event)">
+        <div class="infoComentarios">Añade un comentario</div>
+
+        <label for="nombre" id="autorLabel">Nombre</label>
+        <input name="nombre" id="autorInput" placeholder="Tu nombre" required></input>
+
+        <label for="email" id="emailLabel">Correo electrónico</label>
+        <input name="email" id="emailInput" placeholder="Email" required></input>
+
+        <label for="mensaje" id="mensajeLabel">Mensaje</label>
+        <textarea onkeyup="filtrarContenido(event)" id="areaMensaje" placeholder="Introduce tu comentario..." name="mensaje" required></textarea>
+
+        <button type="submit" class="boton">Enviar</button>
+      </form>
+      <!-- Fin formulario -->
+    </div>
+    <!-- Fin panel de comentarios -->
+
+</section>
+{% endblock %}
