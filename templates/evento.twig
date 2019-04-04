@@ -44,36 +44,25 @@
     <!-- Fin enlaces sociales -->
 
     <!-- Panel de comentarios -->
-    {# ToDo: Crear esquema de comentarios tabla etc y pasar los comentarios como un parametro array a Twig #}
     <button id="mostrarComentarios" onclick="mostrarComentarios()" class="boton botonMostrar">Mostrar comentarios</button>
     <button id="ocultarComentarios" onclick="mostrarComentarios()" class="boton botonOcultar">Ocultar comentarios</button>
     <div id="cajaComentarios" class="cajaComentarios" hidden>
       <!-- Lista de comentarios -->
       <section id="listaComentarios">
-        <article class="comentario">
-          <div class="comentario-autor">
-            Ana
-            <div class="comentario-datos">
-              <span class="comentario-email">ana@web.com</span>
-              <span class="comentario-fecha">21/3/2019 18:05</span>
-            </div>
-          </div>
-          <div class="comentario-mensaje">
-            <p>Buah... que pena que perdiera Federer...</p>
-          </div>
-        </article>
-        <article class="comentario">
-          <div class="comentario-autor">
-            Dani
-            <div class="comentario-datos">
-              <span class="comentario-email">dani@web.org</span>
-              <span class="comentario-fecha">21/3/2019 18:29</span>
-            </div>
-          </div>
-          <div class="comentario-mensaje">
-            <p>Si, pero como se le nota que hace lo que le gusta, si jugara a ****** no sería tan bueno =)</p>
-          </div>
-        </article>
+        {% for comentario in comentarios %}
+            <article class="comentario" id="comentario-{{ comentario.id }}">
+              <div class="comentario-autor">
+                {{ comentario.autor }}
+                <div class="comentario-datos">
+                  <span class="comentario-email">{{ comentario.email }}</span>
+                  <span class="comentario-fecha">{{ comentario.fecha|date("d/m/Y H:i") }}</span>
+                </div>
+              </div>
+              <div class="comentario-mensaje">
+                <p>{{ comentario.mensaje }}</p>
+              </div>
+            </article>
+        {% endfor %}
       </section>
       <!-- Fin lista de comentarios -->
 

@@ -1,6 +1,7 @@
 <?php
 $ROOT_PATH = dirname(__DIR__);
 require_once $ROOT_PATH . '/core/modelo/Evento.php';
+require_once $ROOT_PATH . '/core/modelo/Comentario.php';
 
 class Database {
 
@@ -50,6 +51,24 @@ class Database {
         );
     }
     return $evento;
+  }
+
+  public function getComentariosEvento($idEvento) {
+    $queryComentarios = "SELECT id, autor, email, fecha, mensaje FROM comentarios WHERE evento=?";
+    $stmt = $this->mysqli->prepare($queryComentarios);
+    $stmt->bind_param("i", $idEvento);
+    $stmt->execute();
+    $resultComentarios = $stmt->get_result();
+
+    $comentarios = array();
+    while ($row = $resultComentarios->fetch_array()) {
+        $comentario = new Comentario(
+          $row["id"], $row["autor"], $row["email"],
+          $row["fecha"], $row["mensaje"]
+        );
+        $comentarios[$row["id"]] = $comentario;
+    }
+    return $comentarios;
   }
 }
 
