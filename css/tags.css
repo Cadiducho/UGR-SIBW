@@ -1,0 +1,30 @@
+.lista-tags {
+  margin-bottom: 20px;
+}
+
+.lista-tags-portada {
+  margin: 0 0 15px 15px;
+  padding: 10px;
+}
+
+.tag {
+  padding: 1px 7px;
+  margin: 0 2px;
+  text-transform: lowercase;
+  background-color: #e2e058;
+  padding: 2px 8px;
+  font-size: 14px;
+  font-weight: normal;
+  margin-right: 10px;
+  border-radius: 9px 4px;
+}
+
+.tag a {
+  text-decoration: none;
+  color: #4f4f4f;
+}
+
+.tag a .tag-count {
+  text-decoration: none;
+  color: #a3a3a3;
+}

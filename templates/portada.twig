@@ -1,10 +1,15 @@
 {% extends "layout.twig" %}
 
+{% block head %}
+    {{ parent() }}
+		<link rel="stylesheet" type="text/css" href="css/tags.css" media="screen"/>
+{% endblock %}
+
 {% block titulo %}Portada{% endblock %}
 
 {% block mainContent %}
 	<!-- Eventos -->
-		<h2 class="main-title">Eventos destacados</h2>
+		<h2 class="main-title">Eventos {{ busqueda }}</h2>
 		<section class="content">
 			{% for evento in eventos %}
 				<article class="box">
@@ -20,4 +25,11 @@
 			{% endfor %}
 		</section>
 	<!-- Fin eventos -->
+	<hr/>
+	<section class="lista-tags-portada">
+			<span class="tag"><a href="/index.php">todos</a></span>
+			{% for tag in etiquetas %}
+					<span class="tag"><a href="/index.php?tag={{ tag.nombre }}">{{ tag.nombre }} <span class="tag-count">({{ tag.cantidad }})</span></a></span>
+			{% endfor %}
+	</section>
 {% endblock %}

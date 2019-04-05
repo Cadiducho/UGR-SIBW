@@ -7,6 +7,7 @@
     {{ parent() }}
     <link rel="stylesheet" type="text/css" href="css/comentarios.css" media="screen"/>
     <script src="js/comentarios.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/tags.css" media="screen"/>
 {% endblock %}
 
 
@@ -31,6 +32,15 @@
     <p class="text-event">
       {{ evento.descripcion|nl2br }} {# nl2br insertará saltos de línea #}
     </p>
+
+    <!-- Etiquetas del evento -->
+    <section class="lista-tags">
+        {% for tag in etiquetas %}
+            <span class="tag"><a href="/index.php?tag={{ tag.nombre }}">{{ tag.nombre }}</a></span>
+        {% endfor %}
+    </section>
+    <!-- Fin etiquetas -->
+
     <span class="text-created-updated-event">Creado el {{ evento.creado_en|date("d/m/Y H:i") }}. Actualizado el {{ evento.actualizado_en|date("d/m/Y H:i") }}</span>
     <!-- Fin texto del evento -->
 

@@ -2,6 +2,7 @@
 $ROOT_PATH = dirname(__DIR__);
 require_once $ROOT_PATH . '/core/modelo/Evento.php';
 require_once $ROOT_PATH . '/core/modelo/Comentario.php';
+require_once $ROOT_PATH . '/core/modelo/Tag.php';
 
 class Database {
 
@@ -23,13 +24,16 @@ class Database {
 
   public function getEventosPortada() {
     $queryEventos = "SELECT id, nombre, imagen FROM eventos";
-    $resultEventos = $this->mysqli->query($queryEventos);
+    $stmt = $this->mysqli->prepare($queryEventos);
+    $stmt->execute();
+    $resultEventos = $stmt->get_result();
 
     $eventos = array();
     while ($row = $resultEventos->fetch_array()) {
         $evento = new Evento($row["id"], $row["nombre"], $row["imagen"]);
         $eventos[$row["id"]] = $evento;
     }
+    $stmt->close();
 
     return $eventos;
   }
@@ -51,6 +55,7 @@ class Database {
             $row["creado_en"], $row["actualizado_en"]
         );
     }
+    $stmt->close();
     return $evento;
   }
 
@@ -69,7 +74,60 @@ class Database {
         );
         $comentarios[$row["id"]] = $comentario;
     }
+    $stmt->close();
     return $comentarios;
+  }
+
+  public function getEventosByTag($tag) {
+    $queryEventos = "SELECT e.* FROM eventos e JOIN eventos_tags t
+                      ON (e.id = t.evento) WHERE t.tag
+                      LIKE CONCAT('%',?,'%')";
+    $stmt = $this->mysqli->prepare($queryEventos);
+    $stmt->bind_param("s", $tag);
+    $stmt->execute();
+    $resultEventos = $stmt->get_result();
+
+    $eventos = array();
+    while ($row = $resultEventos->fetch_array()) {
+        $evento = new Evento($row["id"], $row["nombre"], $row["imagen"]);
+        $eventos[$row["id"]] = $evento;
+    }
+    $stmt->close();
+
+    return $eventos;
+  }
+
+  public function getTags() {
+    $queryTags = "SELECT t.tag as nombre, count(*) as cantidad FROM eventos_tags t GROUP BY t.tag;";
+    $stmt = $this->mysqli->prepare($queryTags);
+    $stmt->execute();
+    $resultTags = $stmt->get_result();
+
+    $tags = array();
+    while ($row = $resultTags->fetch_array()) {
+        $tag = new Tag($row["nombre"], $row["cantidad"]);
+        $tags[$row["nombre"]] = $tag;
+    }
+    $stmt->close();
+
+    return $tags;
+  }
+
+  public function getTagsOfEvent($eventId) {
+    $queryTags = "SELECT tag FROM eventos_tags WHERE evento=?";
+    $stmt = $this->mysqli->prepare($queryTags);
+    $stmt->bind_param("i", $eventId);
+    $stmt->execute();
+    $resultTags = $stmt->get_result();
+
+    $tags = array();
+    while ($row = $resultTags->fetch_array()) {
+        $tag = new Tag($row["tag"]);
+        $tags[] = $tag;
+    }
+    $stmt->close();
+
+    return $tags;
   }
 }
 
