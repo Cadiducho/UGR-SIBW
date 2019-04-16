@@ -9,7 +9,7 @@ class Database {
   private $mysqli;
 
   function Database() {
-    $hostname = "localhost";
+    $hostname = "dandelion.cadiducho.com";
     $username = "sibw";
     $password = "sibw";
     $databaseName = "sibw";
@@ -128,6 +128,15 @@ class Database {
     $stmt->close();
 
     return $tags;
+  }
+
+  public function insertarComentario($evento, $nombre, $email, $texto, $fecha, $ip) {
+    $queryTags = "INSERT INTO comentarios (evento, autor, email, fecha, mensaje, ip) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = $this->mysqli->prepare($queryTags);
+    $stmt->bind_param("isssss", $evento, $nombre, $email, $fecha, $texto, $ip);
+    $stmt->execute();
+
+    $stmt->close();
   }
 }
 

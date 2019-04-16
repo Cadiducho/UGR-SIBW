@@ -17,6 +17,7 @@ if (empty($tagBuscada)) {
 }
 
 $listaTags = $database->getTags();
+
 echo $twig->render('portada.twig', ["eventos" => $eventos, "etiquetas" => $listaTags, "busqueda" => $busqueda]);
 
 ?>

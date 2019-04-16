@@ -78,7 +78,6 @@
       <!-- Fin lista de comentarios -->
 
       <!-- Formulario -->
-      {# ToDo: que el formulario envie la petición a un archivo .php mediante POST y se inserten en una tabla de mysql #}
       <form class="form-comentarios" id="formEnviarComentario" onsubmit="return enviarComentario(event)">
         <div class="infoComentarios">Añade un comentario</div>
 
@@ -90,6 +89,8 @@
 
         <label for="mensaje" id="mensajeLabel">Mensaje</label>
         <textarea onkeyup="filtrarContenido(event)" id="areaMensaje" placeholder="Introduce tu comentario..." name="mensaje" required></textarea>
+
+        <input name="eventid" id="eventid" type="hidden" value="{{ evento.id }}"></input>
 
         <button type="submit" class="boton">Enviar</button>
       </form>

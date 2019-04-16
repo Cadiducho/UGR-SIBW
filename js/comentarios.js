@@ -2,7 +2,7 @@
 function mostrarComentarios() {
   let botonComentario = document.getElementById("mostrarComentarios");
   let botonOcultar = document.getElementById("ocultarComentarios");
-  
+
   //Se establece lo que ocurre al pulsar ocultar/mostrar comentarios
   botonOcultar.style.display = "block";
 
@@ -97,6 +97,7 @@ function enviarComentario(event) {
   let email = form.email.value;
   let fecha = new Date();
   let mensaje = form.mensaje.value;
+  let eventid = form.eventid.value;
 
   // Validar que los campos del comentario son correctos
   if (!validar(email, autor, mensaje)) {
@@ -108,29 +109,49 @@ function enviarComentario(event) {
   let emailLabel = document.getElementById("emailLabel");
 
 
-  addComentario(autor, email, mensaje, fecha);
+  addComentario(eventid, autor, email, mensaje, fecha);
 
   return false; // No recargar página tras procesar formulario
 }
 
-function addComentario(autor, email, mensaje, fecha) {
+function addComentario(eventid, autor, email, mensaje, fecha) {
   let lista = document.getElementById("listaComentarios");
-  
-  //Nuevo comentario con el formato de los ya creados 
-  let nuevoComentario = '' +
-  '<article class="comentario">' +
-    '<div class="comentario-autor">' +
-      autor +
-      '<div class="comentario-datos">' +
-        '<span class="comentario-email">' + email + '</span>' +
-        '<span class="comentario-fecha">' + fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear() + ' ' + fecha.getHours() + ':' + fecha.getMinutes() + '</span>' +
-      '</div>'+
-    '</div>' +
-    '<div class="comentario-mensaje">' +
-    '<p>' + mensaje + '</p>' +
-    '</div>' +
-  '</article>';
-  
-  //Se incorpora el nuevo comentario
-  lista.insertAdjacentHTML('beforeend', nuevoComentario);
+
+  // Insertarlo mediante AJAX y PHP
+  let url = "/postComentario.php";
+  let params = 'evento=' + eventid + '&nombre=' + autor + '&email=' + email + '&texto=' + mensaje + '&fecha=' + fecha;
+  let xhr = new XMLHttpRequest();
+  xhr.onload = function () {
+    	if (xhr.status >= 200 && xhr.status < 300) {
+      		if (!(xhr.response === "error")) {
+              console.log(xhr.response);
+              // Mostrarlo en la web
+              let nuevoComentario = '' +
+              '<article class="comentario">' +
+                '<div class="comentario-autor">' +
+                  autor +
+                  '<div class="comentario-datos">' +
+                    '<span class="comentario-email">' + email + '</span>' +
+                    '<span class="comentario-fecha">' + fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear() + ' ' + fecha.getHours() + ':' + fecha.getMinutes() + '</span>' +
+                  '</div>'+
+                '</div>' +
+                '<div class="comentario-mensaje">' +
+                '<p>' + mensaje + '</p>' +
+                '</div>' +
+              '</article>';
+
+              //Se incorpora el nuevo comentario
+              lista.insertAdjacentHTML('beforeend', nuevoComentario);
+          } else {
+            console.log("error");
+          }
+    	} else {
+    		// This will run when it's not
+    		console.log('The request failed!');
+    	}
+  };
+
+  xhr.open('POST', url);
+  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xhr.send(params);
 }
