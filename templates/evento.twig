@@ -90,7 +90,7 @@
         <input name="email" id="emailInput" placeholder="Email" required></input>
 
         <label for="mensaje" id="mensajeLabel">Mensaje</label>
-        <textarea onkeyup="filtrarContenido(event)" id="areaMensaje" placeholder="Introduce tu comentario..." name="mensaje" required></textarea>
+        <textarea onkeyup="filtrarContenido(event, {{ prohibidas|json_encode }})" id="areaMensaje" placeholder="Introduce tu comentario..." name="mensaje" required></textarea>
 
         <input name="eventid" id="eventid" type="hidden" value="{{ evento.id }}"></input>
 

@@ -18,13 +18,12 @@ function mostrarComentarios() {
   }
 }
 
-function filtrarContenido(event)
+function filtrarContenido(event, palabrasProhibidas)
 {
   let textarea = document.getElementById("areaMensaje");
   let mensaje = textarea.value;
 
   //Se eliminan las palabras que hemos determinado como prohibidas
-  let palabrasProhibidas = ["futbol", "baloncesto", "sonic", "bolos", "natacion", "surf", "patinaje", "snowboard", "tiro", "skate"];
   var numeroPalabrasProhibidas = palabrasProhibidas.length;
 
   //Comprobamos si aparece cada una de las palabras prohibidas

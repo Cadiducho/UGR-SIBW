@@ -78,6 +78,22 @@ class Database {
     return $comentarios;
   }
 
+  public function getPalabrasProhibidas() {
+    $queryProhibidas = "SELECT palabra_prohibida FROM palabras_prohibidas";
+    $stmt = $this->mysqli->prepare($queryProhibidas);
+    $stmt->execute();
+    $resultProhibidas = $stmt->get_result();
+
+    $prohibidas = array();
+
+    while ($row = $resultProhibidas->fetch_array()) {
+        $prohibidas[] = $row["palabra_prohibida"];
+    }
+    $stmt->close();
+
+    return $prohibidas;
+  }
+
   public function getGaleriaEvento($idEvento) {
     $queryGaleria = "SELECT foto, descripcion FROM fotos_galeria WHERE evento=?";
     $stmt = $this->mysqli->prepare($queryGaleria);
@@ -90,6 +106,7 @@ class Database {
         $galeria[$row["foto"]] = $row["descripcion"];
     }
     $stmt->close();
+
     return $galeria;
   }
 
