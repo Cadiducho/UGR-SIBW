@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 
-{% block titulo %}Portada{% endblock %}
+{% block titulo %}{{ evento.nombre }}{% endblock %}
 
 {# Cargar el head normal y añadir el css y js de los comentarios #}
 {% block head %}
@@ -52,7 +52,7 @@
     <div class="social">
       <a onclick="compartir('Facebook', '{{ evento.nombre }}')"> <img src="img/facebook.png"> </a>
       <a onclick="compartir('Twitter', '{{ evento.nombre }}')"> <img src="img/twitter.png"> </a>
-      <a href="evento-imprimir.html"> <img src="img/printer.png"> </a>
+      <a href="eventoImprimir.php?id={{ evento.id }}"> <img src="img/printer.png"> </a>
     </div>
     <!-- Fin enlaces sociales -->
 

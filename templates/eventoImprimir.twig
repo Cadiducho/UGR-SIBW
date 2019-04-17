@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Head -->
+<head>
+  <link rel="shortcut icon" href="img/mario.ico" />
+	<meta charset="UTF-8">
+	<title> Print- {{ evento.nombre }} - Mario Tennis Club </title>
+	<link rel="stylesheet" type="text/css" href="css/imprimir.css" media="screen"/>
+</head>
+<!-- Fin Head -->
+
+<!-- Body -->
+<body>
+<!-- Header -->
+<header class="header">
+	<section class="title">
+		<img src="img/mario_tennis.png" alt="mario tennis">
+		<h1> Mario Tennis Club </h1>
+	</section>
+</header>
+<!-- Fin Header -->
+
+<div class="content">
+  <!-- Evento -->
+  <div class="main">
+    <h2 class="main-title">{{ evento.nombre }}</h2>
+  <section class="content-event">
+    <!-- Imagenes del evento -->
+    <div class="img-event">
+        <center><img src="img/{{ evento.imagen }}"></center>
+        <p class="img-footer"> Pista del {{ evento.nombre }} </p>
+    </div>
+    <!-- Fin de imagenes del evento -->
+
+    <!-- Texto del evento -->
+    <div class="texto-general">
+      <div class="texto-izq">
+        <h3 class="organizer-event">{{ evento.organizador }}</h3>
+        <h3 class="date-event">{{ evento.fecha }}</h3>
+        <span class="text-created-updated-event">Creado el {{ evento.creado_en|date("d/m/Y H:i") }}. Actualizado el {{ evento.actualizado_en|date("d/m/Y H:i") }}</span>
+      </div>
+
+      <div class="texto-der">
+        <p class="text-event">
+          {{ evento.descripcion|nl2br }} {# nl2br insertará saltos de línea #}
+        </p>
+      </div>
+    </div>
+
+    <!-- Fin texto del evento -->
+  </section>
+  </div>
+  <!-- Fin evento Indian Wells Masters -->
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+	<p>© Mario Tennis Club 2019 · Ana Bosch Fernández · Daniel Matilla Bastero</p>
+	<p>Condiciones de uso · Política de privacidad · Política de cookies</p>
+</footer>
+<!-- Fin Footer -->
+
+</body>
+<!-- Fin Body -->
+</html>

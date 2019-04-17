@@ -89,14 +89,37 @@ body {
 }
 
 /*img del evento*/
-.img-event {
-	float: right;
-	width: 20%;
+.img-event img {
+  width: 65%;
+  height: auto;
 }
 
-.img-event img {
-  width: 60%;
-  height: auto;
+.img-footer{
+  text-align:center;
+}
+
+/*texto del evento*/
+.texto-general{
+  display: table;
+  clear: both;
+  content: "";
+  padding-left: 18%;
+}
+
+.texto-izq {
+	float: left;
+	width: 16%;
+  display: inline;
+  position: relative;
+}
+
+.texto-der {
+  float: left;
+	width: 84%;
+  display: inline;
+  position: relative;
+  padding-left: 9%;
+
 }
 
 /* Footer */
