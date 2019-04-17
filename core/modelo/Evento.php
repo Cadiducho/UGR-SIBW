@@ -30,10 +30,7 @@ class Evento {
     // Timestamp en el que la pagina del evento fue actualizado
     public $actualizado_en;
 
-    // Lista de etiquietas que categorizan en evento
-    public $tags;
-
-    function Evento($id, $nombre, $imagen, $organizador = "", $fecha = "", $descripcion="", $imagen_lateral_1 = "", $imagen_lateral_1_descripcion = "", $imagen_lateral_2 = "", $imagen_lateral_2_descripcion = "", $creado_en = "", $actualizado_en = "", $tags = array()) {
+    function Evento($id, $nombre, $imagen, $organizador = "", $fecha = "", $descripcion="", $imagen_lateral_1 = "", $imagen_lateral_1_descripcion = "", $imagen_lateral_2 = "", $imagen_lateral_2_descripcion = "", $creado_en = "", $actualizado_en = "") {
       $this->id = $id;
       $this->nombre = $nombre;
       $this->imagen = $imagen;
@@ -46,7 +43,6 @@ class Evento {
       $this->imagen_lateral_2_descripcion = $imagen_lateral_2_descripcion;
       $this->creado_en = $creado_en;
       $this->actualizado_en = $actualizado_en;
-      $this->tags = $tags;
     }
 
 }

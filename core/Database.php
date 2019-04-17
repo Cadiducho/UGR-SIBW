@@ -78,6 +78,21 @@ class Database {
     return $comentarios;
   }
 
+  public function getGaleriaEvento($idEvento) {
+    $queryGaleria = "SELECT foto, descripcion FROM fotos_galeria WHERE evento=?";
+    $stmt = $this->mysqli->prepare($queryGaleria);
+    $stmt->bind_param("i", $idEvento);
+    $stmt->execute();
+    $resultGaleria = $stmt->get_result();
+
+    $galeria = array();
+    while ($row = $resultGaleria->fetch_array()) {
+        $galeria[$row["foto"]] = $row["descripcion"];
+    }
+    $stmt->close();
+    return $galeria;
+  }
+
   public function getEventosByTag($tag) {
     $queryEventos = "SELECT e.* FROM eventos e JOIN eventos_tags t
                       ON (e.id = t.evento) WHERE t.tag

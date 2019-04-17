@@ -8,7 +8,9 @@
     <link rel="stylesheet" type="text/css" href="css/comentarios.css" media="screen"/>
     <script src="js/comentarios.js"></script>
     <script src="js/compartirEvento.js"></script>
+    <script src="js/galeria.js"></script>
     <link rel="stylesheet" type="text/css" href="css/tags.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="css/galeria.css" media="screen"/>
 {% endblock %}
 
 
@@ -46,7 +48,6 @@
     <!-- Fin texto del evento -->
 
     <!-- Enlaces sociales -->
-    {# ToDo: Confirmar lo de los enlaces sociales e incluirlos bien en el template #}
     <h3 class="social-event">Comparte este evento</h3>
     <div class="social">
       <a onclick="compartir('Facebook', '{{ evento.nombre }}')"> <img src="img/facebook.png"> </a>
@@ -99,5 +100,21 @@
     </div>
     <!-- Fin panel de comentarios -->
 
+    {% if galeria is not empty %}
+      <h3 class="social-event">Galería</h3>
+      <section class="gal-row">
+        {% for foto, descripcion in galeria %}
+          <article class="gal-column">
+            <img src="{{ foto }}" alt=" {{ descripcion }}" onclick="cambiarFotoGaleria(this);">
+          </article>
+        {% endfor %}
+      </section>
+
+      <div class="gal-container">
+        <span onclick="this.parentElement.style.display='none'" class="gal-closebtn">&times;</span>
+        <img id="gal-expandedImg" style="width:100%">
+        <div id="gal-imgtext"></div>
+      </div>
+    {% endif %}
 </section>
 {% endblock %}
