@@ -1,0 +1,25 @@
+
+
+/*texto del evento*/
+.texto-general{
+  display: table;
+  clear: both;
+  content: "";
+
+}
+
+.texto-izq {
+	float: left;
+  width: 50px;
+  display: inline;
+  position: relative;
+  padding-left: 10px;
+}
+
+.texto-der {
+  float: right;
+  display: inline;
+  position: relative;
+  padding-left: 100px;
+
+}

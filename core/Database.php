@@ -3,6 +3,7 @@ $ROOT_PATH = dirname(__DIR__);
 require_once $ROOT_PATH . '/core/modelo/Evento.php';
 require_once $ROOT_PATH . '/core/modelo/Comentario.php';
 require_once $ROOT_PATH . '/core/modelo/Tag.php';
+require_once $ROOT_PATH . '/core/modelo/Contacto.php';
 
 class Database {
 
@@ -160,6 +161,25 @@ class Database {
     $stmt->close();
 
     return $tags;
+  }
+
+  public function getContacto() {
+    $queryContacto = "SELECT * FROM conocenos";
+    $stmt = $this->mysqli->prepare($queryContacto);
+    $stmt->execute();
+    $resultContacto = $stmt->get_result();
+
+    $contacto = null;
+    if ($row = $resultContacto->fetch_assoc()) {
+        $contacto = new Contacto(
+            $row["titulo"], $row["subtitulo"], $row["informacion_general"],
+            $row["imagen_izquierda"], $row["imagen_derecha"], $row["descripcion_izquierda"],
+            $row["descripcion_derecha"]
+        );
+    }
+    $stmt->close();
+
+    return $contacto;
   }
 
   public function insertarComentario($evento, $nombre, $email, $texto, $fecha, $ip) {
