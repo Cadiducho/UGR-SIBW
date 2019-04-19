@@ -1,25 +1,54 @@
-
-
-/*texto del evento*/
-.texto-general{
-  display: table;
-  clear: both;
-  content: "";
-
+/*Título*/
+.title {
+font-family: Lucida Sans Unicode;
+font-size: 35px;
+text-align: center;
+color: black;
 }
 
-.texto-izq {
+/*Subtítulo*/
+.subtitle {
+	font-family: Lucida Sans Unicode;
+	font-size: 19px;
+	color: black;
+  margin: 0 0 15px 15px;
+  width: 100%;
+  padding: 10px;
+  padding-right: : 10px;
+  flex-direction: column;
+  text-align: center;
+}
+
+/*Texto de la sección conocenos*/
+.text-conocenos {
+  padding: 10px;
+  padding-right: 10px;
+	text-align : justify;
+	font-family: Lucida Sans Unicode;
+}
+
+/*Contacto izquierda*/
+.contacto-izq {
 	float: left;
   width: 50px;
   display: inline;
   position: relative;
-  padding-left: 10px;
+  padding-left: 200px;
 }
 
-.texto-der {
+.contacto-izq-texto{
+  padding-top: 10px;
+}
+
+/*Contacto derecha*/
+.contacto-der {
   float: right;
   display: inline;
   position: relative;
-  padding-left: 100px;
+  padding-right: 200px;
+  padding-top: 30px;
+}
 
+.contacto-der-texto{
+  padding-top:20px;
 }

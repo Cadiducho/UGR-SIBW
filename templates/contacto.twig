@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 
-{% block titulo %} Conocenos {% endblock %}
+{% block titulo %} Conócenos {% endblock %}
 
 {# Cargar el head normal y añadir el css #}
 {% block head %}
@@ -9,21 +9,21 @@
 {% endblock %}
 
 {% block mainContent %}
-<h2 class="main-title">{{ contacto.titulo }} </h2>
-<section class="content-event">
-    <!-- Texto -->
-    <h3 class="organizer-event">{{ contacto.subtitulo }}</h3>
-    <p class="text-event">
+  <h2 class="title">{{ contacto.titulo }} </h2>
+  <h3 class="subtitle">{{ contacto.subtitulo }}</h3>
+
+<section>
+    <p class="text-conocenos">
       {{ contacto.informacion_general|nl2br }} {# nl2br insertará saltos de línea #}
     </p>
-    <!-- Fin texto del evento -->
-    <div class="texto-general">
-      <div class="texto-izq">
-        <img src="{{ contacto.imagen_izquierda }}" width="100">
-      </div>
-      <div class="texto-der">
-        <img src="{{ contacto.imagen_derecha }}" width="100">
-      </div>
+    <div class="contacto-izq">
+      <img src="{{ contacto.imagen_izquierda }}" width="100">
+      <h5 class="contacto-izq-texto">{{ contacto.descripcion_izquierda}} </h5>
     </div>
+    <div class="contacto-der">
+      <img src="{{ contacto.imagen_derecha }}" width="100">
+      <h5 class="contacto-der-texto">{{ contacto.descripcion_derecha }} </h5>
+    </div>
+  </div>
 </section>
 {% endblock %}
