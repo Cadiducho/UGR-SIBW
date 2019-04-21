@@ -1,5 +1,5 @@
-function compartir(red, nombreEvento) {
-  let myWindow = window.open("", "MsgWindow" + red + nombreEvento, "status=1, height=200, width=430");
+function compartir(red, nombreEvento, imagenEvento) {
+  let myWindow = window.open("", "MsgWindow" + red + nombreEvento + imagenEvento, "status=1, height=200, width=430");
   myWindow.document.write(
     "<html>" +
       "<head>" +
@@ -9,7 +9,14 @@ function compartir(red, nombreEvento) {
       "<body class='" + red + "'>" +
         "<h2>Comparte este evento en " + red + "</h2>" +
         "<form>" +
-          "<input value='Echa un vistazo a " + nombreEvento + " en @MarioTennisClub' required></input>" +
+          "<div>" +
+            "<input value='Echa un vistazo a " + nombreEvento + " en @MarioTennisClub' required>" +
+            "</input>" +
+            "<div>" +
+              "<img width='250' src='img/" + imagenEvento + "'>" +
+              "<br>" +
+            "</div>" +
+          "</div>" +
           "<button type='submit'>Compartir</button>" +
         "</form>" +
       "</body>" +

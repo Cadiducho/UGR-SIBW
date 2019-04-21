@@ -50,8 +50,8 @@
     <!-- Enlaces sociales -->
     <h3 class="social-event">Comparte este evento</h3>
     <div class="social">
-      <a onclick="compartir('Facebook', '{{ evento.nombre }}')"> <img src="img/facebook.png"> </a>
-      <a onclick="compartir('Twitter', '{{ evento.nombre }}')"> <img src="img/twitter.png"> </a>
+      <a onclick="compartir('Facebook', '{{ evento.nombre }}', '{{ evento.imagen }}')"> <img src="img/facebook.png"> </a>
+      <a onclick="compartir('Twitter', '{{ evento.nombre }}', '{{ evento.imagen }}')"> <img src="img/twitter.png"> </a>
       <a href="eventoImprimir.php?id={{ evento.id }}"> <img src="img/printer.png"> </a>
     </div>
     <!-- Fin enlaces sociales -->
@@ -115,12 +115,6 @@
         <img id="gal-expandedImg" style="width:100%">
         <div id="gal-imgtext"></div>
       </div>
-    {% endif %}
-
-    {% if evento.video_id is not null %}
-      <section class="video">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ evento.video_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </section>
     {% endif %}
 </section>
 {% endblock %}
