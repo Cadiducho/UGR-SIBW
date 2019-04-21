@@ -232,6 +232,11 @@ body {
 	margin-bottom: 25px;
 	margin-top: 50px;
 }
+
+.video {
+  padding: 5px;
+  display: block;
+}
 /* Footer */
 .footer {
   padding: 10px;
