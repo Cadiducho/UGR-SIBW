@@ -10,6 +10,7 @@ input {
   width: 100%;
   padding: 10px;
   margin: 5px 0 5px 0;
+  border: none;
 }
 
 button {
@@ -21,4 +22,9 @@ button {
 
 div {
   background-color: white;
+}
+
+img {
+  padding-left: 10px;
+  padding-bottom: 10px;
 }
