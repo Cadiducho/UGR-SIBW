@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Head -->
+<head>
+  <link rel="shortcut icon" href="img/mario.ico" />
+	<meta charset="UTF-8">
+	<title> Sesiones - Mario Tennis Club </title>
+</head>
+
+<body>
+  {% if nombreSesion is not null %}
+    <p> {{ mensaje }} </p>
+  {% endif %}
+
+  {% if nombreSesion is null %}
+    <form action="/session.php?a=login" method="POST">
+      <label for="loginName">Nombre de usuario</label>
+      <input name="loginName" id="loginName" required></input>
+      <button type="submit">Iniciar sesión</button>
+    <form>
+  {% else %}
+    <p>Hola, {{ nombreSesion }}</p>
+    <a href="/session.php?a=exit">Cierra sesión</a>
+  {% endif %}
+</body>
+
+</html>

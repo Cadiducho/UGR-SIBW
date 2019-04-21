@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Head -->
+<head>
+  <link rel="shortcut icon" href="img/mario.ico" />
+	<meta charset="UTF-8">
+	<title> HTML Storage - Mario Tennis Club </title>
+  <script src="js/storage.js"></script>
+</head>
+
+<body>
+    <form id="formMensaje" onsubmit="guardarMensaje(event)">
+      <label for="formMensajeInput">Guarda un mensaje</label>
+      <input name="formMensajeInput" id="formMensajeInput" required></input>
+      <button type="submit">Guardar</button>
+    </form>
+
+    <button onclick="eliminarMensaje()">Eliminar mensaje</button>
+
+    <p>Mensaje guardado: <span id="mensaje"></span></p>
+</body>
+
+</html>
