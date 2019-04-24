@@ -2,8 +2,11 @@
 
 require "core/Twig.php";
 require "core/Database.php";
+require "core/Session.php";
 
 $database = new Database();
+$session = new Session($twig, $database);
+
 $tagBuscada = $_GET['tag'] ?? "";
 
 $eventos = array();
@@ -18,6 +21,6 @@ if (empty($tagBuscada)) {
 
 $listaTags = $database->getTags();
 
-echo $twig->render('portada.twig', ["eventos" => $eventos, "etiquetas" => $listaTags, "busqueda" => $busqueda]);
+echo $session->render('portada.twig', ["eventos" => $eventos, "etiquetas" => $listaTags, "busqueda" => $busqueda]);
 
 ?>

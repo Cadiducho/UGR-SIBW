@@ -4,6 +4,7 @@ require_once $ROOT_PATH . '/core/modelo/Evento.php';
 require_once $ROOT_PATH . '/core/modelo/Comentario.php';
 require_once $ROOT_PATH . '/core/modelo/Tag.php';
 require_once $ROOT_PATH . '/core/modelo/Contacto.php';
+require_once $ROOT_PATH . '/core/modelo/Usuario.php';
 
 class Database {
 
@@ -189,6 +190,36 @@ class Database {
     $stmt->execute();
 
     $stmt->close();
+  }
+
+  public function getUsuarioById($id) {
+    $queryUsuarios = "SELECT * FROM usuarios WHERE id=?";
+    $stmt = $this->mysqli->prepare($queryUsuarios);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $resultUsuario = $stmt->get_result();
+
+    $usuario = null;
+    if ($row = $resultUsuario->fetch_assoc()) {
+        $usuario = new Usuario($row["id"], $row["email"], $row["nickname"], $row["password"], $row["rango"]);
+    }
+    $stmt->close();
+    return $usuario;
+  }
+
+  public function getUsuarioByEmail($email) {
+    $queryUsuarios = "SELECT * FROM usuarios WHERE email=?";
+    $stmt = $this->mysqli->prepare($queryUsuarios);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $resultUsuario = $stmt->get_result();
+
+    $usuario = null;
+    if ($row = $resultUsuario->fetch_assoc()) {
+        $usuario = new Usuario($row["id"], $row["email"], $row["nickname"], $row["password"], $row["rango"]);
+    }
+    $stmt->close();
+    return $usuario;
   }
 }
 
