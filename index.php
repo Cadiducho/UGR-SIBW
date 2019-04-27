@@ -21,6 +21,6 @@ if (empty($tagBuscada)) {
 
 $listaTags = $database->getTags();
 
-echo $session->render('portada.twig', ["eventos" => $eventos, "etiquetas" => $listaTags, "busqueda" => $busqueda]);
+echo $session->render('portada.twig', ["eventos" => $eventos, "etiquetas" => $listaTags, "busqueda" => $busqueda, "loggedUser" => $loggedUser]);
 
 ?>

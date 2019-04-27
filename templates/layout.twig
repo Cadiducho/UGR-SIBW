@@ -5,7 +5,9 @@
     {% block head %}
       <link rel="shortcut icon" href="img/mario.ico" />
       <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" type="text/css" href="css/web.css" media="screen"/>
+      <link rel="stylesheet" type="text/css" href="css/loginPopUp.css" media="screen"/>
       <title>{% block titulo %}{% endblock %} - Mario Tennis Club</title>
     {% endblock %}
   </head>
@@ -34,9 +36,38 @@
           <button type="submit" class="boton-busqueda">Buscar</button>
       </form>
 
-      <button onclick="location.href='/session.php'" type="button" class="boton-sign-in">Sign in</button>
-      <button class="boton-sign-up">Sign up</button>
+      {% if loggedUser is null %}
+        <button onclick="document.getElementById('loginPopUp').style.display='block'" class="boton-sign-in">Sign in</button>
 
+        <div id="loginPopUp" class="modal">
+          <form class="modal-content animate" action="/action_page.php">
+            <div class="avatar-container">
+              <span onclick="document.getElementById('loginPopUp').style.display='none'" class="close" title="Cerrar">&times;</span>
+              <img src="img/seta.png" class="avatar">
+            </div>
+
+            <div class="containerOptions">
+              <label for="usuario"><b>Usuario</b></label>
+              <input type="text" placeholder="Introduzca su usuario" name="usuario" required>
+
+              <label for="contraseña"><b>Contraseña</b></label>
+              <input type="password" placeholder="Introduzca su contraseña" name="contraseña" required>
+
+              <button class="LoginPopUpButton" type="submit">Login</button>
+              <label>
+                <input type="checkbox" checked="checked" name="recuerdame"> Recuerdame
+              </label>
+            </div>
+
+            <div class="containerOptions" style="background-color:#f1f1f1">
+              <button type="button" onclick="document.getElementById('loginPopUp').style.display='none'" class="cancelbtn">Cancelar</button>
+              <span class="psw">¿Olvidastes la contraseña?</span>
+            </div>
+          </form>
+        </div>
+        <button class="boton-sign-up">Sign up</button>
+
+      {% endif %}
     </div>
     <!-- Fin menu de navegacion -->
 
