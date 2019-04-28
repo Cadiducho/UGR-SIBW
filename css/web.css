@@ -50,7 +50,7 @@ body {
 
 .barra-busqueda {
   display: flex;
-  padding: 9px 30px;
+  padding: 12px 30px 2px 30px;
   margin-left: auto;
   border-radius: 20px;
 }
@@ -82,8 +82,8 @@ body {
   color: #fff;
   border-bottom-right-radius: 4px;
   border-top-right-radius: 4px;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 7px;
+  margin-bottom: 1px;
   margin-right: 4px;
   height: 30px;
 }
@@ -91,12 +91,12 @@ body {
 .boton-sign-in {
   background-color: #fff;
   border-color: transparent;
-  color: ##A1B0AD;
-  width: 4.2%;
+  color: #A1B0AD;
+  width: 3.2%;
   border-bottom-left-radius: 4px;
   border-top-left-radius: 4px;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 7px;
+  margin-bottom: 1px;
   height: 30px;
 }
 

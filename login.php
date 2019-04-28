@@ -6,6 +6,9 @@ require "core/Session.php";
 
 session_start();
 
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+  
+}
 $database = new Database();
 $session = new Session($twig, $database);
 
