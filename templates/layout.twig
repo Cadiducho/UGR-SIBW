@@ -40,18 +40,18 @@
         <button onclick="document.getElementById('loginPopUp').style.display='block'" class="boton-sign-in">Sign in</button>
 
         <div id="loginPopUp" class="modal">
-          <form class="modal-content animate" action="/login.php">
+          <form class="modal-content animate" method="post" action="/postLogin.php">
             <div class="avatar-container">
               <span onclick="document.getElementById('loginPopUp').style.display='none'" class="close" title="Cerrar">&times;</span>
               <img src="img/seta.png" class="avatar">
             </div>
 
             <div class="containerOptions">
-              <label for="usuario"><b>Usuario</b></label>
-              <input type="text" placeholder="Introduzca su usuario" name="usuario" required>
+              <label for="email"><b>Email</b></label>
+              <input type="text" placeholder="Introduzca su email" name="email" required>
 
-              <label for="contraseña"><b>Contraseña</b></label>
-              <input type="password" placeholder="Introduzca su contraseña" name="contraseña" required>
+              <label for="password"><b>Contraseña</b></label>
+              <input type="password" placeholder="Introduzca su contraseña" name="password" required>
 
               <button class="LoginPopUpButton" type="submit">Login</button>
               <label>
@@ -66,7 +66,8 @@
           </form>
         </div>
         <button class="boton-sign-up">Sign up</button>
-
+      {% else %}
+        <a href="/profile">{{ loggedUser.nickname }}</a>
       {% endif %}
     </div>
     <!-- Fin menu de navegacion -->

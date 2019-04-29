@@ -199,7 +199,7 @@ class Database {
     $stmt->execute();
     $resultUsuario = $stmt->get_result();
 
-    $usuario = null;
+    $usuario = NULL;
     if ($row = $resultUsuario->fetch_assoc()) {
         $usuario = new Usuario($row["id"], $row["email"], $row["nickname"], $row["password"], $row["rango"]);
     }

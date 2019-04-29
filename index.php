@@ -2,10 +2,10 @@
 
 require "core/Twig.php";
 require "core/Database.php";
-require "core/Session.php";
+require "core/Core.php";
 
 $database = new Database();
-$session = new Session($twig, $database);
+$core = new Core($twig, $database);
 
 $tagBuscada = $_GET['tag'] ?? "";
 
@@ -21,6 +21,6 @@ if (empty($tagBuscada)) {
 
 $listaTags = $database->getTags();
 
-echo $session->render('portada.twig', ["eventos" => $eventos, "etiquetas" => $listaTags, "busqueda" => $busqueda, "loggedUser" => $loggedUser]);
+echo $core->render('portada.twig', ["eventos" => $eventos, "etiquetas" => $listaTags, "busqueda" => $busqueda]);
 
 ?>

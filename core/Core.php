@@ -1,25 +1,24 @@
 <?php
 
-class Session {
+class Core {
 
   private $twig;
   private $database;
 
-  function Session($twig, $database) {
+  function Core($twig, $database) {
       $this->twig = $twig;
       $this->database = $database;
 
       session_start();
   }
 
-  function get($key) {
-    $_SESSION[$key] ?? null;
+  public function get($key) {
+    return $_SESSION[$key] ?? NULL;
   }
 
 
   // Funcion para renderizar un template de twig siempre enviando el usuario que esté iniciado sesión, si existe
-  function render($template, $parameters) {
-
+  function render($template, $parameters = []) {
       $loggedUserId = $this->get("loggedUserId");
       $loggedUser = $this->database->getUsuarioById($loggedUserId);
 
