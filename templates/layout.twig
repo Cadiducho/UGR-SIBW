@@ -8,6 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" type="text/css" href="css/web.css" media="screen"/>
       <link rel="stylesheet" type="text/css" href="css/loginPopUp.css" media="screen"/>
+      <script src="js/login.js"></script>
       <title>{% block titulo %}{% endblock %} - Mario Tennis Club</title>
     {% endblock %}
   </head>
@@ -37,10 +38,10 @@
       </form>
 
       {% if loggedUser is null %}
-        <button onclick="document.getElementById('loginPopUp').style.display='block'" class="boton-sign-in">Sign in</button>
+        <button onclick="showLoginPopUp()" class="boton-sign-in">Sign in</button>
 
         <div id="loginPopUp" class="modal">
-          <form class="modal-content animate" method="post" action="/core/post/postLogin.php">
+          <form id="formLogin" class="modal-content animate" onsubmit="return tryLogin(event);">
             <div class="avatar-container">
               <span onclick="document.getElementById('loginPopUp').style.display='none'" class="close" title="Cerrar">&times;</span>
               <img src="img/seta.png" class="avatar">
@@ -54,13 +55,13 @@
               <input type="password" placeholder="Introduzca su contraseña" name="password" required>
 
               <button class="LoginPopUpButton" type="submit">Login</button>
-              <label>
-                <input type="checkbox" checked="checked" name="recuerdame"> Recuerdame
-              </label>
+              <div id="messageBoxLogin">
+              </div>
+
             </div>
 
             <div class="containerOptions" style="background-color:#f1f1f1">
-              <button type="button" onclick="document.getElementById('loginPopUp').style.display='none'" class="cancelbtn">Cancelar</button>
+              <button type="button" onclick="closeModalPopUp()" class="cancelbtn">Cancelar</button>
               <span class="psw">¿Olvidastes la contraseña?</span>
             </div>
           </form>
@@ -68,6 +69,7 @@
         <button class="boton-sign-up">Sign up</button>
       {% else %}
         <a href="/profile">{{ loggedUser.nickname }}</a>
+        <a onclick="closeSession()" style="color: blue;">Cerrar sesión</a>
       {% endif %}
     </div>
     <!-- Fin menu de navegacion -->
