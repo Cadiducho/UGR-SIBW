@@ -1,6 +1,6 @@
 <?php
 
-require "core/Database.php";
+require "../Database.php";
 $database = new Database();
 
 $emailLogin = $_POST['email'] ?? "";
@@ -16,7 +16,7 @@ if (empty($emailLogin) || empty($passwordLogin)) {
   } else {
     if (password_verify($passwordLogin, $userBuscado->password)) {
       $_SESSION["loggedUserId"] = $userBuscado->id;
-      header("Location: index.php");
+      header("Location: /index.php");
     } else {
       echo "error (password)";
     }

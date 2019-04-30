@@ -3,3 +3,4 @@ vendor/
 
 !compilation_cache/.gitkeep
 compilation_cache/
+\.DS_Store

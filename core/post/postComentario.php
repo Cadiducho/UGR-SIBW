@@ -1,6 +1,6 @@
 <?php
 
-require "core/Database.php";
+require "../Database.php";
 $database = new Database();
 
 $evento = $_POST['evento'] ?? "";

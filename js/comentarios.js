@@ -117,7 +117,7 @@ function addComentario(eventid, autor, email, mensaje, fecha) {
   let lista = document.getElementById("listaComentarios");
 
   // Insertarlo mediante AJAX y PHP
-  let url = "/postComentario.php";
+  let url = "/core/post/postComentario.php";
   let params = 'evento=' + eventid + '&nombre=' + autor + '&email=' + email + '&texto=' + mensaje + '&fecha=' + fecha;
   let xhr = new XMLHttpRequest();
   xhr.onload = function () {
