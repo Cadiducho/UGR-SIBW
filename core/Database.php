@@ -201,7 +201,7 @@ class Database {
 
     $usuario = NULL;
     if ($row = $resultUsuario->fetch_assoc()) {
-        $usuario = new Usuario($row["id"], $row["email"], $row["nickname"], $row["password"], $row["rango"]);
+        $usuario = new Usuario($row["id"], $row["nickname"], $row["email"], $row["password"], $row["rango"]);
     }
     $stmt->close();
     return $usuario;
@@ -216,7 +216,7 @@ class Database {
 
     $usuario = null;
     if ($row = $resultUsuario->fetch_assoc()) {
-        $usuario = new Usuario($row["id"], $row["email"], $row["nickname"], $row["password"], $row["rango"]);
+        $usuario = new Usuario($row["id"], $row["nickname"], $row["email"], $row["password"], $row["rango"]);
     }
     $stmt->close();
     return $usuario;
