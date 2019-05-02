@@ -62,7 +62,7 @@ class Database {
   }
 
   public function getComentariosEvento($idEvento) {
-    $queryComentarios = "SELECT id, autor, email, fecha, mensaje FROM comentarios WHERE evento=?";
+    $queryComentarios = "SELECT c.id, (u.id) as userid, u.email, u.nickname, c.fecha, c.mensaje FROM comentarios c JOIN usuarios u ON (c.usuario = u.id) WHERE evento=?";
     $stmt = $this->mysqli->prepare($queryComentarios);
     $stmt->bind_param("i", $idEvento);
     $stmt->execute();
@@ -70,10 +70,8 @@ class Database {
 
     $comentarios = array();
     while ($row = $resultComentarios->fetch_array()) {
-        $comentario = new Comentario(
-          $row["id"], $row["autor"], $row["email"],
-          $row["fecha"], $row["mensaje"]
-        );
+        $usuarioAutor = new Usuario($row["userid"], $row["nickname"], $row["email"]);
+        $comentario = new Comentario($row["id"], $usuarioAutor, $row["fecha"], $row["mensaje"]);
         $comentarios[$row["id"]] = $comentario;
     }
     $stmt->close();
@@ -183,10 +181,10 @@ class Database {
     return $contacto;
   }
 
-  public function insertarComentario($evento, $nombre, $email, $texto, $fecha, $ip) {
-    $queryTags = "INSERT INTO comentarios (evento, autor, email, fecha, mensaje, ip) VALUES (?, ?, ?, ?, ?, ?)";
+  public function insertarComentario($evento, $userid, $texto, $fecha, $ip) {
+    $queryTags = "INSERT INTO comentarios (evento, usuario, autor, email, fecha, mensaje, ip) VALUES (?, ?, '', '', ?, ?, ?)";
     $stmt = $this->mysqli->prepare($queryTags);
-    $stmt->bind_param("isssss", $evento, $nombre, $email, $fecha, $texto, $ip);
+    $stmt->bind_param("issss", $evento, $userid, $fecha, $texto, $ip);
     $stmt->execute();
 
     $stmt->close();

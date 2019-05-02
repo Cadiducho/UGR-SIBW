@@ -43,38 +43,9 @@ function filtrarContenido(event, palabrasProhibidas)
   }
 }
 
-function validar(email, autor, mensaje) {
-  //Se crea el regex para validar el email
-  let regex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|io|es|uk|co|fr|it)");
-  let emailValid = regex.test(email);
-
-  let emailInput = document.getElementById("emailInput");
-  let emailLabel = document.getElementById("emailLabel");
-
-  let autorInput = document.getElementById("autorInput");
-  let autorLabel = document.getElementById("autorLabel");
-
-  let areaMensaje = document.getElementById("areaMensaje");
+function validar(mensaje) {
+    let areaMensaje = document.getElementById("areaMensaje");
   let mensajeLabel = document.getElementById("mensajeLabel");
-
-  //Se valida el email
-  if (!emailValid) {
-    emailInput.classList.add("invalid-input");
-    emailLabel.classList.add("invalid-label");
-  } else {
-    emailInput.classList.remove("invalid-input");
-    emailLabel.classList.remove("invalid-label");
-  }
-
-  //Se valida el autor
-  let autorValid = (autor.length >= 3);
-  if (!autorValid) {
-    autorInput.classList.add("invalid-input");
-    autorLabel.classList.add("invalid-label");
-  } else {
-    autorInput.classList.remove("invalid-input");
-    autorLabel.classList.remove("invalid-label");
-  }
 
 	//Se valida el comentario
   let mensajeValid = (mensaje.length >= 3);
@@ -86,12 +57,13 @@ function validar(email, autor, mensaje) {
     mensajeLabel.classList.remove("invalid-label");
   }
 
-  return (emailValid && mensajeValid && autorValid);
+  return (mensajeValid);
 }
 
 function enviarComentario(event) {
   event.preventDefault();
   let form = document.getElementById("formEnviarComentario");
+  let userid = form.userid.value;
   let autor = form.nombre.value;
   let email = form.email.value;
   let fecha = new Date();
@@ -99,7 +71,7 @@ function enviarComentario(event) {
   let eventid = form.eventid.value;
 
   // Validar que los campos del comentario son correctos
-  if (!validar(email, autor, mensaje)) {
+  if (!validar(mensaje)) {
     return false; // Cortar aquí la función para no agregar comentarios ni borrar el formulario (para que sea corregido)
   }
 
@@ -108,17 +80,17 @@ function enviarComentario(event) {
   let emailLabel = document.getElementById("emailLabel");
 
 
-  addComentario(eventid, autor, email, mensaje, fecha);
+  addComentario(eventid, userid, autor, email, mensaje, fecha);
 
   return false; // No recargar página tras procesar formulario
 }
 
-function addComentario(eventid, autor, email, mensaje, fecha) {
+function addComentario(eventid, userid, autor, email, mensaje, fecha) {
   let lista = document.getElementById("listaComentarios");
 
   // Insertarlo mediante AJAX y PHP
   let url = "/core/post/postComentario.php";
-  let params = 'evento=' + eventid + '&nombre=' + autor + '&email=' + email + '&texto=' + mensaje + '&fecha=' + fecha;
+  let params = 'evento=' + eventid + '&userid=' + userid + '&texto=' + mensaje + '&fecha=' + fecha;
   let xhr = new XMLHttpRequest();
   xhr.onload = function () {
     	if (xhr.status >= 200 && xhr.status < 300) {
@@ -143,6 +115,7 @@ function addComentario(eventid, autor, email, mensaje, fecha) {
               lista.insertAdjacentHTML('beforeend', nuevoComentario);
           } else {
             console.log("error");
+            console.log(xhr.response);
           }
     	} else {
     		// This will run when it's not

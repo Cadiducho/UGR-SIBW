@@ -12,7 +12,7 @@ class Usuario {
 
   public $rango;
 
-  function Usuario($id, $nickname, $email, $password, $rango = ANONIMO) {
+  function Usuario($id, $nickname, $email, $password = "", $rango = Usuario::ANONIMO) {
     $this->id = $id;
     $this->nickname = $nickname;
     $this->email = $email;

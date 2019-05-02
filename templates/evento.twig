@@ -65,9 +65,9 @@
         {% for comentario in comentarios %}
             <article class="comentario" id="comentario-{{ comentario.id }}">
               <div class="comentario-autor">
-                {{ comentario.autor }}
+                {{ comentario.usuario.nickname }}
                 <div class="comentario-datos">
-                  <span class="comentario-email">{{ comentario.email }}</span>
+                  <span class="comentario-email">{{ comentario.usuario.email }}</span>
                   <span class="comentario-fecha">{{ comentario.fecha|date("d/m/Y H:i") }}</span>
                 </div>
               </div>
@@ -80,22 +80,25 @@
       <!-- Fin lista de comentarios -->
 
       <!-- Formulario -->
-      <form class="form-comentarios" id="formEnviarComentario" onsubmit="return enviarComentario(event)">
-        <div class="infoComentarios">Añade un comentario</div>
+      {% if loggedUser is not null %}
+          <form class="form-comentarios" id="formEnviarComentario" onsubmit="return enviarComentario(event)">
+            <div class="infoComentarios">Añade un comentario</div>
 
-        <label for="nombre" id="autorLabel">Nombre</label>
-        <input name="nombre" id="autorInput" placeholder="Tu nombre" required></input>
+            <input id="autorIdInput" name="userid" type="hidden" value="{{ loggedUser.id }}">
+            <input id="autorInput" name="nombre" type="hidden" value="{{ loggedUser.nickname }}"></input>
+            <input id="emailInput" name="email"  type="hidden" value="{{ loggedUser.email }}"></input>
 
-        <label for="email" id="emailLabel">Correo electrónico</label>
-        <input name="email" id="emailInput" placeholder="Email" required></input>
+            <label for="mensaje" id="mensajeLabel">Mensaje</label>
+            <textarea onkeyup="filtrarContenido(event, {{ prohibidas|json_encode }})" id="areaMensaje" placeholder="Introduce tu comentario..." name="mensaje" required></textarea>
 
-        <label for="mensaje" id="mensajeLabel">Mensaje</label>
-        <textarea onkeyup="filtrarContenido(event, {{ prohibidas|json_encode }})" id="areaMensaje" placeholder="Introduce tu comentario..." name="mensaje" required></textarea>
+            <input name="eventid" id="eventid" type="hidden" value="{{ evento.id }}"></input>
 
-        <input name="eventid" id="eventid" type="hidden" value="{{ evento.id }}"></input>
+            <button type="submit" class="boton">Enviar</button>
+          </form>
+      {% else %}
+        <a href="#" onclick="showLoginPopUp()">Inicia sesión</a> para añadir comentarios
+      {% endif %}
 
-        <button type="submit" class="boton">Enviar</button>
-      </form>
       <!-- Fin formulario -->
     </div>
     <!-- Fin panel de comentarios -->
