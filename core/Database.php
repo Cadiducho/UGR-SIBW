@@ -182,7 +182,7 @@ class Database {
   }
 
   public function insertarComentario($evento, $userid, $texto, $fecha, $ip) {
-    $queryTags = "INSERT INTO comentarios (evento, usuario, autor, email, fecha, mensaje, ip) VALUES (?, ?, '', '', ?, ?, ?)";
+    $queryTags = "INSERT INTO comentarios (evento, usuario, fecha, mensaje, ip) VALUES (?, ?, ?, ?, ?)";
     $stmt = $this->mysqli->prepare($queryTags);
     $stmt->bind_param("issss", $evento, $userid, $fecha, $texto, $ip);
     $stmt->execute();
@@ -218,6 +218,15 @@ class Database {
     }
     $stmt->close();
     return $usuario;
+  }
+
+  public function registrarUsuario($email, $nickname, $password) {
+    $queryRegistro = "INSERT INTO usuarios (email, nickname, password) VALUES (?, ?, ?)";
+    $stmt = $this->mysqli->prepare($queryRegistro);
+    $stmt->bind_param("sss", $email, $nickname, $password);
+    $stmt->execute();
+
+    $stmt->close();
   }
 }
 

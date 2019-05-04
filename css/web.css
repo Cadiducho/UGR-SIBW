@@ -156,9 +156,18 @@ body {
   display:block;
 }
 
+#profile .content-profile {
+  color: black!important;
+}
+
 #profile .content-profile:hover {
   background-color: #d6d6d6;
 }
+
+.dropdown-divider {
+  border-top: 1px solid #949494
+}
+
 /* Content establece el grid en columnas */
 .content {
   display: flex;

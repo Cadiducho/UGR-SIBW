@@ -1,16 +1,36 @@
+/*
+  Scripts para el registro y el inicio de sesión de usuarios
+*/
+
+
+// Mostrar el modal de login
 function showLoginPopUp() {
     let modal = document.getElementById('loginPopUp');
     modal.style.display='block'
 }
 
-function closeModalPopUp() {
+// Mostrar el modal de registro
+function showRegisterPopUp() {
+    let modal = document.getElementById('registerPopUp');
+    modal.style.display='block'
+}
+
+// Cerrar el modal de login
+function closeLoginModalPopUp() {
     let modal = document.getElementById('loginPopUp');
     modal.style.display = "none";
 }
 
-function showMessage(type, message) {
+// Cerrar el modal de registro
+function closeRegisterModalPopUp() {
+    let modal = document.getElementById('registerPopUp');
+    modal.style.display = "none";
+}
+
+// Mostrar un mensaje en un modal. Tipos: info o error
+function showMessage(modal, type, message) {
     let css = (type == "info" ? "message_box_info" : "message_box_error");
-    let messageBox = document.getElementById('messageBoxLogin');
+    let messageBox = modal.querySelector('#messageBox');
     messageBox.classList = "";
     messageBox.classList.add(css);
     messageBox.innerText = message;
@@ -19,7 +39,8 @@ function showMessage(type, message) {
 function tryLogin(event) {
     event.preventDefault();
 
-    let form = document.getElementById("formLogin");
+    let modalLogin = document.getElementById('loginPopUp');
+    let form = modalLogin.querySelector("#formLogin");
     let email = form.email.value;
     let password = form.password.value;
 
@@ -30,16 +51,63 @@ function tryLogin(event) {
     xhr.onload = function () {
       	if (xhr.status >= 200 && xhr.status < 300) {
         		if (!(xhr.response === "error")) {
-                showMessage("info", "Se ha iniciado sesión correctamente");
+                showMessage(modalLogin, "info", "Se ha iniciado sesión correctamente");
 
                 setTimeout(function(){
                     window.location.reload(1);
                 }, 1500);
             } else {
-                showMessage("error", "Los datos de inicio de sesión no son válidos");
+                showMessage(modalLogin, "error", "Los datos de inicio de sesión no son válidos");
             }
       	} else {
-        		showMessage("error", "No se ha podido iniciar sesión");
+        		showMessage(modalLogin, "error", "No se ha podido iniciar sesión");
+      	}
+    };
+
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send(params);
+
+    return false;
+}
+
+function tryRegister(event) {
+    event.preventDefault();
+
+    let modalRegister = document.getElementById('registerPopUp');
+    let form = modalRegister.querySelector("#formRegister");
+    let email = form.email.value;
+    let nickname = form.nickname.value;
+    let password = form.password.value;
+    let passwordConfirm = form.passwordConfirm.value;
+
+    if (password != passwordConfirm) {
+        showMessage(modalRegister, "error", "Las contraseñas no coinciden");
+        return;
+    }
+
+    // Intentar iniciar sesión mediante AJAX
+    let url = "/core/post/postRegister.php";
+    let params = 'password=' + password + '&email=' + email + '&nickname=' + nickname;
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      	if (xhr.status >= 200 && xhr.status < 300) {
+        		if (xhr.response === "error") {
+                showMessage(modalRegister, "error", "Se ha producido un error");
+            } else if (xhr.response === "email") {
+                showMessage(modalRegister, "error", "Ya existe un usuario con ese email");
+            } else {
+                showMessage(modalRegister, "info", "Te has registrado correctamente");
+                setTimeout(function() {
+                    let modalLogin = document.getElementById('loginPopUp');
+                    let emailInput = modalLogin.querySelector('input[name="email"]');
+                    emailInput.value = email;
+                    closeRegisterModalPopUp();
+                    showLoginPopUp();
+                }, 1100);
+            }
+      	} else {
+        		showMessage(modalRegister, "error", "No se ha podido registrar");
       	}
     };
 
@@ -76,8 +144,12 @@ function closeSession() {
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    let modal = document.getElementById('loginPopUp');
-    if (event.target == modal) {
-        closeModalPopUp();
+    let modalLogin = document.getElementById('loginPopUp');
+    if (event.target == modalLogin) {
+        closeLoginModalPopUp();
+    }
+    let modalRegister = document.getElementById('registerPopUp');
+    if (event.target == modalRegister) {
+        closeRegisterModalPopUp();
     }
 }

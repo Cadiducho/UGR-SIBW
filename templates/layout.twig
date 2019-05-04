@@ -39,11 +39,12 @@
 
       {% if loggedUser is null %}
         <button onclick="showLoginPopUp()" class="boton-sign-in">Sign in</button>
+        <button onclick="showRegisterPopUp()" class="boton-sign-up">Sign up</button>
 
         <div id="loginPopUp" class="modal">
           <form id="formLogin" class="modal-content animate" onsubmit="return tryLogin(event);">
             <div class="avatar-container">
-              <span onclick="document.getElementById('loginPopUp').style.display='none'" class="close" title="Cerrar">&times;</span>
+              <span onclick="closeLoginModalPopUp()" class="close" title="Cerrar">&times;</span>
               <img src="img/seta.png" class="avatar">
             </div>
 
@@ -55,25 +56,66 @@
               <input type="password" placeholder="Introduzca su contraseña" name="password" required>
 
               <button class="LoginPopUpButton" type="submit">Login</button>
-              <div id="messageBoxLogin">
+              <div id="messageBox">
               </div>
 
             </div>
 
             <div class="containerOptions" style="background-color:#f1f1f1">
-              <button type="button" onclick="closeModalPopUp()" class="cancelbtn">Cancelar</button>
-              <span class="psw">¿Olvidastes la contraseña?</span>
+              <button type="button" onclick="closeLoginModalPopUp()" class="cancelbtn">Cancelar</button>
+              <span class="psw" onclick="closeLoginModalPopUp(); showRegisterPopUp();">No tengo cuenta</span>
             </div>
           </form>
         </div>
-        <button class="boton-sign-up">Sign up</button>
+        <div id="registerPopUp" class="modal">
+          <form id="formRegister" class="modal-content animate" onsubmit="return tryRegister(event);">
+            <div class="avatar-container">
+              <span onclick="closeRegisterModalPopUp()" class="close" title="Cerrar">&times;</span>
+              <img src="img/seta.png" class="avatar">
+            </div>
+
+            <div class="containerOptions">
+              <label for="email"><b>Email</b></label>
+              <input type="text" placeholder="Introduzca su email" name="email" required>
+
+              <label for="nickname"><b>Nombre de usuario/Nick</b></label>
+              <input type="text" placeholder="Introduzca su nickname" name="nickname" required>
+
+              <label for="password"><b>Contraseña</b></label>
+              <input type="password" placeholder="Introduzca su contraseña" name="password" required>
+
+              <label for="passwordConfirm"><b>Confirmar contraseña</b></label>
+              <input type="password" placeholder="Confirmar su contraseña" name="passwordConfirm" required>
+
+              <button class="LoginPopUpButton" type="submit">Registrar</button>
+              <div id="messageBox">
+              </div>
+
+            </div>
+
+            <div class="containerOptions" style="background-color:#f1f1f1">
+              <button type="button" onclick="closeRegisterModalPopUp()" class="cancelbtn">Cancelar</button>
+              <span class="psw" onclick="closeRegisterModalPopUp(); showLoginPopUp();">Ya tengo cuenta</span>
+            </div>
+          </form>
+        </div>
       {% else %}
       <nav id="profile">
         <ul>
           <li> <a href="#">{{ loggedUser.nickname }}</a>
             <ul>
-              <li> <a class="content-profile" onclick="closeSession()" style="color: black;">Cerrar sesión</a> </li>
-              <li> <a class="content-profile" onclick="closeSession()" style="color: black;">Ver perfil</a>  </li>
+              <li>
+                <a class="content-profile">Ver perfil</a>
+              </li>
+              {% if loggedUser.rango >= constant('Usuario::MODERADOR') %}
+                <li>
+                  <a class="content-profile">Panel de control</a>
+                </li>
+              {% endif %}
+              <li class="dropdown-divider"></li>
+              <li>
+                <a class="content-profile" onclick="closeSession()">Cerrar sesión</a>
+              </li>
             </ul>
           </li>
         </ul>
