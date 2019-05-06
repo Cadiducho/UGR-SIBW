@@ -1,0 +1,106 @@
+/*Título*/
+.title {
+font-family: Lucida Sans Unicode;
+font-size: 35px;
+text-align: center;
+color: black;
+}
+
+/*Datos de usuario*/
+.content-user {
+  margin: 0 0 15px 15px;
+  width: 100%;
+  padding: 10px;
+  flex-direction: column;
+}
+
+/*Imagen del rango*/
+.img-rango {
+	float: right;
+	width: 40%;
+  margin-right: 100px;
+}
+
+.img-rango img {
+  width: 80%;
+  height: auto;
+}
+
+/*Rango*/
+.img-footer {
+	font-family: Lucida Sans Unicode;
+  font-weight: bold;
+  text-align: center;
+}
+
+/*Datos*/
+.title-data{
+	font-family: Lucida Sans Unicode;
+	font-size: 15px;
+	color: black;
+  font-weight:bold;
+  display:inline-block;
+}
+
+.text-data {
+	text-align : justify;
+	font-family: Lucida Sans Unicode;
+	font-size: 15px;
+  display:inline-block;
+}
+
+.user-data {
+  margin-left: 100px;
+}
+
+.data-update {
+  margin-left: 100px;
+  font-size: 25px;
+  font-weight:bold;
+  font-family: Lucida Sans Unicode;
+}
+
+.alert{
+margin-top: 20px;
+
+}
+
+/*Modificar datos*/
+.open-update{
+  background-color: #00d1b2;
+  color: white;
+  padding: 14px 20px;
+  margin: 18px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  margin-left: 100px;
+}
+
+.cajaDatosPersonales {
+  display: none;
+  border: 3px solid #f1f1f1;
+  width: 45%;
+  margin-left: 100px;
+
+}
+
+.cancelbtn {
+  color: white;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  padding: 10px 18px;
+  background-color: #e60000;
+}
+
+.acceptbtn{
+  background-color: #00d1b2;
+  color: white;
+  padding: 14px 20px;
+  margin: 18px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}

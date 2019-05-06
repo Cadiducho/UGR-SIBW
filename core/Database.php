@@ -228,6 +228,17 @@ class Database {
 
     $stmt->close();
   }
+
+  public function modificarUsuario($email, $nickname, $password, $idBuscada) {
+    $queryModifica = "UPDATE usuarios SET email=?, nickname=?, password=?
+                      WHERE id=?";
+    $stmt = $this->mysqli->prepare($queryModifica);
+    $stmt->bind_param("sssi", $email, $nickname, $password, $idBuscada);
+    $stmt->execute();
+
+    $stmt->close();
+  }
+
 }
 
 ?>

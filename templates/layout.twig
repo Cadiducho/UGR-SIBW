@@ -102,10 +102,10 @@
       {% else %}
       <nav id="profile">
         <ul>
-          <li> <a href="#">{{ loggedUser.nickname }}</a>
+          <li> <a href="/usuario.php">{{ loggedUser.nickname }}</a>
             <ul>
               <li>
-                <a class="content-profile">Ver perfil</a>
+                <a href="/usuario.php" class="content-profile">Ver perfil</a>
               </li>
               {% if loggedUser.rango >= constant('Usuario::MODERADOR') %}
                 <li>
