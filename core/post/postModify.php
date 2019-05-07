@@ -8,23 +8,22 @@ $nicknameRegister  = $_POST['nickname'] ?? "";
 $passwordRegister = $_POST['password'] ?? "";
 $passwordConfirm = $_POST['passwordConfirm'] ?? "";
 
+
+
 session_start();
 $userBuscado = $database->getUsuarioById($_SESSION["loggedUserId"]);
 
-if (empty($emailRegister))
-  $emailRegister = $userBuscado->email;
-if (empty($nicknameRegister))
-  $nicknameRegister  = $userBuscado->nickname;
-if (empty($passwordRegister))
-  $passwordRegister  = $userBuscado->password;
-if (empty($passwordConfirm))
-  $passwordConfirm  = $userBuscado->password;
-
 if ($passwordRegister != $passwordConfirm) {
   header("Location: ../../usuario.php?updated=error");
-} else {
+}
+else {
+  if (empty($passwordRegister))
+    $passwordRegister  = $userBuscado->password;
+  else
+    $passwordRegister = password_hash($passwordRegister, PASSWORD_BCRYPT);
 
-  $database->modificarUsuario($emailRegister, $nicknameRegister, password_hash($passwordRegister, PASSWORD_BCRYPT), $userBuscado->id);
+  $database->modificarUsuario($emailRegister, $nicknameRegister, $passwordRegister, $userBuscado->id);
       header("Location: ../../usuario.php?updated=ok");
-  }
+}
+
 ?>

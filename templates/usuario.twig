@@ -6,7 +6,6 @@
 {% block head %}
     {{ parent() }}
     <link rel="stylesheet" type="text/css" href="css/usuario.css" media="screen"/>
-    <script src="js/usuario.js"></script>
 {% endblock %}
 
 {% block mainContent %}
@@ -16,7 +15,7 @@
     <!-- Rango usuario -->
     <div class="img-rango">
         {% if loggedUser.rango == constant('Usuario::REGISTRADO') %}
-        <img src="../img/registrado.png">
+        <center><img src="../img/registrado.png"></center>
         <p class="img-footer"> Usuario registrado </p>
         {% endif %}
         {% if loggedUser.rango == constant('Usuario::MODERADOR') %}
@@ -34,53 +33,41 @@
     </div>
     <!-- Fin rango usuario -->
 
-    <!-- Datos usuario -->
-
-    <p class="data-update">Datos actualizados del perfil</p>
-    <div class="user-data">
-      <p class="title-data">Nickname del usuario:&nbsp  </p><p class="text-data"> {{ loggedUser.nickname }} </p>
-    </div>
-    <div class="user-data">
-      <p class="title-data">Email del usuario:&nbsp </p><p class="text-data"> {{ loggedUser.email }} </p>
-    </div>
-
     {% if updated == "ok" %}
-    <div class="user-data">
-      <p class="title-data">ACTUALICADO</p>
+    <div class="message_box_info">
+    <center><p class="text-data"> Los datos se han modificado correctamente. </p></center>
     </div>
     {% endif %}
 
     {% if updated == "error" %}
-    <div class="user-data">
-      <p class="title-data">ERROR DE ACTUALIZAR</p>
+    <div class="message_box_error">
+    <center><p class="text-data"> Ha ocurrido un error. Los datos no han sido modificados. </p></center>
     </div>
     {% endif %}
-    <!-- Panel de comentarios -->
-    <button id="mostrarModificarDatos" onclick="mostrarComentarios()" class="open-update">Modificar datos personales</button>
-    <div id="cajaDatosPersonales" class="cajaDatosPersonales" hidden>
+
+    <!-- Datos usuario -->
+    <div id="cajaDatosPersonales" class="cajaDatosPersonales">
       <form class="containerOptions" action="../core/post/postModify.php" method="POST">
           <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Introduzca su email" name="email" >
+          <input type="text" placeholder="Introduzca su email" name="email" value="{{ loggedUser.email }}">
 
           <label for="nickname"><b>Nombre de usuario/Nick</b></label>
-          <input type="text" placeholder="Introduzca su nickname" name="nickname" >
+          <input type="text" placeholder="Introduzca su nickname" name="nickname" value="{{ loggedUser.nickname }}">
 
           <label for="password"><b>Contraseña</b></label>
-          <input type="password" placeholder="Introduzca su contraseña" name="password" >
+          <input type="password" placeholder="Introduzca su contraseña" name="password">
 
           <label for="passwordConfirm"><b>Confirmar contraseña</b></label>
-          <input type="password" placeholder="Confirmar su contraseña" name="passwordConfirm" >
+          <input type="password" placeholder="Confirmar su contraseña" name="passwordConfirm">
 
           <button class="acceptbtn" type="submit">Modificar</button>
 
           <div class="containerOptions">
-            <button id="ocultarModificarDatos" type="button" onclick="mostrarComentarios()" class="cancelbtn">Cancelar</button>
-            <img src="../img/exclamacion.png" class="alert" width="30px" height="30px"></img>
+            <img src="../img/exclamacion.png" class="alert" width="30px" height="30px">
             <p class="text-data"> Introduzca en el formulario unicamente los datos que desee modificar </p>
           </div>
       </form>
     </div>
-    <!-- Fin panel de comentarios -->
     <!-- Fin datos del usuario -->
 </section>
 {% endblock %}
