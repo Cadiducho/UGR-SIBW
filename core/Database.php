@@ -78,6 +78,23 @@ class Database {
     return $comentarios;
   }
 
+  public function getAllComentarios() {
+    $queryComentarios = "SELECT c.id, (u.id) as userid, (e.id) as eventid, (e.nombre) as eventnombre, u.email, u.nickname, c.fecha, c.mensaje FROM comentarios c JOIN usuarios u ON (c.usuario = u.id) JOIN eventos e ON (c.evento = e.id)";
+    $stmt = $this->mysqli->prepare($queryComentarios);
+    $stmt->execute();
+    $resultComentarios = $stmt->get_result();
+
+    $comentarios = array();
+    while ($row = $resultComentarios->fetch_array()) {
+        $usuarioAutor = new Usuario($row["userid"], $row["nickname"], $row["email"]);
+        $evento = new Evento($row["eventid"], $row["eventnombre"], "");
+        $comentario = new Comentario($row["id"], $usuarioAutor, $row["fecha"], $row["mensaje"], $evento);
+        $comentarios[$row["id"]] = $comentario;
+    }
+    $stmt->close();
+    return $comentarios;
+  }
+
   public function getPalabrasProhibidas() {
     $queryProhibidas = "SELECT palabra_prohibida FROM palabras_prohibidas";
     $stmt = $this->mysqli->prepare($queryProhibidas);

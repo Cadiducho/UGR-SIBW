@@ -9,7 +9,6 @@ $core = new Core($twig, $database);
 
 $updated = $_GET['updated'] ?? "";
 
-session_start();
 $userBuscado = $database->getUsuarioById($_SESSION["loggedUserId"]);
 
 if($userBuscado == NULL)

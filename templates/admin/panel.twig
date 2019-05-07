@@ -1,0 +1,26 @@
+{% extends "layout.twig" %}
+
+{% block titulo %} Panel Administración {% endblock %}
+
+{# Cargar el head normal y añadir el css #}
+{% block head %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" media="screen"/>
+    <script src="/js/admin.js"></script>
+{% endblock %}
+
+{% block mainContent %}
+    <h1 class="adminPageTitle">Panel de administración</h1>
+
+    {% if loggedUser.rango >= constant('Usuario::MODERADOR') %}
+        {% include "admin/comentarios.twig" %}
+    {% endif %}
+
+    {% if loggedUser.rango >= constant('Usuario::GESTOR') %}
+        {% include "admin/eventos.twig" %}
+    {% endif %}
+
+    {% if loggedUser.rango >= constant('Usuario::SUPERUSUARIO') %}
+        {% include "admin/usuarios.twig" %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+<section class="adminSection">
+    <p class="title">Comentarios</p>
+
+    <input type="text" id="inputBuscarComentario" onkeyup="buscarComentario()" class="buscaTabla" placeholder="Busca comentarios">
+    <table class="table hoverable fullwidth" id="tablaComentarios">
+        <thead>
+            <tr>
+                <th>#id</th>
+                <th>Evento</th>
+                <th>Usuario</th>
+                <th>Comentario</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>#id</th>
+                <th>Evento</th>
+                <th>Usuario</th>
+                <th>Comentario</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for comentario in comentarios %}
+                <tr>
+                    <th>{{ comentario.id }}</th>
+                    <td>{{ comentario.evento.nombre }}</td>
+                    <td>{{ comentario.usuario.nickname }}</td>
+                    <td>{{ comentario.mensaje }}</td>
+                    <td>{{ comentario.fecha|date("d/m/Y H:i") }}</td>
+                    <td>O ! X</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+</section>
