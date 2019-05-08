@@ -38,7 +38,7 @@
                         <a onclick="showEditComentarioModal({{ comentario.id }},{{ comentario.mensaje|json_encode }});" style="text-decoration: none!important;">
                             <i class="icono-sliders edit"></i>
                         </a>
-                        <a comentario="{{ comentario.id }}" style="text-decoration: none!important;">
+                        <a onclick="deleteComentario({{ comentario.id }})" style="text-decoration: none!important;">
                             <i class="icono-cross remove"></i>
                         </a>
                     </td>
@@ -69,6 +69,27 @@
 
     <div class="containerOptions" style="background-color:#f1f1f1">
       <button type="button" onclick="closeEditComentarioModal()" class="cancelbtn">Cancelar</button>
+    </div>
+  </form>
+</div>
+
+<div id="deleteComentarioModal" class="modal">
+  <form id="formDeleteComentario" class="modal-content animate" onsubmit="return tryDeleteComentario(event);">
+    <div class="avatar-container">
+      <span onclick="closeDeleteComentarioModal()" class="close" title="Cerrar">&times;</span>
+    </div>
+    <div class="containerOptions">
+      <h3 id="tituloBorrarComentario">¿Borrar Comentario?</h3>
+      <input type="hidden" name="comentario" id="inputComentarioBorrar">
+
+      <button class="LoginPopUpButton" type="submit">Borrar</button>
+      <div id="messageBox">
+      </div>
+
+    </div>
+
+    <div class="containerOptions" style="background-color:#f1f1f1">
+      <button type="button" onclick="closeDeleteComentarioModal()" class="cancelbtn">Cancelar</button>
     </div>
   </form>
 </div>

@@ -79,7 +79,7 @@ class Database {
   }
 
   public function getAllComentarios() {
-    $queryComentarios = "SELECT c.id, (u.id) as userid, (e.id) as eventid, (e.nombre) as eventnombre, u.email, u.nickname, c.fecha, c.mensaje (SELECT a.nickname FROM usuarios a WHERE a.id = editadoPor) as editadoPor, c.fechaEdit, FROM comentarios c JOIN usuarios u ON (c.usuario = u.id) JOIN eventos e ON (c.evento = e.id)";
+    $queryComentarios = "SELECT c.id, (u.id) as userid, (e.id) as eventid, (e.nombre) as eventnombre, u.email, u.nickname, c.fecha, c.mensaje, (SELECT a.nickname FROM usuarios a WHERE a.id = editadoPor) as editadoPor, c.fechaEdit FROM comentarios c JOIN usuarios u ON (c.usuario = u.id) JOIN eventos e ON (c.evento = e.id)";
     $stmt = $this->mysqli->prepare($queryComentarios);
     $stmt->execute();
     $resultComentarios = $stmt->get_result();
@@ -207,11 +207,18 @@ class Database {
     $stmt->close();
   }
 
-
   public function editComentario($comentario, $mensaje, $adminid) {
       $updateComentario = "UPDATE comentarios SET mensaje=?, editadoPor=? WHERE id=?;";
       $stmt = $this->mysqli->prepare($updateComentario);
       $stmt->bind_param("ssi", $mensaje, $adminid, $comentario);
+      $stmt->execute();
+      $stmt->close();
+  }
+
+  public function deleteComentario($comentario) {
+      $updateComentario = "DELETE FROM comentarios WHERE id=?;";
+      $stmt = $this->mysqli->prepare($updateComentario);
+      $stmt->bind_param("i", $comentario);
       $stmt->execute();
       $stmt->close();
   }
