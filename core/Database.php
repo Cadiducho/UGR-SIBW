@@ -62,7 +62,7 @@ class Database {
   }
 
   public function getComentariosEvento($idEvento) {
-    $queryComentarios = "SELECT c.id, (u.id) as userid, u.email, u.nickname, c.fecha, c.mensaje FROM comentarios c JOIN usuarios u ON (c.usuario = u.id) WHERE evento=?";
+    $queryComentarios = "SELECT c.id, (u.id) as userid, u.email, u.nickname, c.fecha, c.mensaje, (SELECT a.nickname FROM usuarios a WHERE a.id = editadoPor) as editadoPor, c.fechaEdit FROM comentarios c JOIN usuarios u ON (c.usuario = u.id) WHERE evento=?";
     $stmt = $this->mysqli->prepare($queryComentarios);
     $stmt->bind_param("i", $idEvento);
     $stmt->execute();
@@ -71,7 +71,7 @@ class Database {
     $comentarios = array();
     while ($row = $resultComentarios->fetch_array()) {
         $usuarioAutor = new Usuario($row["userid"], $row["nickname"], $row["email"]);
-        $comentario = new Comentario($row["id"], $usuarioAutor, $row["fecha"], $row["mensaje"]);
+        $comentario = new Comentario($row["id"], $usuarioAutor, $row["fecha"], $row["mensaje"], $idEvento, $row["fechaEdit"], $row["editadoPor"]);
         $comentarios[$row["id"]] = $comentario;
     }
     $stmt->close();
@@ -79,7 +79,7 @@ class Database {
   }
 
   public function getAllComentarios() {
-    $queryComentarios = "SELECT c.id, (u.id) as userid, (e.id) as eventid, (e.nombre) as eventnombre, u.email, u.nickname, c.fecha, c.mensaje FROM comentarios c JOIN usuarios u ON (c.usuario = u.id) JOIN eventos e ON (c.evento = e.id)";
+    $queryComentarios = "SELECT c.id, (u.id) as userid, (e.id) as eventid, (e.nombre) as eventnombre, u.email, u.nickname, c.fecha, c.mensaje (SELECT a.nickname FROM usuarios a WHERE a.id = editadoPor) as editadoPor, c.fechaEdit, FROM comentarios c JOIN usuarios u ON (c.usuario = u.id) JOIN eventos e ON (c.evento = e.id)";
     $stmt = $this->mysqli->prepare($queryComentarios);
     $stmt->execute();
     $resultComentarios = $stmt->get_result();
@@ -88,7 +88,7 @@ class Database {
     while ($row = $resultComentarios->fetch_array()) {
         $usuarioAutor = new Usuario($row["userid"], $row["nickname"], $row["email"]);
         $evento = new Evento($row["eventid"], $row["eventnombre"], "");
-        $comentario = new Comentario($row["id"], $usuarioAutor, $row["fecha"], $row["mensaje"], $evento);
+        $comentario = new Comentario($row["id"], $usuarioAutor, $row["fecha"], $row["mensaje"], $evento, $row["fechaEdit"], $row["editadoPor"]);
         $comentarios[$row["id"]] = $comentario;
     }
     $stmt->close();
@@ -205,6 +205,15 @@ class Database {
     $stmt->execute();
 
     $stmt->close();
+  }
+
+
+  public function editComentario($comentario, $mensaje, $adminid) {
+      $updateComentario = "UPDATE comentarios SET mensaje=?, editadoPor=? WHERE id=?;";
+      $stmt = $this->mysqli->prepare($updateComentario);
+      $stmt->bind_param("ssi", $mensaje, $adminid, $comentario);
+      $stmt->execute();
+      $stmt->close();
   }
 
   public function getUsuarioById($id) {

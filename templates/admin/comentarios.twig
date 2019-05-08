@@ -31,9 +31,44 @@
                     <td>{{ comentario.usuario.nickname }}</td>
                     <td>{{ comentario.mensaje }}</td>
                     <td>{{ comentario.fecha|date("d/m/Y H:i") }}</td>
-                    <td>O ! X</td>
+                    <td>
+                        <a href="http://localhost/evento.php?id={{ comentario.evento.id }}" style="text-decoration: none!important;">
+                            <i class="icono-chain link"></i>
+                        </a>
+                        <a onclick="showEditComentarioModal({{ comentario.id }},{{ comentario.mensaje|json_encode }});" style="text-decoration: none!important;">
+                            <i class="icono-sliders edit"></i>
+                        </a>
+                        <a comentario="{{ comentario.id }}" style="text-decoration: none!important;">
+                            <i class="icono-cross remove"></i>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
       </table>
 </section>
+
+<div id="editComentarioPopUp" class="modal">
+  <form id="formEditComentario" class="modal-content animate" onsubmit="return tryEditComentario(event);">
+    <div class="avatar-container">
+      <span onclick="closeEditComentarioModal()" class="close" title="Cerrar">&times;</span>
+    </div>
+
+    <div class="containerOptions">
+      <h3 id="tituloEditarComentario">Editar Comentario</h3>
+
+      <label for="comentario"><b>Comentario</b></label>
+      <input type="text" placeholder="Edita el comentario" name="mensaje" id="inputMensaje" required>
+      <input type="hidden" name="comentario" id="inputComentario">
+
+      <button class="LoginPopUpButton" type="submit">Editar</button>
+      <div id="messageBox">
+      </div>
+
+    </div>
+
+    <div class="containerOptions" style="background-color:#f1f1f1">
+      <button type="button" onclick="closeEditComentarioModal()" class="cancelbtn">Cancelar</button>
+    </div>
+  </form>
+</div>

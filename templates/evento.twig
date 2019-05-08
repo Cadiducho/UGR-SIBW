@@ -73,6 +73,9 @@
               </div>
               <div class="comentario-mensaje">
                 <p>{{ comentario.mensaje }}</p>
+                {% if comentario.editadoPor is not null %}
+                    <p class="comentario-editado">Editado por {{ comentario.editadoPor}} el {{ comentario.fechaEdit|date("d/m/Y H:i") }}</p>
+                {% endif %}
               </div>
             </article>
         {% endfor %}

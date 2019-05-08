@@ -86,3 +86,15 @@
 .table.hoverable tbody tr:not(.is-selected):hover {
   background-color: #fafafa;
 }
+
+.edit {
+  color: #ffe16b!important;
+}
+
+.link {
+  color: #10e5d3!important;
+}
+
+.remove {
+  color: red!important;
+}
