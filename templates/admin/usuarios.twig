@@ -1,3 +1,64 @@
 <section class="adminSection">
     <p class="title">Usuarios</p>
+
+    <table class="table hoverable fullwidth" id="tablaUsuarios">
+        <thead>
+            <tr>
+                <th>#id</th>
+                <th>Nickname</th>
+                <th>Email</th>
+                <th>Rango</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+              <th>#id</th>
+              <th>Nickname</th>
+              <th>Email</th>
+              <th>Rango</th>
+              <th>Acciones</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <th>{{ usuario.id }}</th>
+                    <td>{{ usuario.nickname }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.rango }}</td>
+                    <td>
+                        <a onclick="showEditUsuarioModal({{ usuario.id }},{{ usuario.rango }});" style="text-decoration: none!important;">
+                            <i class="icono-sliders edit"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
 </section>
+
+<div id="editUsuarioPopUp" class="modal">
+  <form id="formEditUsuario" class="modal-content animate" onsubmit="return tryEditUsuario(event);">
+    <div class="avatar-container">
+      <span onclick="closeEditUsuarioModal()" class="close" title="Cerrar">&times;</span>
+    </div>
+
+    <div class="containerOptions">
+      <h3 id="tituloEditarUsuario">Editar Comentario</h3>
+
+      <label for="usuario"><b>Rango</b></label>
+      <input type="text" placeholder="Edita el rango del usuario" name="rango" id="inputRango" required>
+      <input type="hidden" name="usuario" id="inputUsuario">
+
+      <button class="LoginPopUpButton" type="submit">Editar</button>
+      <div id="messageBox">
+      </div>
+
+    </div>
+
+    <div class="containerOptions" style="background-color:#f1f1f1">
+      <button type="button" onclick="closeEditUsuarioModal()" class="cancelbtn">Cancelar</button>
+    </div>
+  </form>
+</div>

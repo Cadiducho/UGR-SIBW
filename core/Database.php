@@ -272,6 +272,65 @@ class Database {
     $stmt->close();
   }
 
+  public function getAllUsuarios() {
+    $queryUsuarios = "SELECT id as userid, email, nickname, password, rango  FROM usuarios";
+    $stmt = $this->mysqli->prepare($queryUsuarios);
+    $stmt->execute();
+    $resultUsuarios= $stmt->get_result();
+
+    $usuarios = array();
+    while ($row = $resultUsuarios->fetch_array()) {
+        $usuario = new Usuario($row["userid"], $row["nickname"], $row["email"], $row["password"], $row["rango"]);
+        $usuarios[$row["userid"]] = $usuario;
+    }
+    $stmt->close();
+
+    return $usuarios;
+
+  }
+
+  public function editUsuario($usuario, $rango) {
+      $updateUsuario = "UPDATE usuarios SET rango=? WHERE id=?;";
+      $stmt = $this->mysqli->prepare($updateUsuario);
+      $stmt->bind_param("is", $rango, $usuario);
+      $stmt->execute();
+      $stmt->close();
+  }
+
+  public function countUsuario($rango) {
+      $countNumUsuario = "SELECT count(*) as cantidadUser from usuarios where rango=?;";
+      $stmt = $this->mysqli->prepare($countNumUsuario);
+      $stmt->bind_param("i", $rango);
+      $stmt->execute();
+      $resultCountUsuarios= $stmt->get_result();
+
+      $countUser = 0;
+      if ($row = $resultCountUsuarios->fetch_array()) {
+          $countUser = $row["cantidadUser"];
+      }
+
+      $stmt->close();
+
+      return $countUser;
+  }
+
+  public function rangoUsuario($usuario) {
+      $rangoUsuario = "SELECT rango from usuarios where id=?;";
+      $stmt = $this->mysqli->prepare($rangoUsuario);
+      $stmt->bind_param("i", $usuario);
+      $stmt->execute();
+      $resultRangoUsuario= $stmt->get_result();
+
+      $rangosUser = 0;
+      if ($row = $resultRangoUsuario->fetch_array()) {
+          $rangosUser = $row["rango"];
+      }
+
+      $stmt->close();
+
+      return $rangosUser;
+  }
+
 }
 
 ?>

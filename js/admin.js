@@ -126,3 +126,56 @@ function tryDeleteComentario(event) {
 
     return false;
 }
+
+function showEditUsuarioModal(usuarioid, rango) {
+    let modal = document.getElementById('editUsuarioPopUp');
+    let inputRango = modal.querySelector("#inputRango");
+    inputRango.value = rango;
+    let inputUsuario = modal.querySelector("#inputUsuario");
+    inputUsuario.value = usuarioid;
+    let titulo = modal.querySelector("#tituloEditarUsuario");
+    titulo.innerHTML = "Editar Usuario #" + usuarioid;
+
+    modal.style.display='block'
+}
+
+function closeEditUsuarioModal() {
+    let modal = document.getElementById('editUsuarioPopUp');
+    modal.style.display = "none";
+}
+
+function tryEditUsuario(event) {
+    event.preventDefault();
+
+    let editUsuarioModal = document.getElementById('editUsuarioPopUp');
+    let form = editUsuarioModal.querySelector("#formEditUsuario");
+    let rango = form.rango.value;
+    let usuario = form.usuario.value;
+
+    // Intentar iniciar sesión mediante AJAX
+    let url = "/core/post/admin/postEditUsuario.php";
+    let params = 'usuario=' + usuario + '&rango=' + rango;
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      	if (xhr.status >= 200 && xhr.status < 300) {
+        		if (xhr.response === "error") {
+                showMessage(editUsuarioModal, "error", "Ha ocurrido algún error");
+            } else if (xhr.response === "unauthorized") {
+                showMessage(editUsuarioModal, "error", "No autorizado");
+            } else if (xhr.response === "ok") {
+                showMessage(editUsuarioModal, "info", "Usuario editado correctamente");
+                setTimeout(function(){
+                    window.location.reload(1);
+                }, 1500);
+            }
+      	} else {
+        		showMessage(editUsuarioModal, "error", "No se ha podido editar el usuario");
+      	}
+    };
+
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send(params);
+
+    return false;
+}

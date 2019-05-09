@@ -22,6 +22,7 @@ $parametros = array();
 
 if ($loggedUser->rango >= Usuario::MODERADOR) {
     $parametros["comentarios"] = $database->getAllComentarios();
+    $parametros["usuarios"] = $database->getAllUsuarios();
 }
 echo $core->render('admin/panel.twig', $parametros);
 ?>
