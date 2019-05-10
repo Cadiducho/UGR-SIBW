@@ -331,6 +331,28 @@ class Database {
       return $rangosUser;
   }
 
+  public function getAllEventos() {
+    $queryEventos = "SELECT id as eventoid, nombre, imagen, organizador, fecha, descripcion, imagen_lateral_1,
+                      imagen_lateral_1_descripcion, imagen_lateral_2, imagen_lateral_2_descripcion,
+                      video_id, creado_en, actualizado_en FROM eventos";
+    $stmt = $this->mysqli->prepare($queryEventos);
+    $stmt->execute();
+    $resultEventos= $stmt->get_result();
+
+    $eventos = array();
+    while ($row = $resultEventos->fetch_array()) {
+        $evento = new Evento($row["eventoid"], $row["nombre"], $row["imagen"], $row["organizador"], $row["fecha"],
+                      $row["descripcion"], $row["imagen_lateral_1"], $row["imagen_lateral_1_descripcion"],
+                      $row["imagen_lateral_2"], $row["imagen_lateral_2_descripcion"],
+                      $row["video_id"], $row["creado_en"], $row["actualizado_en"]);
+        $eventos[$row["eventoid"]] = $evento;
+    }
+    $stmt->close();
+
+    return $eventos;
+
+  }
+
 }
 
 ?>
