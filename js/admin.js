@@ -179,3 +179,82 @@ function tryEditUsuario(event) {
 
     return false;
 }
+
+function buscarEventos() {
+    let input = document.getElementById("inputBuscarEventos");
+    let filter = input.value.toUpperCase();
+    let table = document.getElementById("tablaEventos");
+    let tr = table.getElementsByTagName("tr");
+    let eventName, eventOrganizator, eventDate;
+    for (i = 0; i < tr.length; i++) {
+        eventName = tr[i].getElementsByTagName("td")[0];
+        eventOrganizator = tr[i].getElementsByTagName("td")[2];
+        eventDate = tr[i].getElementsByTagName("td")[3];
+
+        if (eventName || eventOrganizator || eventDate) {
+            eventValue = eventName.textContent || eventName.innerText;
+            organizatorText = eventOrganizator.textContent || eventOrganizator.innerText;
+            dateText = eventDate.textContent || eventDate.innerText;
+            if ((eventValue.toUpperCase().indexOf(filter) > -1)
+                  || (organizatorText.toUpperCase().indexOf(filter) > -1)
+                  || (dateText.toUpperCase().indexOf(filter) > -1)) {
+
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function tryAddEvento() {
+      event.preventDefault();
+
+      let crearEventoModal = document.getElementById('addEventPopUp');
+      let form = crearEventoModal.querySelector("#formAddEvent");
+      let nombre = form.nombre.value;
+      let imagen = form.imagen.value;
+      let organizador = form.organizador.value;
+      let fecha = form.fecha.value;
+      let descripcion = form.descripcion.value;
+      let imagen_lateral_1 = form.imagen_lateral_1.value;
+      let imagen_lateral_1_descripcion = form.imagen_lateral_1_descripcion.value;
+      let imagen_lateral_2 = form.imagen_lateral_2.value;
+      let imagen_lateral_2_descripcion = form.imagen_lateral_2_descripcion.value;
+
+      let url = "/core/post/admin/postAddEvento.php";
+      let params = 'nombre=' + nombre + '&imagen=' + imagen + '&organizador=' + organizador + '&fecha=' + fecha + '&descripcion=' + descripcion +
+                   '&imagen_lateral_1=' + imagen_lateral_1 + '&imagen_lateral_1_descripcion=' + imagen_lateral_1_descripcion +
+                   '&imagen_lateral_2=' + imagen_lateral_2 + '&imagen_lateral_2_descripcion=' + imagen_lateral_2_descripcion ;
+      let xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        	if (xhr.status >= 200 && xhr.status < 300) {
+          		if (xhr.response === "error") {
+                  showMessage(crearEventoModal, "error", "Se ha producido un error");
+              } else if (xhr.response === "ok"){
+                  showMessage(crearEventoModal, "info", "Se ha creado el evento correctamente");
+                  setTimeout(function(){
+                      window.location.reload(1);
+                  }, 1500);
+              }
+        	} else {
+          		showMessage(crearEventoModal, "error", "No se ha podido crear el evento");
+        	}
+      };
+
+      xhr.open('POST', url);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send(params);
+
+      return false;
+  }
+
+  function closeAddEventoModal() {
+      let modal = document.getElementById('addEventPopUp');
+      modal.style.display = "none";
+  }
+
+  function showAddEventPopUp() {
+      let modal = document.getElementById('addEventPopUp');
+      modal.style.display='block'
+  }

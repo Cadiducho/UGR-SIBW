@@ -350,7 +350,16 @@ class Database {
     $stmt->close();
 
     return $eventos;
+  }
 
+  public function registrarEvento($nombreRegister, $imagenRegister, $organizadorRegister, $fechaRegister, $descripcionRegister, $img1Register, $img1descRegister, $img2Register, $img2descRegister) {
+    $queryRegistroEvento = "INSERT INTO eventos (nombre, imagen, organizador, fecha, descripcion, imagen_lateral_1, imagen_lateral_1_descripcion,
+                        imagen_lateral_2, imagen_lateral_2_descripcion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $this->mysqli->prepare($queryRegistroEvento);
+    $stmt->bind_param("sssssssss", $nombreRegister, $imagenRegister, $organizadorRegister, $fechaRegister, $descripcionRegister, $img1Register, $img1descRegister, $img2Register, $img2descRegister);
+    $stmt->execute();
+
+    $stmt->close();
   }
 
 }

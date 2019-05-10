@@ -8,7 +8,6 @@
             <tr>
             <th>#id</th>
             <th>Nombre</th>
-            <th>Imagen</th>
             <th>Organizador</th>
             <th>Fecha</th>
             <th>Acciones</th>
@@ -18,7 +17,6 @@
             <tr>
             <th>#id</th>
             <th>Nombre</th>
-            <th>Imagen</th>
             <th>Organizador</th>
             <th>Fecha</th>
             <th>Acciones</th>
@@ -29,7 +27,6 @@
                 <tr>
                     <th>{{ evento.id }}</th>
                     <td>{{ evento.nombre }}</td>
-                    <td>{{ evento.imagen }}</td>
                     <td>{{ evento.organizador }}</td>
                     <td>{{ evento.fecha }}</td>
                     <td>
@@ -42,9 +39,60 @@
                         <a onclick="deleteComentario({{ comentario.id }})" style="text-decoration: none!important;">
                             <i class="icono-cross remove"></i>
                         </a>
+                        <a onclick="showAddEventPopUp();" style="text-decoration: none!important;">
+                            <i class="icono-plus add"></i>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
       </table>
 </section>
+
+<div id="addEventPopUp" class="modal">
+  <form id="formAddEvent" class="modal-content animate" onsubmit="return tryAddEvento();">
+    <div class="avatar-container">
+      <span onclick="closeAddEventoModal()" class="close" title="Cerrar">&times;</span>
+    </div>
+
+    <div class="containerOptions">
+      <label for="nombre"><b>Nombre</b></label>
+      <input type="text" placeholder="Introduzca el nombre del evento" name="nombre" required>
+
+      <label for="imagen"><b>Imagen</b></label>
+      <input type="text" placeholder="Introduzca la imagen del evento" name="imagen" required>
+
+      <label for="organizador"><b>Organizador</b></label>
+      <input type="text" placeholder="Introduzca el organizador del evento" name="organizador" required>
+
+      <label for="fecha"><b>Fecha</b></label>
+      <input type="text" placeholder="Introduzca la fecha del evento" name="fecha" required>
+
+      <label for="descripcion"><b>Descripcion</b></label>
+      <input type="text" placeholder="Introduzca la descripcion del evento" name="descripcion" required>
+
+      <label for="imagen_lateral_1"><b>Imagen Lateral 1</b></label>
+      <input type="text" placeholder="Introduzca la imagen lateral 1 evento" name="imagen_lateral_1" required>
+
+      <label for="imagen_lateral_1_descripcion"><b>Imagen Lateral 1 Descripcion</b></label>
+      <input type="text" placeholder="Introduzca la descripcion de la imagen lateral 1" name="imagen_lateral_1_descripcion" required>
+
+      <label for="imagen_lateral_2"><b>Imagen Lateral 2</b></label>
+      <input type="text" placeholder="Introduzca la imagen lateral 2 evento" name="imagen_lateral_2" required>
+
+      <label for="imagen_lateral_2_descripcion"><b>Imagen Lateral 2 Descripcion</b></label>
+      <input type="text" placeholder="Introduzca la descripcion de la imagen lateral 2" name="imagen_lateral_2_descripcion" required>
+
+
+
+      <button class="LoginPopUpButton" type="submit">Crear</button>
+      <div id="messageBox">
+      </div>
+
+    </div>
+
+    <div class="containerOptions" style="background-color:#f1f1f1">
+      <button type="button" onclick="closeAddEventoModal()" class="cancelbtn">Cancelar</button>
+    </div>
+  </form>
+</div>
