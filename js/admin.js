@@ -258,3 +258,73 @@ function tryAddEvento() {
       let modal = document.getElementById('addEventPopUp');
       modal.style.display='block'
   }
+
+  function tryEditEvento(event) {
+      event.preventDefault();
+
+      let editUsuarioModal = document.getElementById('editEventoPopUp');
+      let form = editUsuarioModal.querySelector("#formEditEvento");
+      let rango = form.rango.value;
+      let usuario = form.usuario.value;
+
+      // Intentar iniciar sesión mediante AJAX
+      let url = "/core/post/admin/postEditUsuario.php";
+      let params = 'usuario=' + usuario + '&rango=' + rango;
+      let xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        	if (xhr.status >= 200 && xhr.status < 300) {
+          		if (xhr.response === "error") {
+                  showMessage(editUsuarioModal, "error", "Ha ocurrido algún error");
+              } else if (xhr.response === "unauthorized") {
+                  showMessage(editUsuarioModal, "error", "No autorizado");
+              } else if (xhr.response === "ok") {
+                  showMessage(editUsuarioModal, "info", "Usuario editado correctamente");
+                  setTimeout(function(){
+                      window.location.reload(1);
+                  }, 1500);
+              }
+        	} else {
+          		showMessage(editUsuarioModal, "error", "No se ha podido editar el usuario");
+        	}
+      };
+
+      xhr.open('POST', url);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send(params);
+
+      return false;
+  }
+
+  function showEditEventoModal(eventoid, nombre, imagen, organizador, fecha, descripcion, imagen_lateral_1, imagen_lateral_1_descripcion, imagen_lateral_2, imagen_lateral_2_descripcion) {
+      let modal = document.getElementById('editEventoPopUp');
+      let inputNombre = modal.querySelector("#inputNombre");
+      inputNombre.value = nombre;
+      let inputEvento = modal.querySelector("#inputEvento");
+      inputEvento.value = eventoid;
+      let inputImagen = modal.querySelector("#inputImagen");
+      inputImagen.value = imagen;
+      let inputOrganizador = modal.querySelector("#inputOrganizador");
+      inputOrganizador.value = organizador;
+      let inputFecha = modal.querySelector("#inputFecha");
+      inputFecha.value = fecha;
+      let inputDescripcion = modal.querySelector("#inputDescripcion");
+      inputDescripcion.value = descripcion;
+      let inputImg1 = modal.querySelector("#inputImg1");
+      inputImg1.value = imagen_lateral_1;
+      let inputImg1Desc = modal.querySelector("#inputImg1Desc");
+      inputImg1Desc.value = imagen_lateral_1_descripcion;
+      let inputImg2 = modal.querySelector("#inputImg2");
+      inputImg2.value = imagen_lateral_2;
+      let inputImg2Desc = modal.querySelector("#inputImg2Desc");
+      inputImg2Desc.value = imagen_lateral_2_descripcion;
+
+      let titulo = modal.querySelector("#tituloEditarEvento");
+      titulo.innerHTML = "Editar Evento #" + eventoid;
+
+      modal.style.display='block'
+  }
+
+  function closeEditEventoModal() {
+      let modal = document.getElementById('editEventoPopUp');
+      modal.style.display = "none";
+  }

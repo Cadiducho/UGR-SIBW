@@ -33,7 +33,9 @@
                         <a href="http://localhost/evento.php?id={{ evento.id }}" style="text-decoration: none!important;">
                             <i class="icono-chain link"></i>
                         </a>
-                        <a onclick="showEditComentarioModal({{ comentario.id }},{{ comentario.mensaje|json_encode }});" style="text-decoration: none!important;">
+                        <a onclick="showEditEventoModal({{ evento.id }},{{ evento.nombre }},{{ evento.imagen }},{{ evento.organizador }},{{ evento.fecha }},{{ evento.descripcion }},
+                                                         {{ evento.imagen_lateral_1 }},{{ evento.imagen_lateral_1_descripcion }},{{ evento.imagen_lateral_2 }},
+                                                         {{ evento.imagen_lateral_2_descripcion }});" style="text-decoration: none!important;">
                             <i class="icono-sliders edit"></i>
                         </a>
                         <a onclick="deleteComentario({{ comentario.id }})" style="text-decoration: none!important;">
@@ -93,6 +95,55 @@
 
     <div class="containerOptions" style="background-color:#f1f1f1">
       <button type="button" onclick="closeAddEventoModal()" class="cancelbtn">Cancelar</button>
+    </div>
+  </form>
+</div>
+
+<div id="editEventoPopUp" class="modal">
+  <form id="formEditEvento" class="modal-content animate" onsubmit="return tryEditEvento(event);">
+    <div class="avatar-container">
+      <span onclick="closeEditEventoModal()" class="close" title="Cerrar">&times;</span>
+    </div>
+
+    <div class="containerOptions">
+      <h3 id="tituloEditarEvento">Editar Evento</h3>
+
+      <label for="nombre"><b>Nombre</b></label>
+      <input type="text" placeholder="Edita el nombre del evento" name="nombre" id="inputNombre" required>
+      <input type="hidden" name="evento" id="inputEvento">
+
+      <label for="imagen"><b>Imagen</b></label>
+      <input type="text" placeholder="Edita la imagen del evento" name="imagen" id="inputImagen" required>
+
+      <label for="organizador"><b>Organizador</b></label>
+      <input type="text" placeholder="Edita el organizador del evento" name="organizador" id="inputOrganizador" required>
+
+      <label for="fecha"><b>Fecha</b></label>
+      <input type="text" placeholder="Edita la fecha del evento" name="fecha" id="inputFecha" required>
+
+      <label for="descripcion"><b>Descripcion</b></label>
+      <input type="text" placeholder="Edita la descripcion del evento" name="descripcion" id="inputDescripcion" required>
+
+      <label for="imagen_lateral_1"><b>Imagen Lateral 1</b></label>
+      <input type="text" placeholder="Edita la imagen lateral 1 evento" name="imagen_lateral_1" id="inputImg1" required>
+
+      <label for="imagen_lateral_1_descripcion"><b>Imagen Lateral 1 Descripcion</b></label>
+      <input type="text" placeholder="Edita la descripcion de la imagen lateral 1" name="imagen_lateral_1_descripcion" id="inputImg1Desc" required>
+
+      <label for="imagen_lateral_2"><b>Imagen Lateral 2</b></label>
+      <input type="text" placeholder="Edita la imagen lateral 2 evento" name="imagen_lateral_2" id="inputImg2" required>
+
+      <label for="imagen_lateral_2_descripcion"><b>Imagen Lateral 2 Descripcion</b></label>
+      <input type="text" placeholder="Edita la descripcion de la imagen lateral 2" name="imagen_lateral_2_descripcion" id="inputImg2Desc" required>
+
+      <button class="LoginPopUpButton" type="submit">Editar</button>
+      <div id="messageBox">
+      </div>
+
+    </div>
+
+    <div class="containerOptions" style="background-color:#f1f1f1">
+      <button type="button" onclick="closeEditEventoModal()" class="cancelbtn">Cancelar</button>
     </div>
   </form>
 </div>
