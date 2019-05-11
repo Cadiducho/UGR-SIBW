@@ -308,7 +308,7 @@ function tryAddEvento() {
       let eventoid = form.evento.value;
 
       let url = "/core/post/admin/postEditEvento.php";
-      let params = 'evento' +  eventoid + '&nombre=' + nombre + '&imagen=' + imagen + '&organizador=' + organizador + '&fecha=' + fecha + '&descripcion=' + descripcion +
+      let params = 'evento=' +  eventoid + '&nombre=' + nombre + '&imagen=' + imagen + '&organizador=' + organizador + '&fecha=' + fecha + '&descripcion=' + descripcion +
                    '&imagen_lateral_1=' + imagen_lateral_1 + '&imagen_lateral_1_descripcion=' + imagen_lateral_1_descripcion +
                    '&imagen_lateral_2=' + imagen_lateral_2 + '&imagen_lateral_2_descripcion=' + imagen_lateral_2_descripcion ;
       let xhr = new XMLHttpRequest();
