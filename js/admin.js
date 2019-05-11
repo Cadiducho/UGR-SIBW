@@ -237,6 +237,9 @@ function tryAddEvento() {
                       window.location.reload(1);
                   }, 1500);
               }
+              else {
+                showMessage()
+              }
         	} else {
           		showMessage(crearEventoModal, "error", "No se ha podido crear el evento");
         	}
@@ -257,42 +260,6 @@ function tryAddEvento() {
   function showAddEventPopUp() {
       let modal = document.getElementById('addEventPopUp');
       modal.style.display='block'
-  }
-
-  function tryEditEvento(event) {
-      event.preventDefault();
-
-      let editUsuarioModal = document.getElementById('editEventoPopUp');
-      let form = editUsuarioModal.querySelector("#formEditEvento");
-      let rango = form.rango.value;
-      let usuario = form.usuario.value;
-
-      // Intentar iniciar sesión mediante AJAX
-      let url = "/core/post/admin/postEditUsuario.php";
-      let params = 'usuario=' + usuario + '&rango=' + rango;
-      let xhr = new XMLHttpRequest();
-      xhr.onload = function () {
-        	if (xhr.status >= 200 && xhr.status < 300) {
-          		if (xhr.response === "error") {
-                  showMessage(editUsuarioModal, "error", "Ha ocurrido algún error");
-              } else if (xhr.response === "unauthorized") {
-                  showMessage(editUsuarioModal, "error", "No autorizado");
-              } else if (xhr.response === "ok") {
-                  showMessage(editUsuarioModal, "info", "Usuario editado correctamente");
-                  setTimeout(function(){
-                      window.location.reload(1);
-                  }, 1500);
-              }
-        	} else {
-          		showMessage(editUsuarioModal, "error", "No se ha podido editar el usuario");
-        	}
-      };
-
-      xhr.open('POST', url);
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      xhr.send(params);
-
-      return false;
   }
 
   function showEditEventoModal(eventoid, nombre, imagen, organizador, fecha, descripcion, imagen_lateral_1, imagen_lateral_1_descripcion, imagen_lateral_2, imagen_lateral_2_descripcion) {
@@ -324,7 +291,99 @@ function tryAddEvento() {
       modal.style.display='block'
   }
 
+  function tryEditEvento(event) {
+      event.preventDefault();
+
+      let editEventoModal = document.getElementById('editEventoPopUp');
+      let form = editEventoModal.querySelector("#formEditEvento");
+      let nombre = form.nombre.value;
+      let imagen = form.imagen.value;
+      let organizador = form.organizador.value;
+      let fecha = form.fecha.value;
+      let descripcion = form.descripcion.value;
+      let imagen_lateral_1 = form.imagen_lateral_1.value;
+      let imagen_lateral_1_descripcion = form.imagen_lateral_1_descripcion.value;
+      let imagen_lateral_2 = form.imagen_lateral_2.value;
+      let imagen_lateral_2_descripcion = form.imagen_lateral_2_descripcion.value;
+      let eventoid = form.evento.value;
+
+      let url = "/core/post/admin/postEditEvento.php";
+      let params = 'evento' +  eventoid + '&nombre=' + nombre + '&imagen=' + imagen + '&organizador=' + organizador + '&fecha=' + fecha + '&descripcion=' + descripcion +
+                   '&imagen_lateral_1=' + imagen_lateral_1 + '&imagen_lateral_1_descripcion=' + imagen_lateral_1_descripcion +
+                   '&imagen_lateral_2=' + imagen_lateral_2 + '&imagen_lateral_2_descripcion=' + imagen_lateral_2_descripcion ;
+      let xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        	if (xhr.status >= 200 && xhr.status < 300) {
+          		if (xhr.response === "error") {
+                  showMessage(editEventoModal, "error", "Ha ocurrido algún error");
+              } else if (xhr.response === "ok") {
+                  showMessage(editEventoModal, "info", "Evento editado correctamente");
+                  setTimeout(function(){
+                      window.location.reload(1);
+                  }, 1500);
+              }
+        	} else {
+          		showMessage(editEventoModal, "error", "No se ha podido editar el evento");
+        	}
+      };
+
+      xhr.open('POST', url);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send(params);
+
+      return false;
+  }
+
   function closeEditEventoModal() {
       let modal = document.getElementById('editEventoPopUp');
       modal.style.display = "none";
+  }
+
+  function deleteEvento(eventoid) {
+      let modal = document.getElementById('deleteEventoModal');
+      let inputEvento = modal.querySelector("#inputEventoBorrar");
+      inputEvento.value = eventoid;
+      let titulo = modal.querySelector("#tituloBorrarEvento");
+      titulo.innerHTML = "¿Borrar Evento #" + eventoid + "?";
+
+      modal.style.display='block'
+  }
+
+  function closeDeleteEventoModal() {
+      let modal = document.getElementById('deleteEventoModal');
+      modal.style.display = "none";
+  }
+
+  function tryDeleteEvento(event) {
+      event.preventDefault();
+
+      let borrarEventoModal = document.getElementById('deleteEventoModal');
+      let form = borrarEventoModal.querySelector("#formDeleteEvento");
+      let evento = form.evento.value;
+
+      let url = "/core/post/admin/postDeleteEvento.php";
+      let params = 'evento=' + evento;
+      let xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        	if (xhr.status >= 200 && xhr.status < 300) {
+          		if (xhr.response === "error") {
+                  showMessage(borrarEventoModal, "error", "Ha ocurrido algún error");
+              } else if (xhr.response === "unauthorized") {
+                  showMessage(borrarEventoModal, "error", "No autorizado");
+              } else if (xhr.response === "ok") {
+                  showMessage(borrarEventoModal, "info", "Evento borrado correctamente");
+                  setTimeout(function(){
+                      window.location.reload(1);
+                  }, 1500);
+              }
+        	} else {
+          		showMessage(borrarEventoModal, "error", "No se ha podido borrar el evento");
+        	}
+      };
+
+      xhr.open('POST', url);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send(params);
+
+      return false;
   }

@@ -362,6 +362,27 @@ class Database {
     $stmt->close();
   }
 
+
+  public function editarEvento($evento, $nombre, $imagen, $organizador, $fecha, $descripcion, $img1, $img1desc, $img2, $img2desc) {
+    $queryUpdateEvento = "UPDATE eventos SET nombre=?, imagen=?, organizador=?, fecha=?, descripcion=?,
+                            imagen_lateral_1=?, imagen_lateral_1_descripcion=?, imagen_lateral_2=?, imagen_lateral_2_descripcion=?
+                            WHERE id=?;";
+
+    $stmt = $this->mysqli->prepare($queryUpdateEvento);
+    $stmt->bind_param("sssssssssi", $nombre, $imagen, $organizador, $fecha, $descripcion, $img1, $img1desc, $img2, $img2desc, $evento);
+    $stmt->execute();
+
+    $stmt->close();
+  }
+
+  public function deleteEvento($evento) {
+      $deleteEvento = "DELETE FROM eventos WHERE id=?;";
+      $stmt = $this->mysqli->prepare($deleteEvento);
+      $stmt->bind_param("i", $evento);
+      $stmt->execute();
+      $stmt->close();
+  }
+
 }
 
 ?>
