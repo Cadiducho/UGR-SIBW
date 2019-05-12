@@ -78,6 +78,10 @@ span.psw {
   width: 30%;
 }
 
+.modal-ancho {
+  width: 70%!important;
+}
+
 .close {
   position: absolute;
   right: 25px;

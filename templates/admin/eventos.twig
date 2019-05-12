@@ -2,7 +2,7 @@
     <div>
       <p class="title-evento">Eventos</p>
       <a onclick="showAddEventPopUp();" class="add-event" style="text-decoration: none!important;">
-          <i class="icono-plus add"></i>
+          <i class="fa fa-plus add"></i>
       </a>
     </div>
 
@@ -39,11 +39,19 @@
                         </a>
                         <a onclick="showEditEventoModal({{ evento.id }},{{ evento.nombre|json_encode }},{{ evento.imagen|json_encode }},{{ evento.organizador|json_encode }},{{ evento.fecha|json_encode }},{{ evento.descripcion|json_encode }},
                                                          {{ evento.imagen_lateral_1|json_encode }},{{ evento.imagen_lateral_1_descripcion|json_encode }},{{ evento.imagen_lateral_2|json_encode }},
-                                                         {{ evento.imagen_lateral_2_descripcion|json_encode }});" style="text-decoration: none!important;">
-                            <i class="icono-sliders edit"></i>
+                                                         {{ evento.imagen_lateral_2_descripcion|json_encode }});"
+
+                                            style="text-decoration: none!important;">
+                            <i class="fa fa-edit edit"></i>
+                        </a>
+                        <a onlick="showEditTagsModal({{ evento.id }},{{ evento.etiquetas|json_encode }});">
+                            <i class="fa fa-tag edit"></i>
+                        </a>
+                        <a onlick="showEditGaleriaModal({{ evento.id }},{{ evento.galeria|json_encode }});">
+                            <i class="fa fa-photo edit"></i>
                         </a>
                         <a onclick="deleteEvento({{ evento.id }})" style="text-decoration: none!important;">
-                            <i class="icono-cross remove"></i>
+                            <i class="fa fa-close remove"></i>
                         </a>
 
                     </td>
@@ -54,7 +62,7 @@
 </section>
 
 <div id="addEventPopUp" class="modal">
-  <form id="formAddEvent" class="modal-content animate" onsubmit="return tryAddEvento();">
+  <form id="formAddEvent" class="modal-content modal-ancho animate" onsubmit="return tryAddEvento();">
     <div class="avatar-container">
       <span onclick="closeAddEventoModal()" class="close" title="Cerrar">&times;</span>
     </div>
@@ -103,7 +111,7 @@
 </div>
 
 <div id="editEventoPopUp" class="modal">
-  <form id="formEditEvento" class="modal-content animate" onsubmit="return tryEditEvento(event);">
+  <form id="formEditEvento" class="modal-content modal-ancho animate" onsubmit="return tryEditEvento(event);">
     <div class="avatar-container">
       <span onclick="closeEditEventoModal()" class="close" title="Cerrar">&times;</span>
     </div>

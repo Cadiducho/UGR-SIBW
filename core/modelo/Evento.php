@@ -24,6 +24,10 @@ class Evento {
     public $imagen_lateral_2;
     public $imagen_lateral_2_descripcion;
 
+    public $etiquetas;
+
+    public $galeria;
+
     // Url de un video de Youtube
     public $video_id;
 

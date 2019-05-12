@@ -33,13 +33,13 @@
                     <td>{{ comentario.fecha|date("d/m/Y H:i") }}</td>
                     <td>
                         <a href="http://localhost/evento.php?id={{ comentario.evento.id }}" style="text-decoration: none!important;">
-                            <i class="icono-chain link"></i>
+                            <i class="fa fa-chain link"></i>
                         </a>
                         <a onclick="showEditComentarioModal({{ comentario.id }},{{ comentario.mensaje|json_encode }});" style="text-decoration: none!important;">
-                            <i class="icono-sliders edit"></i>
+                            <i class="fa fa-edit edit"></i>
                         </a>
                         <a onclick="deleteComentario({{ comentario.id }})" style="text-decoration: none!important;">
-                            <i class="icono-cross remove"></i>
+                            <i class="fa fa-close remove"></i>
                         </a>
                     </td>
                 </tr>

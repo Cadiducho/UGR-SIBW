@@ -387,3 +387,31 @@ function tryAddEvento() {
 
       return false;
   }
+
+
+  function buscarUsuarios() {
+      let input = document.getElementById("inputBuscarUsuarios");
+      let filter = input.value.toUpperCase();
+      let table = document.getElementById("tablaUsuarios");
+      let tr = table.getElementsByTagName("tr");
+      let username, userMail, userRank;
+      for (i = 0; i < tr.length; i++) {
+          username = tr[i].getElementsByTagName("td")[0];
+          userMail = tr[i].getElementsByTagName("td")[2];
+          userRank = tr[i].getElementsByTagName("td")[3];
+
+          if (username || userMail || userRank) {
+              username = username.textContent || username.innerText;
+              userMail = userMail.textContent || userMail.innerText;
+              userRank = userRank.textContent || userRank.innerText;
+              if ((username.toUpperCase().indexOf(filter) > -1)
+                    || (userMail.toUpperCase().indexOf(filter) > -1)
+                    || (userRank.toUpperCase().indexOf(filter) > -1)) {
+
+                  tr[i].style.display = "";
+              } else {
+                  tr[i].style.display = "none";
+              }
+          }
+      }
+  }

@@ -83,12 +83,16 @@
   width: 100%;
 }
 
-.table.hoverable tbody tr:not(.is-selected):hover {
+.table.hoverable tbody tr:hover {
   background-color: #fafafa;
 }
 
 .edit {
   color: #ffe16b!important;
+}
+
+.fa {
+  font-size: 1.6em!important;
 }
 
 .link {

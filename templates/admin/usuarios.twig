@@ -1,6 +1,7 @@
 <section class="adminSection">
     <p class="title">Usuarios</p>
 
+    <input type="text" id="inputBuscarUsuarios" onkeyup="buscarUsuarios()" class="buscaTabla" placeholder="Busca usuarios">
     <table class="table hoverable fullwidth" id="tablaUsuarios">
         <thead>
             <tr>
@@ -26,10 +27,20 @@
                     <th>{{ usuario.id }}</th>
                     <td>{{ usuario.nickname }}</td>
                     <td>{{ usuario.email }}</td>
-                    <td>{{ usuario.rango }}</td>
+                    <td>
+                        {% if usuario.rango == constant('Usuario::MODERADOR') %}
+                            Moderador
+                        {% elseif usuario.rango == constant('Usuario::GESTOR') %}
+                            Gestor
+                        {% elseif usuario.rango >= constant('Usuario::SUPERUSUARIO') %}
+                            Superusuario
+                        {% else %}
+                            Usuario registrado
+                        {% endif %}
+                    </td>
                     <td>
                         <a onclick="showEditUsuarioModal({{ usuario.id }},{{ usuario.rango }});" style="text-decoration: none!important;">
-                            <i class="icono-sliders edit"></i>
+                            <i class="fa fa-edit edit"></i>
                         </a>
                     </td>
                 </tr>
@@ -53,7 +64,7 @@
          <option value=20>Moderador</option>
          <option value=30>Gestor</option>
          <option value=40>Superusuario</option>
-      </select> 
+      </select>
       <input type="hidden" name="usuario" id="inputUsuario">
 
       <button class="LoginPopUpButton" type="submit">Editar</button>

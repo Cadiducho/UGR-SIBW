@@ -5,6 +5,7 @@ require_once $ROOT_PATH . '/core/modelo/Comentario.php';
 require_once $ROOT_PATH . '/core/modelo/Tag.php';
 require_once $ROOT_PATH . '/core/modelo/Contacto.php';
 require_once $ROOT_PATH . '/core/modelo/Usuario.php';
+require_once $ROOT_PATH . '/core/modelo/FotoGaleria.php';
 
 class Database {
 
@@ -112,7 +113,7 @@ class Database {
   }
 
   public function getGaleriaEvento($idEvento) {
-    $queryGaleria = "SELECT foto, descripcion FROM fotos_galeria WHERE evento=?";
+    $queryGaleria = "SELECT id, foto, descripcion FROM fotos_galeria WHERE evento=?";
     $stmt = $this->mysqli->prepare($queryGaleria);
     $stmt->bind_param("i", $idEvento);
     $stmt->execute();
@@ -120,7 +121,8 @@ class Database {
 
     $galeria = array();
     while ($row = $resultGaleria->fetch_array()) {
-        $galeria[$row["foto"]] = $row["descripcion"];
+        $foto = new FotoGaleria($row["id"], $row["foto"], $row["descripcion"]);
+        $galeria[] = $foto;
     }
     $stmt->close();
 
@@ -345,6 +347,8 @@ class Database {
                       $row["descripcion"], $row["imagen_lateral_1"], $row["imagen_lateral_1_descripcion"],
                       $row["imagen_lateral_2"], $row["imagen_lateral_2_descripcion"],
                       $row["video_id"], $row["creado_en"], $row["actualizado_en"]);
+        $evento->etiquetas = $this->getTagsOfEvent($row["eventoid"]);
+        $evento->galeria = $this->getGaleriaEvento($row["eventoid"]);
         $eventos[$row["eventoid"]] = $evento;
     }
     $stmt->close();

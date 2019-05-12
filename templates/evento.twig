@@ -38,7 +38,7 @@
 
     <!-- Etiquetas del evento -->
     <section class="lista-tags">
-        {% for tag in etiquetas %}
+        {% for tag in evento.etiquetas %}
             <span class="tag"><a href="/index.php?tag={{ tag.nombre }}">{{ tag.nombre }}</a></span>
         {% endfor %}
     </section>
@@ -106,12 +106,12 @@
     </div>
     <!-- Fin panel de comentarios -->
 
-    {% if galeria is not empty %}
+    {% if evento.galeria is not empty %}
       <h3 class="social-event">Galería</h3>
       <section class="gal-row">
-        {% for foto, descripcion in galeria %}
+        {% for foto in evento.galeria %}
           <article class="gal-column">
-            <img src="{{ foto }}" alt=" {{ descripcion }}" onclick="cambiarFotoGaleria(this);">
+            <img id="{{ foto.id }}" src="{{ foto.link }}" alt="{{ foto.descripcion }}" onclick="cambiarFotoGaleria(this);">
           </article>
         {% endfor %}
       </section>
