@@ -45,10 +45,15 @@
     </div>
 
     <div class="containerOptions">
-      <h3 id="tituloEditarUsuario">Editar Comentario</h3>
+      <h3 id="tituloEditarUsuario">Editar Usuario</h3>
 
       <label for="usuario"><b>Rango</b></label>
-      <input type="text" placeholder="Edita el rango del usuario" name="rango" id="inputRango" required>
+      <select name="rango" id="inputRango">
+         <option value=10>Usuario</option>
+         <option value=20>Moderador</option>
+         <option value=30>Gestor</option>
+         <option value=40>Superusuario</option>
+      </select> 
       <input type="hidden" name="usuario" id="inputUsuario">
 
       <button class="LoginPopUpButton" type="submit">Editar</button>

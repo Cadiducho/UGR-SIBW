@@ -1,6 +1,10 @@
 <section class="adminSection">
-    <p class="title">Eventos</p>
-
+    <div>
+      <p class="title-evento">Eventos</p>
+      <a onclick="showAddEventPopUp();" class="add-event" style="text-decoration: none!important;">
+          <i class="icono-plus add"></i>
+      </a>
+    </div>
 
     <input type="text" id="inputBuscarEventos" onkeyup="buscarEventos()" class="buscaTabla" placeholder="Busca eventos">
     <table class="table hoverable fullwidth" id="tablaEventos">
@@ -41,9 +45,7 @@
                         <a onclick="deleteEvento({{ evento.id }})" style="text-decoration: none!important;">
                             <i class="icono-cross remove"></i>
                         </a>
-                        <a onclick="showAddEventPopUp();" style="text-decoration: none!important;">
-                            <i class="icono-plus add"></i>
-                        </a>
+
                     </td>
                 </tr>
             {% endfor %}
@@ -58,6 +60,7 @@
     </div>
 
     <div class="containerOptions">
+      <h3 id="tituloAddEvento">Añadir Evento</h3>
       <label for="nombre"><b>Nombre</b></label>
       <input type="text" placeholder="Introduzca el nombre del evento" name="nombre" required>
 

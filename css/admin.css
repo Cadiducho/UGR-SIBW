@@ -102,3 +102,18 @@
 .add {
   color: green!important;
 }
+
+.add-event {
+  float: right;
+  width: 5%;
+
+}
+
+.title-evento {
+  display: inline;
+  color: #646464;
+  font-size: 1.70em;
+  font-weight: 600;
+  line-height: 1.125;
+  width: 95%;
+}

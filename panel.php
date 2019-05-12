@@ -25,12 +25,10 @@ if ($loggedUser->rango >= Usuario::MODERADOR) {
 }
 
 if ($loggedUser->rango >= Usuario::GESTOR) {
-    //$parametros["eventos"] = $database->getAllEventos();
+    $parametros["eventos"] = $database->getAllEventos();
 }
 
 if ($loggedUser->rango >= Usuario::SUPERUSUARIO) {
-    $parametros["comentarios"] = $database->getAllComentarios();
-    $parametros["eventos"] = $database->getAllEventos();
     $parametros["usuarios"] = $database->getAllUsuarios();
 
 }
