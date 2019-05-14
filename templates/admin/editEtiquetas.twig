@@ -1,0 +1,105 @@
+{% extends "layout.twig" %}
+
+{% block titulo %} Panel Administración {% endblock %}
+
+{# Cargar el head normal y añadir el css #}
+{% block head %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/tags.css" media="screen"/>
+    <script src="/js/admin.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
+{% endblock %}
+
+{% block mainContent %}
+    <h1 class="adminPageTitle">Panel de administración</h1>
+
+    <section class="adminSection">
+        <div>
+          <p class="title-evento">Editar etiquetas de {{ evento.nombre }}</p>
+          <a onclick="showAddEtiquetaPopUp({{ evento.id }}, {{ evento.nombre|json_encode }});" class="add-event" style="text-decoration: none!important;">
+              <i class="fa fa-plus add"></i>
+          </a>
+        </div>
+
+        <table class="table hoverable fullwidth" id="tablaEventos">
+            <thead>
+                <tr>
+                    <th>Etiqueta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Etiqueta</th>
+                    <th>Acciones</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                  {% for etiqueta in evento.etiquetas %}
+                    <tr>
+                        <th><span class="tag">{{ etiqueta.nombre }}</span></th>
+
+                        <td>
+                            <a href="/index.php?tag={{ etiqueta.nombre }}" style="text-decoration: none!important;">
+                                <i class="fa fa-chain link"></i>
+                            </a>
+
+                            <a onclick="deleteEtiqueta({{ evento.id }}, {{ etiqueta.nombre|json_encode }})">
+                                <i class="fa fa-close remove"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </section>
+
+    <div id="addEtiquetaModal" class="modal">
+      <form id="formAddEtiqueta" class="modal-content animate" onsubmit="return tryAddEtiqueta(event);">
+        <div class="avatar-container">
+          <span onclick="closeAddEtiquetaPopUp()" class="close" title="Cerrar">&times;</span>
+        </div>
+
+        <div class="containerOptions">
+          <h3 id="tituloAddEtiqueta">Añadir etiqueta</h3>
+
+          <label for="comentario"><b>Nueva etiqueta</b></label>
+          <input type="text" placeholder="Agrega nueva etiqueta al evento" name="etiqueta" id="inputEtiqueta" required>
+          <input type="hidden" name="evento" id="inputEvento">
+
+          <button class="LoginPopUpButton" type="submit">Agregar etiqueta</button>
+          <div id="messageBox">
+          </div>
+
+        </div>
+
+        <div class="containerOptions" style="background-color:#f1f1f1">
+          <button type="button" onclick="closeAddEtiquetaPopUp()" class="cancelbtn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="deleteEtiquetaModal" class="modal">
+      <form id="formDeleteEtiqueta" class="modal-content animate" onsubmit="return tryDeleteEtiqueta(event);">
+        <div class="avatar-container">
+          <span onclick="closeDeleteEtiquetaModal()" class="close" title="Cerrar">&times;</span>
+        </div>
+        <div class="containerOptions">
+          <h3 id="tituloBorrarEtiqueta">¿Borrar etiqueta?</h3>
+          <input type="hidden" name="evento" id="inputEvento">
+          <input type="hidden" name="etiqueta" id="inputEtiqueta">
+
+          <button class="LoginPopUpButton" type="submit">Borrar etiqueta</button>
+          <div id="messageBox">
+          </div>
+
+        </div>
+
+        <div class="containerOptions" style="background-color:#f1f1f1">
+          <button type="button" onclick="closeDeleteEtiquetaModal()" class="cancelbtn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+{% endblock %}

@@ -121,3 +121,25 @@
   line-height: 1.125;
   width: 95%;
 }
+
+.editEtiquetasButton {
+  background-color: #e2e058;
+  padding: 6px 2px;
+  margin: 4px 0;
+  border: none;
+  cursor: pointer;
+  width: 49%;
+}
+
+.editGaleriaButton {
+  background-color: #66ff00;
+  padding: 6px 2px;
+  margin: 4px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+}
+
+.editGaleriaButton:hover .editEtiquetasButton:hover {
+  opacity: 0.8;
+}

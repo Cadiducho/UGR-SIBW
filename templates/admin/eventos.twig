@@ -35,7 +35,7 @@
                     <td>{{ evento.fecha }}</td>
                     <td>
                         <a href="http://localhost/evento.php?id={{ evento.id }}" style="text-decoration: none!important;">
-                            <i class="icono-chain link"></i>
+                            <i class="fa fa-chain link"></i>
                         </a>
                         <a onclick="showEditEventoModal({{ evento.id }},{{ evento.nombre|json_encode }},{{ evento.imagen|json_encode }},{{ evento.organizador|json_encode }},{{ evento.fecha|json_encode }},{{ evento.descripcion|json_encode }},
                                                          {{ evento.imagen_lateral_1|json_encode }},{{ evento.imagen_lateral_1_descripcion|json_encode }},{{ evento.imagen_lateral_2|json_encode }},
@@ -44,13 +44,7 @@
                                             style="text-decoration: none!important;">
                             <i class="fa fa-edit edit"></i>
                         </a>
-                        <a onlick="showEditTagsModal({{ evento.id }},{{ evento.etiquetas|json_encode }});">
-                            <i class="fa fa-tag edit"></i>
-                        </a>
-                        <a onlick="showEditGaleriaModal({{ evento.id }},{{ evento.galeria|json_encode }});">
-                            <i class="fa fa-photo edit"></i>
-                        </a>
-                        <a onclick="deleteEvento({{ evento.id }})" style="text-decoration: none!important;">
+                        <a onclick="deleteEvento({{ evento.id }})">
                             <i class="fa fa-close remove"></i>
                         </a>
 
@@ -147,7 +141,10 @@
       <label for="evento"><b>Imagen Lateral 2 Descripcion</b></label>
       <input type="text" placeholder="Edita la descripcion de la imagen lateral 2" name="imagen_lateral_2_descripcion" id="inputImg2Desc" required>
 
-      <button class="LoginPopUpButton" type="submit">Editar</button>
+      <button id="btnEditEtiquetas" class="editEtiquetasButton" type="button">Editar etiquetas</button>
+      <button id="btnEditGaleria" class="editGaleriaButton" type="button">Editar galería</button>
+
+      <button class="LoginPopUpButton" type="submit">Guardar cambios y editar</button>
       <div id="messageBox">
       </div>
 

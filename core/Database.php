@@ -387,6 +387,22 @@ class Database {
       $stmt->close();
   }
 
+  public function deleteEtiquetaFromEvento($evento, $etiqueta) {
+      $deleteTag = "DELETE FROM eventos_tags WHERE evento=? AND tag=?;";
+      $stmt = $this->mysqli->prepare($deleteTag);
+      $stmt->bind_param("is", $evento, $etiqueta);
+      $stmt->execute();
+      $stmt->close();
+  }
+
+  public function addTagToEvent($evento, $etiqueta) {
+      $addTag = "INSERT INTO eventos_tags (`evento`, `tag`) VALUES (?, ?);";
+      $stmt = $this->mysqli->prepare($addTag);
+      $stmt->bind_param("is", $evento, $etiqueta);
+      $stmt->execute();
+      $stmt->close();
+  }
+
 }
 
 ?>

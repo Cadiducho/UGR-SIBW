@@ -285,6 +285,11 @@ function tryAddEvento() {
       let inputImg2Desc = modal.querySelector("#inputImg2Desc");
       inputImg2Desc.value = imagen_lateral_2_descripcion;
 
+      let btnEditEtiquetas = modal.querySelector('#btnEditEtiquetas');
+      let btnEditGaleria = modal.querySelector('#btnEditGaleria');
+      btnEditEtiquetas.onclick = function () { window.location = "panel.php?editEtiquetas=" + eventoid; };
+      btnEditGaleria.onclick = function () { window.location = "panel.php?editGaleria=" + eventoid; };
+
       let titulo = modal.querySelector("#tituloEditarEvento");
       titulo.innerHTML = "Editar Evento #" + eventoid;
 
@@ -378,6 +383,111 @@ function tryAddEvento() {
               }
         	} else {
           		showMessage(borrarEventoModal, "error", "No se ha podido borrar el evento");
+        	}
+      };
+
+      xhr.open('POST', url);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send(params);
+
+      return false;
+  }
+
+  function showAddEtiquetaPopUp(eventid, eventname) {
+      let modal = document.getElementById('addEtiquetaModal');
+      let inputEvento = modal.querySelector("#inputEvento");
+      inputEvento.value = eventid;
+      let titulo = modal.querySelector("#tituloAddEtiqueta");
+      titulo.innerHTML = "Agregar etiqueta a " + eventname;
+
+      modal.style.display='block'
+  }
+
+  function closeAddEtiquetaPopUp() {
+      let modal = document.getElementById('addEtiquetaModal');
+      modal.style.display = "none";
+  }
+
+  function deleteEtiqueta(eventoid, tag) {
+      let modal = document.getElementById('deleteEtiquetaModal');
+      let inputEvento = modal.querySelector("#inputEvento");
+      inputEvento.value = eventoid;
+      let inputEtiqueta = modal.querySelector("#inputEtiqueta");
+      inputEtiqueta.value = tag;
+      let titulo = modal.querySelector("#tituloBorrarEtiqueta");
+      titulo.innerHTML = "¿Borrar etiqueta " + tag + "?";
+
+      modal.style.display='block'
+  }
+
+  function closeDeleteEtiquetaModal() {
+      let modal = document.getElementById('deleteEtiquetaModal');
+      modal.style.display = "none";
+  }
+
+  function tryDeleteEtiqueta(event) {
+      event.preventDefault();
+
+      let borrarEtiquetaModal = document.getElementById('deleteEtiquetaModal');
+      let form = borrarEtiquetaModal.querySelector("#formDeleteEtiqueta");
+      let evento = form.evento.value;
+      let etiqueta = form.etiqueta.value;
+
+      let url = "/core/post/admin/postBorrarEtiquetaFromEvento.php";
+      let params = 'evento=' + evento + '&etiqueta=' + etiqueta;
+      let xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        	if (xhr.status >= 200 && xhr.status < 300) {
+          		if (xhr.response === "error") {
+                  showMessage(borrarEtiquetaModal, "error", "Ha ocurrido algún error");
+              } else if (xhr.response === "unauthorized") {
+                  showMessage(borrarEtiquetaModal, "error", "No autorizado");
+              } else if (xhr.response === "ok") {
+                  showMessage(borrarEtiquetaModal, "info", "Etiqueta borrada correctamente");
+                  setTimeout(function(){
+                      window.location.reload(1);
+                  }, 1500);
+              }
+        	} else {
+          		showMessage(borrarEtiquetaModal, "error", "No se ha podido borrar la etiqueta");
+        	}
+      };
+
+      xhr.open('POST', url);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send(params);
+
+      return false;
+  }
+
+  function tryAddEtiqueta(event) {
+      event.preventDefault();
+
+      let addEtiquetaModal = document.getElementById('addEtiquetaModal');
+      let form = addEtiquetaModal.querySelector("#formAddEtiqueta");
+      let evento = form.evento.value;
+      let etiqueta = form.etiqueta.value;
+
+      console.log("Añadidneod" + etiqueta + " a " + evento);
+
+      let url = "/core/post/admin/postAddEtiquetaToEvento.php";
+      let params = 'evento=' + evento + '&etiqueta=' + etiqueta;
+      let xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        	if (xhr.status >= 200 && xhr.status < 300) {
+              console.log(xhr.response);
+          		if (xhr.response === "error") {
+                  showMessage(addEtiquetaModal, "error", "Ha ocurrido algún error");
+              } else if (xhr.response === "unauthorized") {
+                  showMessage(addEtiquetaModal, "error", "No autorizado");
+              } else if (xhr.response === "ok") {
+                  showMessage(addEtiquetaModal, "info", "Etiqueta añadida correctamente");
+                  setTimeout(function(){
+                      window.location.reload(1);
+                  }, 1500);
+              }
+        	} else {
+          		showMessage(addEtiquetaModal, "error", "No se ha podido añadir la etiqueta");
         	}
       };
 

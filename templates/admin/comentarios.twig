@@ -29,7 +29,7 @@
                     <th>{{ comentario.id }}</th>
                     <td>{{ comentario.evento.nombre }}</td>
                     <td>{{ comentario.usuario.nickname }}</td>
-                    <td>{{ comentario.mensaje }}</td>
+                    <td>{{ (comentario.mensaje|length > 40 ? comentario.mensaje|slice(0, 40) ~ ' […]' : comentario.mensaje)  }}</td>
                     <td>{{ comentario.fecha|date("d/m/Y H:i") }}</td>
                     <td>
                         <a href="http://localhost/evento.php?id={{ comentario.evento.id }}" style="text-decoration: none!important;">
