@@ -403,6 +403,22 @@ class Database {
       $stmt->close();
   }
 
+  public function deleteGaleriaFromEvento($evento, $galeria) {
+      $deleteImage = "DELETE FROM fotos_galeria WHERE evento=? AND id=?;";
+      $stmt = $this->mysqli->prepare($deleteImage);
+      $stmt->bind_param("ii", $evento, $galeria);
+      $stmt->execute();
+      $stmt->close();
+  }
+
+  public function addImageToEvent($evento, $imagen, $descripcion) {
+      $addTag = "INSERT INTO fotos_galeria (`evento`, `foto`, `descripcion`) VALUES (?, ?, ?);";
+      $stmt = $this->mysqli->prepare($addTag);
+      $stmt->bind_param("iss", $evento, $imagen, $descripcion);
+      $stmt->execute();
+      $stmt->close();
+  }
+
 }
 
 ?>

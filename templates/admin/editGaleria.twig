@@ -1,0 +1,109 @@
+{% extends "layout.twig" %}
+
+{% block titulo %} Panel Administración {% endblock %}
+
+{# Cargar el head normal y añadir el css #}
+{% block head %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" media="screen"/>
+    <script src="/js/admin.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
+{% endblock %}
+
+{% block mainContent %}
+    <h1 class="adminPageTitle">Panel de administración</h1>
+
+    <section class="adminSection">
+        <div>
+          <p class="title-evento">Editar galería de {{ evento.nombre }}</p>
+          <a onclick="showAddGaleriaPopUp({{ evento.id }}, {{ evento.nombre|json_encode }});" class="add-event" style="text-decoration: none!important;">
+              <i class="fa fa-plus add"></i>
+          </a>
+        </div>
+
+        <table class="table hoverable fullwidth" id="tablaEventos">
+            <thead>
+                <tr>
+                    <th>#id</th>
+                    <th>Descripcion</th>
+                    <th>Ruta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>#id</th>
+                    <th>Descripcion</th>
+                    <th>Ruta</th>
+                    <th>Acciones</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                {% for fotoGaleria in evento.galeria %}
+                    <tr>
+                        <th>{{ fotoGaleria.id }}</th>
+                        <th>{{ fotoGaleria.descripcion }}</th>
+                        <th>{{ fotoGaleria.link }}</th>
+
+                        <td>
+                            <a onclick="deleteGaleria({{ evento.id }}, {{ fotoGaleria.id }})">
+                                <i class="fa fa-close remove"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </section>
+
+    <div id="addGaleriaModal" class="modal">
+      <form id="formAddGaleria" class="modal-content animate" onsubmit="return tryAddGaleria(event);">
+        <div class="avatar-container">
+          <span onclick="closeAddGaleriaPopUp()" class="close" title="Cerrar">&times;</span>
+        </div>
+
+        <div class="containerOptions">
+          <h3 id="tituloAddGaleria">Añadir foto a la galería</h3>
+
+          <label for="comentario"><b>Descripción</b></label>
+          <input type="text" placeholder="Descripción de la imágen" name="descripcion" id="inputDescripcion" required>
+
+          <label for="comentario"><b>Ruta a la imagen</b></label>
+          <input type="text" placeholder="Enlace a la imagen" name="imagen" id="inputImagen" required>
+
+          <input type="hidden" name="evento" id="inputEvento">
+
+          <button class="LoginPopUpButton" type="submit">Agregar imagen</button>
+          <div id="messageBox">
+          </div>
+
+        </div>
+
+        <div class="containerOptions" style="background-color:#f1f1f1">
+          <button type="button" onclick="closeAddGaleriaPopUp()" class="cancelbtn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="deleteGaleriaModal" class="modal">
+      <form id="formDeleteGaleria" class="modal-content animate" onsubmit="return tryDeleteGaleria(event);">
+        <div class="avatar-container">
+          <span onclick="closeDeleteGaleriaModal()" class="close" title="Cerrar">&times;</span>
+        </div>
+        <div class="containerOptions">
+          <h3 id="tituloBorrarGaleria">¿Borrar imagen de la galería?</h3>
+          <input type="hidden" name="evento" id="inputEvento">
+          <input type="hidden" name="idgaleria" id="inputGaleria">
+
+          <button class="LoginPopUpButton" type="submit">Borrar imagen</button>
+          <div id="messageBox">
+          </div>
+
+        </div>
+
+        <div class="containerOptions" style="background-color:#f1f1f1">
+          <button type="button" onclick="closeDeleteGaleriaModal()" class="cancelbtn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+{% endblock %}

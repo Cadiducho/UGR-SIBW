@@ -468,8 +468,6 @@ function tryAddEvento() {
       let evento = form.evento.value;
       let etiqueta = form.etiqueta.value;
 
-      console.log("Añadidneod" + etiqueta + " a " + evento);
-
       let url = "/core/post/admin/postAddEtiquetaToEvento.php";
       let params = 'evento=' + evento + '&etiqueta=' + etiqueta;
       let xhr = new XMLHttpRequest();
@@ -488,6 +486,110 @@ function tryAddEvento() {
               }
         	} else {
           		showMessage(addEtiquetaModal, "error", "No se ha podido añadir la etiqueta");
+        	}
+      };
+
+      xhr.open('POST', url);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send(params);
+
+      return false;
+  }
+
+  function showAddGaleriaPopUp(eventid, eventname) {
+      let modal = document.getElementById('addGaleriaModal');
+      let inputEvento = modal.querySelector("#inputEvento");
+      inputEvento.value = eventid;
+      let titulo = modal.querySelector("#tituloAddGaleria");
+      titulo.innerHTML = "Agregar imagen a " + eventname;
+
+      modal.style.display='block'
+  }
+
+  function closeAddGaleriaPopUp() {
+      let modal = document.getElementById('addGaleriaModal');
+      modal.style.display = "none";
+  }
+
+  function deleteGaleria(eventoid, galeriaId) {
+      let modal = document.getElementById('deleteGaleriaModal');
+      let inputEvento = modal.querySelector("#inputEvento");
+      inputEvento.value = eventoid;
+      let inputGaleria = modal.querySelector("#inputGaleria");
+      inputGaleria.value = galeriaId;
+      let titulo = modal.querySelector("#tituloBorrarGaleria");
+      titulo.innerHTML = "¿Borrar imagen #" + galeriaId + "?";
+
+      modal.style.display='block'
+  }
+
+  function closeDeleteGaleriaModal() {
+      let modal = document.getElementById('deleteGaleriaModal');
+      modal.style.display = "none";
+  }
+
+  function tryDeleteGaleria(event) {
+      event.preventDefault();
+
+      let borrarGaleriaModal = document.getElementById('deleteGaleriaModal');
+      let form = borrarGaleriaModal.querySelector("#formDeleteGaleria");
+      let evento = form.evento.value;
+      let galeriaId = form.idgaleria.value;
+
+      let url = "/core/post/admin/postBorrarGaleriaFromEvento.php";
+      let params = 'evento=' + evento + '&galeria=' + galeriaId;
+      let xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        	if (xhr.status >= 200 && xhr.status < 300) {
+          		if (xhr.response === "error") {
+                  showMessage(borrarGaleriaModal, "error", "Ha ocurrido algún error");
+              } else if (xhr.response === "unauthorized") {
+                  showMessage(borrarGaleriaModal, "error", "No autorizado");
+              } else if (xhr.response === "ok") {
+                  showMessage(borrarGaleriaModal, "info", "Imagen borrada correctamente");
+                  setTimeout(function(){
+                      window.location.reload(1);
+                  }, 1500);
+              }
+        	} else {
+          		showMessage(borrarGaleriaModal, "error", "No se ha podido borrar la imagen");
+        	}
+      };
+
+      xhr.open('POST', url);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send(params);
+
+      return false;
+  }
+
+  function tryAddGaleria(event) {
+      event.preventDefault();
+
+      let addGaleriaModal = document.getElementById('addGaleriaModal');
+      let form = addGaleriaModal.querySelector("#formAddGaleria");
+      let evento = form.evento.value;
+      let imagen = form.imagen.value;
+      let descripcion = form.descripcion.value;
+
+      let url = "/core/post/admin/postAddGaleriaToEvento.php";
+      let params = 'evento=' + evento + '&imagen=' + imagen + "&descripcion=" + descripcion;
+      let xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        	if (xhr.status >= 200 && xhr.status < 300) {
+              console.log(xhr.response);
+          		if (xhr.response === "error") {
+                  showMessage(addGaleriaModal, "error", "Ha ocurrido algún error");
+              } else if (xhr.response === "unauthorized") {
+                  showMessage(addGaleriaModal, "error", "No autorizado");
+              } else if (xhr.response === "ok") {
+                  showMessage(addGaleriaModal, "info", "Imagen añadida correctamente");
+                  setTimeout(function(){
+                      window.location.reload(1);
+                  }, 1500);
+              }
+        	} else {
+          		showMessage(addGaleriaModal, "error", "No se ha podido añadir la imagen");
         	}
       };
 
