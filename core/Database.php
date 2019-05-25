@@ -181,6 +181,28 @@ class Database {
     return $tags;
   }
 
+  public function searchComentariosByInput($filter) {
+    $queryComentarios = "SELECT c.id, u.nickname AS nickname, u.id as userid, u.email as email, e.id AS eventid, e.nombre AS eventname, c.mensaje, c.fecha
+            FROM comentarios c
+            JOIN usuarios u ON (c.usuario = u.id)
+            JOIN eventos e ON (c.evento = e.id)
+            WHERE c.mensaje LIKE CONCAT('%',?,'%') OR u.nickname LIKE CONCAT('%',?,'%')";
+    $stmt = $this->mysqli->prepare($queryComentarios);
+    $stmt->bind_param("ss", $filter, $filter);
+    $stmt->execute();
+    $resultComentarios = $stmt->get_result();
+
+    $comentarios = array();
+    while ($row = $resultComentarios->fetch_array()) {
+        $usuarioAutor = new Usuario($row["userid"], $row["nickname"], $row["email"]);
+        $evento = new Evento($row["eventid"], $row["eventname"], "");
+        $comentario = new Comentario($row["id"], $usuarioAutor, $row["fecha"], $row["mensaje"], $evento, "", "");
+        $comentarios[$row["id"]] = $comentario;
+    }
+    $stmt->close();
+    return $comentarios;
+  }
+
   public function getContacto() {
     $queryContacto = "SELECT * FROM conocenos";
     $stmt = $this->mysqli->prepare($queryContacto);
