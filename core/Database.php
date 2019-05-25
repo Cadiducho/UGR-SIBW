@@ -148,6 +148,25 @@ class Database {
     return $eventos;
   }
 
+  public function getEventosByNombre($nombre, $descripcion) {
+    $queryEventos = "SELECT * FROM eventos WHERE nombre
+                      LIKE CONCAT('%',?,'%')
+                      OR descripcion LIKE CONCAT('%',?,'%')";
+    $stmt = $this->mysqli->prepare($queryEventos);
+    $stmt->bind_param("ss", $nombre, $descripcion);
+    $stmt->execute();
+    $resultEventos = $stmt->get_result();
+
+    $eventos = array();
+    while ($row = $resultEventos->fetch_array()) {
+        $evento = new Evento($row["id"], $row["nombre"], $row["imagen"]);
+        $eventos[$row["id"]] = $evento;
+    }
+    $stmt->close();
+
+    return $eventos;
+  }
+
   public function getTags() {
     $queryTags = "SELECT t.tag as nombre, count(*) as cantidad FROM eventos_tags t GROUP BY t.tag;";
     $stmt = $this->mysqli->prepare($queryTags);

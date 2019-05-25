@@ -8,6 +8,7 @@ $database = new Database();
 $core = new Core($twig, $database);
 
 $tagBuscada = $_GET['tag'] ?? "";
+$tagBuscada2 = $_GET['tag'] ?? "";
 
 $eventos = array();
 $busqueda = "";
@@ -15,7 +16,7 @@ if (empty($tagBuscada)) {
   $eventos = $database->getEventosPortada();
   $busqueda = "destacados";
 } else {
-  $eventos = $database->getEventosByTag($tagBuscada);
+  $eventos = $database->getEventosByNombre($tagBuscada, $tagBuscada2);
   $busqueda = "por `" . $tagBuscada . "`";
 }
 

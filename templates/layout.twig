@@ -9,6 +9,7 @@
       <link rel="stylesheet" type="text/css" href="css/web.css" media="screen"/>
       <link rel="stylesheet" type="text/css" href="css/loginPopUp.css" media="screen"/>
       <script src="js/login.js"></script>
+      <script src="js/search.js"></script>
       <title>{% block titulo %}{% endblock %} - Mario Tennis Club</title>
     {% endblock %}
   </head>
@@ -33,9 +34,11 @@
       <a href="#news">Ayuda</a>
 
       <form class="barra-busqueda" action="index.php" method="GET">
-          <input class="input-busqueda" name="tag" placeholder="Buscar eventos"/>
+          <input class="input-busqueda" name="tag" placeholder="Buscar eventos" onkeyup="showHint(this.value)" autocomplete="off"/>
           <button type="submit" class="boton-busqueda">Buscar</button>
       </form>
+      <div id="txtHint" style="color:white"></div>
+
 
       {% if loggedUser is null %}
         <button onclick="showLoginPopUp()" class="boton-sign-in">Sign in</button>
