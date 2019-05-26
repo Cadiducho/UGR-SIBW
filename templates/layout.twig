@@ -33,11 +33,22 @@
       <a href="/contacto.php">Conócenos</a>
       <a href="#news">Ayuda</a>
 
+      {% if loggedUser is null or loggedUser.rango != constant('Usuario::GESTOR') %}
       <form class="barra-busqueda" action="index.php" method="GET">
           <input class="input-busqueda" name="tag" placeholder="Buscar eventos" onkeyup="showHint(this.value)" autocomplete="off"/>
           <button type="submit" class="boton-busqueda">Buscar</button>
       </form>
-      <div id="txtHint" style="color:white"></div>
+      <div id="txtHint"></div>
+      {% endif %}
+
+
+      {% if loggedUser.rango == constant('Usuario::GESTOR') %}
+      <form class="barra-busqueda" action="index.php" method="GET">
+          <input class="input-busqueda" name="tag" placeholder="Buscar eventos" onkeyup="showHintG(this.value)" autocomplete="off"/>
+          <button type="submit" class="boton-busqueda">Buscar</button>
+      </form>
+      <div id="txtHintG"></div>
+      {% endif %}
 
 
       {% if loggedUser is null %}
