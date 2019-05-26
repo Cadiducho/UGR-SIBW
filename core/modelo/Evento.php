@@ -37,7 +37,10 @@ class Evento {
     // Timestamp en el que la pagina del evento fue actualizado
     public $actualizado_en;
 
-    function Evento($id, $nombre, $imagen, $organizador = "", $fecha = "", $descripcion="", $imagen_lateral_1 = "", $imagen_lateral_1_descripcion = "", $imagen_lateral_2 = "", $imagen_lateral_2_descripcion = "", $video_id = "", $creado_en = "", $actualizado_en = "") {
+    // Campo para saber si un evento esta publicado o no
+    public $publicado;
+
+    function Evento($id, $nombre, $imagen, $organizador = "", $fecha = "", $descripcion="", $imagen_lateral_1 = "", $imagen_lateral_1_descripcion = "", $imagen_lateral_2 = "", $imagen_lateral_2_descripcion = "", $video_id = "", $creado_en = "", $actualizado_en = "", $publicado = "") {
 
       $this->id = $id;
       $this->nombre = $nombre;
@@ -52,6 +55,7 @@ class Evento {
       $this->video_id = $video_id;
       $this->creado_en = $creado_en;
       $this->actualizado_en = $actualizado_en;
+      $this->publicado = $publicado;
     }
 
 }

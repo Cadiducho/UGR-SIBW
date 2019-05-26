@@ -12,7 +12,7 @@ $tagBuscada2 = $_GET["q"];
 
 $hint = "";
 
-$eventos = $database->getEventosByNombre($tagBuscada, $tagBuscada2);
+$eventos = $database->getEventosByNombreG($tagBuscada, $tagBuscada2);
 echo '	<ul>';
 foreach($eventos as $name){
 

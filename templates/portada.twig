@@ -12,16 +12,31 @@
 		<h2 class="main-title">Eventos {{ busqueda }}</h2>
 		<section class="content">
 			{% for evento in eventos %}
-				<article class="box">
-					<a href="evento.php?id={{ evento.id }}">
-						<picture class="thumbnail">
-							<img src="img/{{ evento.imagen }}" alt=" {{ evento.nombre }}">
-						</picture>
-						<div class="box-content">
-							<p>{{ evento.nombre }}</p>
-						</div>
-					</a>
-				</article>
+        {% if loggedUser.rango != constant('Usuario::GESTOR') %}
+          {% if evento.publicado == "S" %}
+    				<article class="box">
+    					<a href="evento.php?id={{ evento.id }}">
+    						<picture class="thumbnail">
+    							<img src="img/{{ evento.imagen }}" alt=" {{ evento.nombre }}">
+    						</picture>
+    						<div class="box-content">
+    							<p>{{ evento.nombre }}</p>
+    						</div>
+    					</a>
+    				</article>
+          {% endif %}
+        {% else %}
+          <article class="box">
+            <a href="evento.php?id={{ evento.id }}">
+              <picture class="thumbnail">
+                <img src="img/{{ evento.imagen }}" alt=" {{ evento.nombre }}">
+              </picture>
+              <div class="box-content">
+                <p>{{ evento.nombre }}</p>
+              </div>
+            </a>
+          </article>
+        {% endif %}
 			{% endfor %}
 		</section>
 	<!-- Fin eventos -->

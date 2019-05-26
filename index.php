@@ -16,7 +16,7 @@ if (empty($tagBuscada)) {
   $eventos = $database->getEventosPortada();
   $busqueda = "destacados";
 } else {
-  $eventos = $database->getEventosByNombre($tagBuscada, $tagBuscada2);
+  $eventos = $database->getEventosByNombreG($tagBuscada, $tagBuscada2);
   $busqueda = "por `" . $tagBuscada . "`";
 }
 

@@ -26,14 +26,19 @@ class Database {
   }
 
   public function getEventosPortada() {
-    $queryEventos = "SELECT id, nombre, imagen FROM eventos";
+    $queryEventos = "SELECT * FROM eventos";
     $stmt = $this->mysqli->prepare($queryEventos);
     $stmt->execute();
     $resultEventos = $stmt->get_result();
 
     $eventos = array();
     while ($row = $resultEventos->fetch_array()) {
-        $evento = new Evento($row["id"], $row["nombre"], $row["imagen"]);
+      $evento = new Evento(
+          $row["id"], $row["nombre"], $row["imagen"],
+          $row["organizador"], $row["fecha"], $row["descripcion"],
+          $row["imagen_lateral_1"], $row["imagen_lateral_1_descripcion"],
+          $row["imagen_lateral_2"], $row["imagen_lateral_2_descripcion"],
+          $row["video_id"], $row["creado_en"], $row["actualizado_en"], $row["publicado"]);
         $eventos[$row["id"]] = $evento;
     }
     $stmt->close();
@@ -149,7 +154,27 @@ class Database {
   }
 
   public function getEventosByNombre($nombre, $descripcion) {
-    $queryEventos = "SELECT * FROM eventos WHERE nombre
+    $queryEventos = "SELECT * FROM eventos e WHERE (nombre
+                      LIKE CONCAT('%',?,'%')
+                      OR descripcion LIKE CONCAT('%',?,'%'))
+                      AND publicado = 'S'";
+    $stmt = $this->mysqli->prepare($queryEventos);
+    $stmt->bind_param("ss", $nombre, $descripcion);
+    $stmt->execute();
+    $resultEventos = $stmt->get_result();
+
+    $eventos = array();
+    while ($row = $resultEventos->fetch_array()) {
+        $evento = new Evento($row["id"], $row["nombre"], $row["imagen"]);
+        $eventos[$row["id"]] = $evento;
+    }
+    $stmt->close();
+
+    return $eventos;
+  }
+
+  public function getEventosByNombreG($nombre, $descripcion) {
+    $queryEventos = "SELECT * FROM eventos e WHERE nombre
                       LIKE CONCAT('%',?,'%')
                       OR descripcion LIKE CONCAT('%',?,'%')";
     $stmt = $this->mysqli->prepare($queryEventos);
