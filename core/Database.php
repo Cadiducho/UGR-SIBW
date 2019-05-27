@@ -241,7 +241,7 @@ class Database {
         $usuarioAutor = new Usuario($row["userid"], $row["nickname"], $row["email"]);
         $evento = new Evento($row["eventid"], $row["eventname"], "");
         $comentario = new Comentario($row["id"], $usuarioAutor, $row["fecha"], $row["mensaje"], $evento, "", "");
-        $comentarios[$row["id"]] = $comentario;
+        $comentarios[] = $comentario;
     }
     $stmt->close();
     return $comentarios;

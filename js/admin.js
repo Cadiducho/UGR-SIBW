@@ -3,16 +3,39 @@ function buscarComentario() {
     let filter = input.value.toLowerCase();
     let table = document.getElementById("tablaComentarios");
     let tr = table.getElementsByTagName("tr");
-
+    
     let url = "/core/search/searchComentarios.php";
     let params = 'filter=' + filter;
     let xhr = new XMLHttpRequest();
     xhr.onload = function () {
       	if (xhr.status >= 200 && xhr.status < 300) {
         		if (xhr.response !== "error") {
-                console.log("raw " + xhr.response);
                 let respuesta = JSON.parse(xhr.response);
-                console.log("Recibido: " + respuesta);
+
+                let nuevaTabla = "";
+                respuesta.forEach(function(comentario) {
+                    nuevaTabla += `<tr>
+                        <th>` + comentario.id + `</th>
+                        <td>` + comentario.evento.nombre + `</td>
+                        <td>` + comentario.usuario.nickname + `</td>
+                        <td>` + comentario.mensaje + `</td>
+                        <td>` + comentario.fecha + `</td>
+                        <td>
+                            <a href="http://localhost/evento.php?id=` + comentario.id + `" style="text-decoration: none!important;">
+                                <i class="fa fa-chain link"></i>
+                            </a>
+                            <a onclick="showEditComentarioModal(` + comentario.id + `, ` + JSON.stringify(comentario.mensaje) + `);" style="text-decoration: none!important;">
+                                <i class="fa fa-edit edit"></i>
+                            </a>
+                            <a onclick="deleteComentario(` + comentario.id + `)" style="text-decoration: none!important;">
+                                <i class="fa fa-close remove"></i>
+                            </a>
+                        </td>
+                    </tr>`;
+                });
+                let tablaComentarios = document.getElementById("tablaComentarios");
+                let tbody = tablaComentarios.querySelector("tbody");
+                tbody.innerHTML = nuevaTabla;
             }
       	}
     };
